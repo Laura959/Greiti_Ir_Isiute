@@ -1,10 +1,10 @@
 version: "3.8"
 services:
-    phpmyadmin_db:        
+    localhost_db:        
       image: mariadb:10.3
       ports:
         - 4400:3306
-      container_name: phpmyadmin_db
+      container_name: localhost_db
       restart: unless-stopped
       environment:
         - MYSQL_ROOT_PASSWORD=nera
@@ -12,12 +12,12 @@ services:
         - ./.dev/testing.cnf:/etc/mysql/conf.d/testing.cnf:ro
         - ./.dev/db:/var/lib/mysql              
   
-    phpmyadmin:
+    localhost_phpadmin:
         image: phpmyadmin
-        container_name: phpmyadmin
+        container_name: localhost_phpadmin
         environment:
             - PMA_ARBITRARY=1
-            - PMA_HOSTS=phpmyadmin_db
+            - PMA_HOSTS=localhost_db
             - PMA_PORTS=3306
             - PMA_USER=root
             - PMA_PASSWORD=nera
@@ -27,9 +27,9 @@ services:
         volumes:
             - ./.dev/data/sessions:/sessions
     
-    phpapp:
+    localhost_app:
       image: php:7.2-apache
-      container_name: phpapp      
+      container_name: localhost_app      
       restart: unless-stopped
       ports:
         - 9000:80
