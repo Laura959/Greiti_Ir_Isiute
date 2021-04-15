@@ -28,7 +28,7 @@ services:
             - ./.dev/data/sessions:/sessions
     
     localhost_app:
-      image: php:7.2-apache
+      build: ./
       container_name: localhost_app      
       restart: unless-stopped
       ports:
