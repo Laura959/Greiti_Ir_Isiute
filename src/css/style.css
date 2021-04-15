@@ -1,15 +1,19 @@
 * {
 	margin: 0px;
 	padding: 0px;
+	box-sizing: border-box;
 }
-body {
-	font-size: 120%;
 
+body {
+	/* font-size: 120%; */
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #eeeeee;
 }
 
 .header {
 	width: 30%;
 	margin: 50px auto 0px;
+	min-width: 300px;
 	color: white;
 	background: #5F9EA0;
 	text-align: center;
@@ -18,52 +22,61 @@ body {
 	border-radius: 10px 10px 0px 0px;
 	padding: 20px;
 }
-form, .content {
+
+.form {
 	width: 30%;
+	min-width: 300px;
 	margin: 0px auto;
-	padding: 20px;
+	padding: 10px 20px;
 	border: 1px solid #B0C4DE;
 	background: white;
 	border-radius: 0px 0px 10px 10px;
-}
-.input-group {
-	margin: 10px 0px 10px 0px;
+	text-align: center;
+	position: relative;
 }
 
-.input-group label {
+label {
 	display: block;
 	text-align: left;
-	margin: 3px;
+	margin: 15px 0 0 17.5px;
 }
-.input-group input {
-	height: 30px;
+
+input {
 	width: 93%;
 	padding: 5px 10px;
 	font-size: 16px;
 	border-radius: 5px;
 	border: 1px solid gray;
 }
-.btn {
-	padding: 10px;
+
+.login-btn {
 	font-size: 15px;
+	padding: initial;
+	padding: .5rem;
+	margin: 1.5rem auto 0;
+	width: 10rem;
 	color: white;
-	background: #5F9EA0;
+	background-color: #5F9EA0;
 	border: none;
 	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
 }
+
+.login-btn:hover{
+	background-color: #5f9ea0a1;
+}
+
 .error {
 	width: 92%;
-	margin: 0px auto;
-	padding: 10px;
-	border: 1px solid #a94442;
 	color: #a94442;
-	background: #f2dede;
-	border-radius: 5px;
-	text-align: left;
+	font-size: .85rem;
+	position: absolute;
+	text-align: right;
+	bottom: 4.25rem;
+	right: 2rem;
 }
-.success {
-	color: #3c763d;
-	background: #dff0d8;
-	border: 1px solid #3c763d;
-	margin-bottom: 20px;
+.login-name {
+	color: white;
+	margin: 0px 10px 0px 0px;
 }
