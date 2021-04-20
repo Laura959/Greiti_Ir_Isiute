@@ -11,7 +11,7 @@
 $host = "localhost";  
  $user = "root";  
  $pass = "";  
- $dbName = "task_system";  
+ $dbName = "projektas";  
  $message = ""; 
 
  ?>

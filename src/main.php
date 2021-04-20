@@ -33,5 +33,29 @@ if (isset($_SESSION["name"])) {
 		</div>
 	</nav>
 </header>
+<main>
+	<?php
+		include_once('db_config.php');
+		try {
+		$connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
+		$connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+	    $queryM = "SELECT Projekto_id, Pavadinimas, Aprasymas, Busena, Sukurimo_data, Visos_uzduotys, Neatliktos_uzduotys FROM projektai";
+		$result = $connectM->prepare($queryM);  
+		$result->execute();
+		$data = $result->fetchAll(PDO::FETCH_ASSOC);
+		//  isspausdinamas projektu sarasas
+		echo "<table>";
+		echo "<h3>PROJEKTAI</h3>";
+		echo "<tr><th>ID</th><th>TITLE</th><th>DESCRIPTION</th><th>STATE</th><th>CREATION DATE</th><th>ALL TASKS</th><th>UNFINISHED TASKS</th></tr>";
+		foreach($data as $row){   
+			echo "<tr><td>".$row['Projekto_id']."</td><td>".$row['Pavadinimas']."</td><td>".$row['Aprasymas']."</td><td>".$row['Busena']."</td><td>".$row['Sukurimo_data']."</td><td>".$row['Visos_uzduotys']."</td><td>".$row['Neatliktos_uzduotys']."</td></tr>";
+		}       
+		echo "</table>";
+		echo "<br>";
+	} catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima    
+		echo $error->getMessage();
+		}
+	?>
+</main>
 </html>
