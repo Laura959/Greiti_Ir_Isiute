@@ -43,13 +43,20 @@ if (isset($_SESSION["name"])) {
 	    $queryM = "SELECT Projekto_id, Pavadinimas, Aprasymas, Busena, Sukurimo_data, Visos_uzduotys, Neatliktos_uzduotys FROM projektai";
 		$result = $connectM->prepare($queryM);  
 		$result->execute();
-		$data = $result->fetchAll(PDO::FETCH_ASSOC);
-		//  isspausdinamas projektu sarasas
+
+			// count naudosime, jei noresime nustatyti eiluciu skaiciu
+		// $count = 1;
+
+				//  isspausdinamas projektu sarasas
 		echo "<table>";
 		echo "<h3>PROJEKTAI</h3>";
 		echo "<tr><th>ID</th><th>TITLE</th><th>DESCRIPTION</th><th>STATE</th><th>CREATION DATE</th><th>ALL TASKS</th><th>UNFINISHED TASKS</th></tr>";
-		foreach($data as $row){   
+		while($row = $result->fetch(PDO::FETCH_ASSOC)){    
 			echo "<tr><td>".$row['Projekto_id']."</td><td>".$row['Pavadinimas']."</td><td>".$row['Aprasymas']."</td><td>".$row['Busena']."</td><td>".$row['Sukurimo_data']."</td><td>".$row['Visos_uzduotys']."</td><td>".$row['Neatliktos_uzduotys']."</td></tr>";
+			// $count++;
+			// if ($count>2) {
+			// 	break;  cia galesime nustatyti salygas, kas bus kai pvz isspausdins 10 eiluciu
+			// }
 		}       
 		echo "</table>";
 		echo "<br>";
