@@ -77,6 +77,268 @@ input {
 	right: 2rem;
 }
 .login-name {
-	color: white;
+	color: #80807e;;
 	margin: 0px 10px 0px 0px;
+	font-weight: bold;
 }
+
+.div-container{
+	display: flex;
+	flex-direction: row;
+}
+
+.left-menu {
+	background-color: #ffffff;
+	width: 20vh;
+	height: 200vh;
+}
+
+table 			      { 
+	border-spacing: 1; 
+	border-collapse: collapse; 
+	background:white;
+	border-radius:15px;
+	overflow:hidden;
+	max-width:1000px; 
+	width:80%;
+	margin:0 auto;
+	position:relative;
+	color: #80807e;
+	z-index: -100;
+	margin-top: 2%;
+}
+
+tr {
+	border:none;
+	padding-right: 0;
+}
+
+thead {
+	color: #ffffff;
+	background-color: #a8d381;
+	width: 200vh;
+	height: 70px;
+	text-align: center;
+}
+
+td,th { 
+	text-align: center;
+	padding-top: 17px;
+	padding-bottom: 17px;
+}
+
+button {
+background-color:#ffffff; 
+border: none;  
+cursor: pointer;
+padding: 3px 3px; 
+}
+
+.navbar {
+	height: 100px;
+	padding-right: 21%;
+}
+
+.project-page-title {
+	font-family: 'Oswald', sans-serif;
+	font-weight: bold;
+	font-size: 34px;
+	letter-spacing: 2px;
+	color: #a8d381;
+	margin-left: 25.5%;
+}
+
+#search {
+	width: 170px;
+	border-radius: 50px;
+	font-family: 'Oswald', sans-serif;
+	text-align: center;
+	border: #ececec;
+}
+
+.whole-search {
+	margin-right: 2%;
+}
+
+#search-icon {
+	background-color: transparent;
+	margin-left: -32px;
+} 
+
+.grey-border {
+	border-bottom: solid 1px #80807e; 
+}
+
+.progress-numbers {
+	margin-left: -55px;
+	margin-bottom: -18.5px;
+	margin-right: 25px;
+}
+
+.round {
+	background-color: #eeeeee;
+	border-radius: 13px;
+	height: 12px;
+	width: 70px;
+	margin-left: 35%;
+}
+
+.progress-colors {
+	background-color: #c0f292;
+	width: 23px;
+	height: 12px;
+	border-radius: 10px;
+	margin-top: -3px;
+}
+
+.far, .fas {
+	color:#c0f292;
+	background-color: #ffffff;
+	font-size: 18px;
+}
+
+.progresss {
+	padding-left: 60px;
+}
+
+
+#create-button {
+	background-color: transparent;
+
+}
+
+#plus-button {
+	background-color: transparent;
+	font-size: 44px;
+	position: absolute;
+	right: -25px;
+}
+
+.completion-spacing {
+	padding-left: 80px;
+}
+
+.project-name-spacing {
+	padding-left: 10px;
+}
+
+.td-spacing {
+	padding-left: 20px;
+}
+
+ul {
+	margin-top: 40%;
+}
+
+.left-menu {
+	position: fixed;
+	left: -170px;
+	width: 250px;
+	height: 100%;
+	background: #ffffff;
+	transition: all .5s ease;
+}
+
+.left-menu {
+	list-style: none;
+	text-decoration: none;
+}
+
+.left-menu ul a {
+	display: block;
+	height: 100%;
+	width: 100%;
+	line-height: 65px;
+	font-size: 20px;
+	color: #80807e;
+	box-sizing: border-box;
+	padding-left: 40px;
+	transition: .4s;
+}
+
+ul li:hover a {
+	padding-left: 50px;
+}
+
+.left-menu ul a i{
+	margin-right: 16px;
+}
+
+#check {
+	display: none;
+}
+
+label #cancel {
+	left: -200px;
+	position: absolute;
+	z-index: 1111;
+}
+
+
+label #hamburger {
+	position: absolute;
+	cursor: pointer;
+	background: #c0f292;
+	border-radius: 3px;
+	z-index: 1111;
+	left: 16px;
+	top: 25px;
+	font-size: 30px;
+	color: #c0f292;
+	background-color: #ffffff;
+	padding: 4px 9px;
+	transition: all .5s ease;
+}
+
+#check:checked ~ .left-menu{
+	left: 0;
+}
+
+#check:checked ~ label #hamburger{
+	left: 250px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+	top: 20px;
+	left: 205px;
+	transition: .5s ease;
+}
+
+#check:checked ~ section{
+	margin-left: 250px;
+}
+
+section {
+	transition: all .5s;
+} 
+
+label #cancel {
+	padding: 4px;
+	font-size: 26px;
+} 
+
+.fa-th-large, .fa-folder, .fa-history,  .fa-plus-circle {
+	font-size: 35px;
+	margin-left: 150px;
+}
+
+.fa-sign-out-alt {
+	background-color: transparent;
+	color: #a8d381;
+}
+
+form button {
+	background-color: transparent;
+}
+
+.left-menu-titles {
+	margin-top: -72px;
+	margin-left: -26px;
+}
+
+.hover-info {
+	display:none;
+}
+
