@@ -1,15 +1,6 @@
 
 <?php
-session_start();
-if (isset($_SESSION["name"])) {
-    if (isset($_POST['logout'])) {
-        session_destroy();
-        header("location:index.php");
-    }
-} else {
-    header("location:index.php");
-}
-
+include_once('header.php');
  include_once('db_config.php');
     try {
 
@@ -23,7 +14,7 @@ $servername='localhost';
       die('Could not Connect My Sql:' .mysql_error());
    }
         if(count($_POST)>0) {
-mysqli_query($conn,"UPDATE projektai set Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Pavadinimas='" . $_POST['Pavadinimas'] . "'");
+mysqli_query($conn,"UPDATE projektai set Projekto_id='" . $_POST['Projekto_id'] . "', Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Projekto_id='" . $_POST['Projekto_id'] . "'");
 $message = "Record Modified Successfully";
 }
 $result = mysqli_query($conn,"SELECT * FROM projektai");
@@ -64,10 +55,13 @@ $row= mysqli_fetch_array($result);
     <form name="frmUser" method="post" action="">
 
 
-        Pavadinimas: <br>
+      <br><td><label>Pavadinimas:</label></td><br>
+
+<input type="hidden" name="Projekto_id" class="txtField" value="<?php echo $row['Projekto_id']; ?>">
+
         <input type="text" name="Pavadinimas" value="<?php echo $row['Pavadinimas']; ?>">
-        <br>
-        Aprasymas :<br>
+
+  <br><td><label>Aprasymas:</label></td><br>
         <input type="text" name="Aprasymas" value="<?php echo $row['Aprasymas']; ?>">
         <br>
 
@@ -84,7 +78,3 @@ $row= mysqli_fetch_array($result);
 </body>
 
 </html>
-
-
-
-
