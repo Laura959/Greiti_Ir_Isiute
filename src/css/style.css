@@ -35,13 +35,13 @@ body {
 	position: relative;
 }
 
-label {
+.label {
 	display: block;
 	text-align: left;
 	margin: 15px 0 0 17.5px;
 }
 
-input {
+.input {
 	width: 93%;
 	padding: 5px 10px;
 	font-size: 16px;
@@ -93,7 +93,7 @@ input {
 	height: 200vh;
 }
 
-table 			      { 
+table { 
 	border-spacing: 1; 
 	border-collapse: collapse; 
 	background:white;
@@ -127,7 +127,7 @@ td,th {
 	padding-bottom: 17px;
 }
 
-button {
+.button {
 background-color:#ffffff; 
 border: none;  
 cursor: pointer;
@@ -271,7 +271,7 @@ ul li:hover a {
 label #cancel {
 	left: -200px;
 	position: absolute;
-	z-index: 1111;
+	z-index: 1;
 }
 
 
@@ -280,7 +280,7 @@ label #hamburger {
 	cursor: pointer;
 	background: #c0f292;
 	border-radius: 3px;
-	z-index: 1111;
+	z-index: 1;
 	left: 16px;
 	top: 25px;
 	font-size: 30px;
@@ -342,3 +342,6 @@ form button {
 	display:none;
 }
 
+/* i{
+	pointer-events: none;
+} */

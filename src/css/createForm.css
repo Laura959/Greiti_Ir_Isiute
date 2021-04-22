@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+    font-family: 'Oswald', sans-serif;
+    height: 100%;
+    width: 100vw;
+}
+
+.blur__JS{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(.25rem);
+}
+
+.pop-up__h2 {
+    background-color: #a0e383;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding: 1.3rem 0;
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+    letter-spacing: .25rem;
+    text-indent: .25rem
+}
+
+.pop-up {
+    width: clamp(350px, 50vw, 550px);
+    min-width: 350px;
+    border-radius: 2rem;
+    background-color: #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 5;
+}
+
+.pop-up__JS {
+    display: block;
+}
+
+.pop-up__form {
+    width: 85%;
+    min-width: 300px;
+    margin: 0 auto 1.9rem;
+    background: transparent;
+    text-align: center;
+}
+
+pop-up__textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.pop-up__input,
+.pop-up__textarea,
+.pop-up__cancel-btn {
+    width: 85%;
+    padding: .5rem 1.75rem;
+    font-size: 1rem;
+    margin: 1.75rem 0;
+    border-radius: 1.5rem;
+    border: none;
+    outline: transparent;
+    position: relative;
+    word-break: break-all; 
+    font-family: 'Oswald', sans-serif;
+}
+
+.pop-up__textarea {
+    resize: none;
+    margin: 0;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    opacity: .75;
+ }
+ 
+ :-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+ }
+ 
+ ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center;
+ }
+
+.pop-up__create-btn,
+.pop-up__cancel-btn {
+    font-size: 1.2rem;
+    text-indent: initial;
+    padding: 0;
+    color: #ffffff;
+    background-color: #a0e383;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 400;
+    transition: opacity .15s ease-out;
+    width: clamp(7.5rem, 15vw, 10rem);
+}
+
+.pop-up__cancel-btn {
+    background-color: #d65249;
+    padding: .5rem 0;
+
+}
+
+.pop-up__create-btn:hover,
+.pop-up__cancel-btn:hover {
+    opacity: .75;
+}
+
+.pop-up--flex {
+    display: flex;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.pop-up__placeholder{
+    position: absolute;
+    top: 53.5%;
+    z-index: 10;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: .55;
+    font-size: 1rem;
+    cursor: text;
+    pointer-events: none;
+
+}
+
+.pop-up__error{
+    position: absolute;
+    width: fit-content;
+    text-align: center;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d65249;
+    font-weight: 300;
+    letter-spacing: .05rem;
+}
