@@ -22,7 +22,7 @@ try {
                $_SESSION["name"] = $result[0]['Vardas'];
                header("location:main.php");
           } else {
-               $message = 'Invalid username or password';
+               $message = 'Invalid email or password';
           }
            }  
      }
@@ -37,29 +37,31 @@ try {
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta name="description" content="Login page">
-     <title>Login</title>
-     <link href="css/style.css?rnd=132" type="text/css" rel="stylesheet">
+     <title>Sign in</title>
+     <link href="css/style.css" type="text/css" rel="stylesheet">
      <link rel="preconnect" href="https://fonts.gstatic.com">
      <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
      <div class="header">
-          <h2>Login</h2>
+          <h2>SIGN IN</h2>
      </div>
+    <div>
      <form class="form" method="POST" id="login-form">
-          <label>Email</label>
-          <input type="text" name="username" placeholder="Your email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" title="Enter a valid email address" required>
-          <label>Password</label>
-          <input type="password" name="password" placeholder="Your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+          <label></label>
+          <input type="text" name="username" placeholder="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" title="Enter a valid email address" required>
+          <label></label>
+          <input type="password" name="password" placeholder="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
           <input type="submit" name="login" value="Login" class="login-btn" id="login-btn"><br>
-          <?php
+          
+     </form>
+    <?php
           if (!empty($message)) {
                echo '<p class="error">' . $message . '</p><br>';
           }
           ?>
-     </form>
-     </div>
+    </div>
 </body>
 
 </html>
