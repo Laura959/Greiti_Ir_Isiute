@@ -17,7 +17,7 @@ $servername='localhost';
 mysqli_query($conn,"UPDATE projektai set Projekto_id='" . $_POST['Projekto_id'] . "', Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Projekto_id='" . $_POST['Projekto_id'] . "'");
 $message = "Record Modified Successfully";
 }
-$result = mysqli_query($conn,"SELECT * FROM projektai");
+$result = mysqli_query($conn,"SELECT * FROM projektai WHERE Projekto_id='" . $_GET['Projekto_id'] . "'");
 $row= mysqli_fetch_array($result);
 
 
@@ -58,6 +58,7 @@ $row= mysqli_fetch_array($result);
       <br><td><label>Pavadinimas:</label></td><br>
 
 <input type="hidden" name="Projekto_id" class="txtField" value="<?php echo $row['Projekto_id']; ?>">
+<input type="hidden" name="userid"  value="<?php echo $row['userid']; ?>">
 
         <input type="text" name="Pavadinimas" value="<?php echo $row['Pavadinimas']; ?>">
 
