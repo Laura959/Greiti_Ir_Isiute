@@ -85,6 +85,7 @@ include_once('header.php');
             if ($i == $number)
             {
             echo "<tr>
+            <td class='d-none'>".$row['Projekto_id']."</td>
             <td>".$row['Pavadinimas']."</td>
             <td>".$row['Aprasymas']."</td>
             <td>".$row['Busena']."</td>
@@ -93,14 +94,16 @@ include_once('header.php');
             <div class='hover-info'>All tasks: ".$row['Total_tasks'].", Finished tasks".($row['Total_tasks'] - $row['Todo_tasks']).", To do tasks: ".$row['Todo_tasks'].".</div><div class='round'>
             <div class='progress-colors'></div></div></td>
           <td class='td-spacing'>
-          <button><a href='update-process.php?Pavadinimas=".$row['Pavadinimas']."'>"."<i class='far fa-edit'></i></a></button>
-          <button><i class='far fa-trash-alt'></i></button>
+          <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
+          <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+
           <button><i class='fas fa-archive'></i></button>
           <button><i class='fas fa-arrow-down'></i></button></td>
           <td><button id='create-button'><i class='fas fa-plus-circle' id='plus-button'></i></button></td></tr>";
             break;
             }
             echo "<tr>
+            <td class='d-none'>".$row['Projekto_id']."</td>
             <td class='grey-border'>".$row['Pavadinimas']."</td>
             <td class='grey-border'>".$row['Aprasymas']."</td>
             <td class='grey-border'>".$row['Busena']."</td>
@@ -109,8 +112,8 @@ include_once('header.php');
             <div class='round'>
             <div class='progress-colors'></div></div></td>
           <td class='grey-border'>
-          <button><a href='update-process.php?Pavadinimas=".$row['Pavadinimas']."'>"."<i class='far fa-edit'></i></a></button>
-          <button><i class='far fa-trash-alt'></i></button>
+          <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
+          <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
           <button><i class='fas fa-archive'></i></button>
           <button><i class='fas fa-arrow-down'></i></button></td></tr>";
             // $count++;
