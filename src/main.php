@@ -10,6 +10,7 @@ if (isset($_SESSION["username"])) {
 }
 //auto-loader pakrauna reikiamas klases
 require_once 'includes/auto-loader.inc.php';
+include_once('header.php');
 include_once('db_config.php');
 ?>
 
@@ -17,8 +18,6 @@ include_once('db_config.php');
 <html lang="en">
 
 <head>
-
-=======
     <title>Project manager</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -103,7 +102,15 @@ include_once('db_config.php');
 			}
 				echo "<tr><td class='grey-border'>".$row['Pavadinimas']."</td><td class='grey-border'>".$row['Aprasymas']."</td><td class='grey-border'>".$row['Busena']."</td><td class='grey-border progresss'><p class='progress-numbers'>".$row['Total_tasks']."/".$row['Todo_tasks']."</p><div class='round'>
 				<div class='progress-colors'></div>
-				</div></td><td class='grey-border'><button class=\"button\"><i class='far fa-edit'></i></button><button class=\"button\"><i class='far fa-trash-alt'></i></button><button class=\"button\"><i class='fas fa-archive'></i></button><button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
+				</div>
+                </td>
+                <td class='grey-border'>
+                <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
+                <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+                <button class=\"button\"><i class='fas fa-archive'></i></button>
+                <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
+                </td>
+                </tr>";
 			// $count++;
 			// if ($count>2) {
 			// 	break;  cia galesime nustatyti salygas, kas bus kai pvz isspausdins 10 eiluciu
