@@ -26,8 +26,6 @@
                 $statement2->execute([$id, $role, $user]);
                 //Jei abi uzklausos sekmingos kiekvienos ju rowCount() bus po 1
                 if($statement->rowCount() + $statement2->rowCount() === 2){
-                    // header("location: ./task.php");
-                    // exit();
                     echo "<script> location.replace(\"task.php\"); </script>";
                 }
             }
@@ -76,7 +74,7 @@
                 if($count > 0){
                     return true;
                 }else{
-                    return $statement->rowCount();
+                    return false;
                 }
             }catch(PDOException $error){
                 return 'error';
