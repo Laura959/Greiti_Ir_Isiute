@@ -6,12 +6,12 @@ try {
      $connect = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
      $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
      if (isset($_POST["login"])) {
-           if(empty($_POST["username"]) || empty($_POST["password"]))  
-           {  
-                $message = '<span>All fields are required</span>';  
-           }  
-           else  
-           {  
+           if(empty($_POST["username"]) || empty($_POST["password"]))
+           {
+                $message = '<span>All fields are required</span>';
+           }
+           else
+           {
           $query = "SELECT * FROM vartotojai WHERE El_pastas = ? AND Slaptazodis = ?";
           $statement = $connect->prepare($query);
           $statement->execute([$_POST["username"], $_POST["password"]]);
@@ -25,9 +25,9 @@ try {
           } else {
                $message = 'Invalid username or password';
           }
-           }  
+           }
      }
-} catch (PDOException $error) {     
+} catch (PDOException $error) {
      $message = 'Something went wrong';
 }
 ?>
@@ -60,7 +60,7 @@ try {
           }
           ?>
      </form>
-     </div>
+
 </body>
 
 </html>
