@@ -6,6 +6,8 @@ include_once('header.php');
 <html lang="en">
 
 <head>
+
+=======
     <title>Project manager</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -131,4 +133,5 @@ include_once('header.php');
 </main>
     </section>
     </body>
+
 </html>

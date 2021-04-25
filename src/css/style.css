@@ -77,6 +77,7 @@ input {
     right: 2rem;
 }
 .login-name {
+
     color: #80807e;;
     margin: 0px 10px 0px 0px;
     font-weight: bold;
@@ -93,7 +94,7 @@ input {
     height: 200vh;
 }
 
-table                   {
+table {
     border-spacing: 1;
     border-collapse: collapse;
     background:white;
@@ -199,15 +200,19 @@ padding: 3px 3px;
 
 .progresss {
     padding-left: 60px;
+
 }
 
 
 #create-button {
+
     background-color: transparent;
+
 
 }
 
 #plus-button {
+
     background-color: transparent;
     font-size: 44px;
     position: absolute;
@@ -272,10 +277,12 @@ label #cancel {
     left: -200px;
     position: absolute;
     z-index: 1111;
+
 }
 
 
 label #hamburger {
+
     position: absolute;
     cursor: pointer;
     background: #c0f292;
@@ -340,4 +347,58 @@ form button {
 
 .hover-info {
     display:none;
+
 }
+
+#check:checked ~ .left-menu{
+	left: 0;
+}
+
+#check:checked ~ label #hamburger{
+	left: 250px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+	top: 20px;
+	left: 205px;
+	transition: .5s ease;
+}
+
+#check:checked ~ section{
+	margin-left: 250px;
+}
+
+section {
+	transition: all .5s;
+} 
+
+label #cancel {
+	padding: 4px;
+	font-size: 26px;
+} 
+
+.fa-th-large, .fa-folder, .fa-history,  .fa-plus-circle {
+	font-size: 35px;
+	margin-left: 150px;
+}
+
+.fa-sign-out-alt {
+	background-color: transparent;
+	color: #a8d381;
+}
+
+form button {
+	background-color: transparent;
+}
+
+.left-menu-titles {
+	margin-top: -72px;
+	margin-left: -26px;
+}
+
+.hover-info {
+	display:none;
+}
+
