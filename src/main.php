@@ -10,6 +10,7 @@ if (isset($_SESSION["username"])) {
 }
 //auto-loader pakrauna reikiamas klases
 require_once 'includes/auto-loader.inc.php';
+include_once('header.php');
 include_once('db_config.php');
 ?>
 
@@ -17,8 +18,6 @@ include_once('db_config.php');
 <html lang="en">
 
 <head>
-
-=======
     <title>Project manager</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -88,6 +87,7 @@ include_once('db_config.php');
             // count naudosime, jei noresime nustatyti eiluciu skaiciu
         // $count = 1;
 
+
                 //  isspausdinamas projektu sarasas
         echo "<table>";
         echo "<thead>";
@@ -137,6 +137,7 @@ include_once('db_config.php');
         echo "</table>";
         echo "<br>";
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
+
 
         echo $error->getMessage();
         }
