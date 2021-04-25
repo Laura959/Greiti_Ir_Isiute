@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
@@ -5,9 +7,10 @@
 }
 
 body {
-    /* font-size: 120%; */
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #eeeeee;
+	font-family: 'Oswald', sans-serif;
+	background-color: #eeeeee;
+	height: 100%;
+	width: 100%;
 }
 
 .header {
@@ -35,18 +38,18 @@ body {
     position: relative;
 }
 
-label {
-    display: block;
-    text-align: left;
-    margin: 15px 0 0 17.5px;
+.label {
+	display: block;
+	text-align: left;
+	margin: 15px 0 0 17.5px;
 }
 
-input {
-    width: 93%;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid gray;
+.input {
+	width: 93%;
+	padding: 5px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid gray;
 }
 
 .login-btn {
@@ -89,24 +92,24 @@ input {
 }
 
 .left-menu {
-    background-color: #ffffff;
-    width: 20vh;
-    height: 200vh;
+	background-color: #ffffff;
+	width: 20vh;
+	height: 200vh;
 }
 
-table {
-    border-spacing: 1;
-    border-collapse: collapse;
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    max-width:1000px;
-    width:80%;
-    margin:0 auto;
-    position:relative;
-    color: #80807e;
-    z-index: -100;
-    margin-top: 2%;
+table { 
+	border-spacing: 1; 
+	border-collapse: collapse; 
+	background:white;
+	border-radius:15px;
+	overflow:hidden;
+	max-width:1000px; 
+	width:80%;
+	margin:0 auto;
+	position:relative;
+	color: #80807e;
+	z-index: 0;
+	margin-top: 2%;
 }
 
 tr {
@@ -128,9 +131,9 @@ td,th {
     padding-bottom: 17px;
 }
 
-button {
-background-color:#ffffff;
-border: none;
+.button {
+background-color:#ffffff; 
+border: none;  
 cursor: pointer;
 padding: 3px 3px;
 }
@@ -274,80 +277,25 @@ ul li:hover a {
 }
 
 label #cancel {
-    left: -200px;
-    position: absolute;
-    z-index: 1111;
-
+	left: -200px;
+	position: absolute;
+	z-index: 1;
 }
 
 
 label #hamburger {
-
-    position: absolute;
-    cursor: pointer;
-    background: #c0f292;
-    border-radius: 3px;
-    z-index: 1111;
-    left: 16px;
-    top: 25px;
-    font-size: 30px;
-    color: #c0f292;
-    background-color: #ffffff;
-    padding: 4px 9px;
-    transition: all .5s ease;
-}
-
-#check:checked ~ .left-menu{
-    left: 0;
-}
-
-#check:checked ~ label #hamburger{
-    left: 250px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-#check:checked ~ label #cancel{
-    top: 20px;
-    left: 205px;
-    transition: .5s ease;
-}
-
-#check:checked ~ section{
-    margin-left: 250px;
-}
-
-section {
-    transition: all .5s;
-}
-
-label #cancel {
-    padding: 4px;
-    font-size: 26px;
-}
-
-.fa-th-large, .fa-folder, .fa-history,  .fa-plus-circle {
-    font-size: 35px;
-    margin-left: 150px;
-}
-
-.fa-sign-out-alt {
-    background-color: transparent;
-    color: #a8d381;
-}
-
-form button {
-    background-color: transparent;
-}
-
-.left-menu-titles {
-    margin-top: -72px;
-    margin-left: -26px;
-}
-
-.hover-info {
-    display:none;
-
+	position: absolute;
+	cursor: pointer;
+	background: #c0f292;
+	border-radius: 3px;
+	z-index: 1;
+	left: 16px;
+	top: 25px;
+	font-size: 30px;
+	color: #c0f292;
+	background-color: #ffffff;
+	padding: 4px 9px;
+	transition: all .5s ease;
 }
 
 #check:checked ~ .left-menu{
@@ -402,3 +350,6 @@ form button {
 	display:none;
 }
 
+/* i{
+	pointer-events: none;
+} */
