@@ -3,7 +3,7 @@ class Dbh {
     private $host = "localhost";  
     private $user = "root";  
     private $pass = "";  
-    private $dbName = "task_system";  
+    private $dbName = "projektas";  
 
     public function connect(){
         try{

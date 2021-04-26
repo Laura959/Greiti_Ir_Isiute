@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["name"])) {
+if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
         header("location:index.php");

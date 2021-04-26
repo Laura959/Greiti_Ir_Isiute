@@ -11,7 +11,7 @@ $servername='localhost';
    $dbname = "projektas";
    $conn=mysqli_connect($servername,$username,$password,"$dbname");
    if(!$conn){
-      die('Could not Connect My Sql:' .mysql_error());
+      die('Could not Connect My Sql:'.mysql_error());
    }
         if(count($_POST)>0) {
 mysqli_query($conn,"UPDATE projektai set Projekto_id='" . $_POST['Projekto_id'] . "', Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Projekto_id='" . $_POST['Projekto_id'] . "'");

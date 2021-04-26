@@ -27,6 +27,10 @@
                 //Jei abi uzklausos sekmingos kiekvienos ju rowCount() bus po 1
                 if($statement->rowCount() + $statement2->rowCount() === 2){
                     echo "<script> location.replace(\"task.php\"); </script>";
+                }else{
+                    // $_SESSION['message'] =  "Database connection lost.";
+                    // $_SESSION['message'] = $user."role: ".$role."id: ".$id;
+                    $_SESSION['message'] = $statement2->rowCount();
                 }
             }
         }
@@ -62,7 +66,7 @@
             $host = "localhost";
             $dbUser = "root";
             $pass = "";
-            $dbName = "task_system";
+            $dbName = "projektas";
 
             try{
                 $dsn = "mysql:host=".$host.";dbname=".$dbName;

@@ -12,12 +12,15 @@ try {
 
 
      /*sql to delete a record*/
-    $sql = "DELETE FROM projektai WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
+        $sql = "DELETE FROM komandos WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
+
+        $sql2 = "DELETE FROM projektai WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
 
 
 
     /*use exec() because no results are returned*/
     $conn->exec($sql);
+    $conn->exec($sql2);
     echo "Record deleted successfully";
     }
 catch(PDOException $e)
