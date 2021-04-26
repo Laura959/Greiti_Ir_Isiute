@@ -42,7 +42,7 @@ $row= mysqli_fetch_array($result);
         <a class="navbar-brand mr-auto">Project manager</a>
         <div class="form-inline">
             <?php
-            echo '<p class="login-name">' . $_SESSION["name"] . '</p>';
+            echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form class="form-unstyled" method="POST">
                 <button type="submit" name="logout" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
