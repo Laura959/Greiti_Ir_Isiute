@@ -2,6 +2,11 @@
 
     class Project extends Dbh{
 
+        private $host = "localhost";  
+        private $user = "root";  
+        private $pass = "";  
+        private $dbName = "projektas"; 
+
         public function createProject($name, $description, $user){
             if(empty($name)){
                 $_SESSION['message'] = "Project's title field is required";
@@ -14,31 +19,35 @@
                     $_SESSION['message'] = "Project with this name already exists";
                 }
             }else{
-                $id = $this->getRandomId();
+                $id = $this->getUniqueId();
                 $state = 'In Progress';
                 $date = date("Y-m-d");
                 $role = 1;
-                $sql = "INSERT INTO projektai VALUES (?, ?, ?, ?, ?)";
-                $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
-                $statement = $this->connect()->prepare($sql);
-                $statement->execute([$id, $name, $description, $state, $date]);
-                $statement2 = $this->connect()->prepare($sql2);
-                $statement2->execute([$id, $role, $user]);
-                //Jei abi uzklausos sekmingos kiekvienos ju rowCount() bus po 1
-                if($statement->rowCount() + $statement2->rowCount() === 2){
+
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $pdo->beginTransaction();
+                try{
+                    $sql = "INSERT INTO projektai VALUES (?, ?, ?, ?, ?)";
+                    $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
+                    $statement = $pdo->prepare($sql);
+                    $statement->execute([$id, $name, $description, $state, $date]);
+                    $statement2 = $pdo->prepare($sql2);
+                    $statement2->execute([$id, $role, $user]);
+                    $pdo->commit();
                     echo "<script> location.replace(\"task.php\"); </script>";
-                }else{
-                    // $_SESSION['message'] =  "Database connection lost.";
-                    // $_SESSION['message'] = $user."role: ".$role."id: ".$id;
-                    $_SESSION['message'] = $statement2->rowCount();
+                }catch(Exception $e){
+                    $pdo->rollBack();
+                    $_SESSION['message'] =  "Database connection lost.";
                 }
             }
         }
         //Generuojamas id iki kol bus gauta unikali reiksme
-        public function getRandomId(){
+        public function getUniqueId(){
             $id = rand(100000000, 999999999);
             if($this->checkIfIdExists($id)){
-                $this->getRandomId();
+                $this->getUniqueId();
             }
             return $id;
         }
@@ -62,15 +71,9 @@
                 INNER JOIN vartotojai ON komandos.Vartotojas = vartotojai.Vartotojo_id 
                 WHERE projektai.Pavadinimas = ? && vartotojai.Vartotojo_id = ?
             ";
-            // Connection ne per dbh.class.php, nes kol kas neradau kaip reikia pagauti (catch) error tokiu atveju
-            $host = "localhost";
-            $dbUser = "root";
-            $pass = "";
-            $dbName = "projektas";
-
             try{
-                $dsn = "mysql:host=".$host.";dbname=".$dbName;
-                $pdo = new PDO($dsn, $dbUser, $pass);
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
                 $statement = $pdo->prepare($sql);
                 $statement->execute([$name ,$user]);
