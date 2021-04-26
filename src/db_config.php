@@ -8,8 +8,8 @@
 
 
 // Xampp DB
-$host = "localhost";  
- $user = "root";  
- $pass = "";  
- $dbName = "projektas";  
+$host = "localhost";
+ $user = "root";
+ $pass = "";
+ $dbName = "projektas";
  $message = "";
