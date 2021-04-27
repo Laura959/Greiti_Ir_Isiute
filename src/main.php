@@ -12,7 +12,6 @@ if (isset($_SESSION["username"])) {
 require_once 'includes/auto-loader.inc.php';
 include_once('db_config.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +24,7 @@ include_once('db_config.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
    <link href="css/style.css?rnd=132" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -106,7 +105,9 @@ include_once('db_config.php');
             <div class='round'><div class='progress-colors'></div></div></td>
           <td class='td-spacing'>
           <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
-          <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+          <i class='far fa-trash-alt'></i></a>
+          </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
           <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td>
           <td><button class=\"button\" id='create-button'>
@@ -123,7 +124,9 @@ include_once('db_config.php');
                 <div class='round'><div class='progress-colors'></div></div></td>
                 <td class='grey-border'>
                 <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
-          <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+          <i class='far fa-trash-alt'></i></a>
+          </button>
                 <button class=\"button\">
                 <i class='fas fa-archive'></i></button>
                 <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
@@ -164,8 +167,19 @@ include_once('db_config.php');
             ?>
         </form>
     </div>
+    <!-- <a href='delete.php?Projekto_id=123456"'> -->
+    <div class="pop-up__delete <?php echo isset($_POST['title']) ? 'pop-up__Delete_JS' : '';?>">
+        <h2 class="pop-up__h2">Delete a Project</h2>
+        <form method="POST" class="pop-up__form">
+            <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
+            <div class="pop-up--flex">
+                <a href="#" class="pop-up__confirm-btn">Delete</a>
+                <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
+            </div>
+        </form>
     </main>
-    <script src="./js/createProject.js?rnd=132"></script>
+    <script src="./js/createProject.js?rnd=235"></script>
     </section>
+    <!-- <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button> -->
     </body>
 </html>
