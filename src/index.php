@@ -45,14 +45,14 @@ try {
 </head>
 
 <body>
-     <div class="header">
+     <div class="header-login">
           <h2>SIGN IN</h2>
      </div>
     <div>
-     <form class="form" method="POST" id="login-form">
-          <label class="label">Email</label>
+     <form class="form-login" method="POST" id="login-form">
+          <label class="label-login">Email</label>
           <input class="input" type="text" name="username" placeholder="Your email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" title="Enter a valid email address" required>
-          <label class="label">Password</label>
+          <label class="label-login">Password</label>
           <input class="input" type="password" name="password" placeholder="Your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
           <input type="submit" name="login" value="Login" class="input login-btn" id="login-btn"><br>
           
@@ -60,7 +60,7 @@ try {
           
           <?php
           if (!empty($message)) {
-               echo '<p class="error">' . $message . '</p><br>';
+               echo '<p class="error-login">' . $message . '</p><br>';
           }
           ?>
 
