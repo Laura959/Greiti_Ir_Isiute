@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
-
 * {
     margin: 0px;
     padding: 0px;
@@ -7,31 +6,31 @@
 }
 
 body {
-	font-family: 'Oswald', sans-serif;
-	background-color: #eeeeee;
-	height: 100%;
-	width: 100%;
+    font-family: 'Oswald', sans-serif;
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%;
     line-height: 2;
 }
 
-table { 
-	border-spacing: 1; 
-	border-collapse: collapse; 
-	background:white;
-	border-radius:15px;
-	overflow:hidden;
-	max-width:1800px; 
-	width:80%;
-	margin:0 auto;
-	position:relative;
-	color: #80807e;
-	z-index: 0;
-	margin-top: 2%;
+table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 1800px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    color: #80807e;
+    z-index: 0;
+    margin-top: 2%;
     margin-left: 12%;
 }
 
 tr {
-    border:none;
+    border: none;
 }
 
 thead {
@@ -42,7 +41,7 @@ thead {
     width: 100%;
 }
 
-td,th {
+td, th {
     text-align: center;
     padding-top: 24px;
     padding-bottom: 24px;
@@ -58,8 +57,8 @@ ul li:hover a {
 }
 
 section {
-	transition: all .5s;
-} 
+    transition: all .5s;
+}
 
 button {
     border: #ffffff;
@@ -67,43 +66,30 @@ button {
 }
 
 form button {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 label #cancel {
-	left: -200px;
-	position: absolute;
-	z-index: 1;
+    left: -200px;
+    position: absolute;
+    z-index: 1;
     padding: 4px;
-	font-size: 26px;
+    font-size: 26px;
 }
 
 label #hamburger {
-	position: absolute;
-	cursor: pointer;
-	background: #c0f292;
-	border-radius: 3px;
-	z-index: 1;
-	left: 16px;
-	top: 25px;
-	font-size: 30px;
-	color: #c0f292;
-	background-color: #ffffff;
-	padding: 4px 9px;
-	transition: all .5s ease;
-}
-
-.header {
-    width: 30%;
-    margin: 50px auto 0px;
-    min-width: 300px;
-    color: white;
-    background: #5F9EA0;
-    text-align: center;
-    border: 1px solid #B0C4DE;
-    border-bottom: none;
-    border-radius: 10px 10px 0px 0px;
-    padding: 20px;
+    position: absolute;
+    cursor: pointer;
+    background: #c0f292;
+    border-radius: 3px;
+    z-index: 1;
+    left: 16px;
+    top: 25px;
+    font-size: 30px;
+    color: #c0f292;
+    background-color: #ffffff;
+    padding: 4px 9px;
+    transition: all .5s ease;
 }
 
 .form {
@@ -118,17 +104,19 @@ label #hamburger {
 }
 
 .label {
-	display: block;
-	text-align: left;
-	margin: 15px 0 0 17.5px;
+    >>>>>>>main display: block;
+    text-align: left;
+    margin: 15px 0 0 17.5px;
 }
 
 .input {
-	width: 93%;
-	padding: 5px 10px;
-	font-size: 16px;
-	border-radius: 5px;
-	border: 1px solid gray;
+    width: 93%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: none;
+    text-align: center;
+    font-weight: bold;
 }
 
 .login-btn {
@@ -145,7 +133,7 @@ label #hamburger {
     font-weight: bold;
 }
 
-.login-btn:hover{
+.login-btn:hover {
     background-color: #5f9ea0a1;
 }
 
@@ -158,28 +146,29 @@ label #hamburger {
     bottom: 4.25rem;
     right: 2rem;
 }
-.login-name {
 
-    color: #80807e;;
+.login-name {
+    color: #80807e;
+    ;
     margin: 0px 10px 0px 0px;
     font-weight: bold;
     font-size: 20px;
 }
 
-.div-container{
+.div-container {
     display: flex;
     flex-direction: row;
 }
 
 .left-menu {
-	background-color: #ffffff;
-	width: 20vh;
-	height: 200vh;
+    background-color: #ffffff;
+    width: 20vh;
+    height: 200vh;
 }
 
 .button {
-    background-color: transparent; 
-    border: none;  
+    background-color: transparent;
+    border: none;
     cursor: pointer;
     padding: 3px 3px;
 }
@@ -224,7 +213,7 @@ label #hamburger {
 }
 
 .far, .fas {
-    color:#c0f292;
+    color: #c0f292;
     background-color: #ffffff;
     font-size: 26px;
 }
@@ -265,17 +254,16 @@ label #hamburger {
     transition: .4s;
 }
 
-.left-menu ul a i{
+.left-menu ul a i {
     margin-right: 16px;
 }
 
-
 .left-menu-titles {
-	margin-top: -75px;
+    margin-top: -75px;
 }
 
 .hover-info {
-	display:none;
+    display: none;
     width: 108px;
     background: #ffffff;
     border: 1px solid #eeeeee;
@@ -283,11 +271,11 @@ label #hamburger {
     padding: 8px;
     border-radius: 10px;
     margin-left: 13.5%;
-    -webkit-box-shadow: 5px 5px 15px -4px rgba(0,0,0,0.62); 
-    box-shadow: 5px 5px 15px -4px rgba(0,0,0,0.62);
+    -webkit-box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.62);
+    box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.62);
 }
 
-.round:hover + .hover-info {
+.round:hover+.hover-info {
     display: block;
     position: absolute;
 }
@@ -296,56 +284,56 @@ label #hamburger {
     color: #ffffff;
 }
 
-.fa-th-large, .fa-folder, .fa-history,  .fa-plus-circle {
-	font-size: 30px;
-	margin-left: 155px;
+.fa-th-large, .fa-folder, .fa-history, .fa-plus-circle {
+    font-size: 30px;
+    margin-left: 155px;
 }
 
 .fa-sign-out-alt {
-	background-color: #eeeeee;
-	color: #a8d381;
+    background-color: #eeeeee;
+    color: #a8d381;
 }
 
 #check {
     display: none;
 }
 
-#check:checked ~ .left-menu{
-	left: 0;
+#check:checked~.left-menu {
+    left: 0;
 }
 
-#check:checked ~ .left-menu ul{
-	margin-top: 22%;
+#check:checked~.left-menu ul {
+    margin-top: 22%;
 }
 
-#check:checked ~ label #hamburger{
-	left: 250px;
-	opacity: 0;
-	pointer-events: none;
-}
-  
-#check:checked ~ label #cancel{
-	top: 20px;
-	left: 205px;
-	transition: .5s ease;
+#check:checked~label #hamburger {
+    left: 250px;
+    opacity: 0;
+    pointer-events: none;
 }
 
-#check:checked ~ section{
-	margin-left: 250px;
+#check:checked~label #cancel {
+    top: 20px;
+    left: 205px;
+    transition: .5s ease;
 }
 
-#check:checked ~ .left-menu .left-menu-titles {
+#check:checked~section {
+    margin-left: 250px;
+}
+
+#check:checked~.left-menu .left-menu-titles {
     margin-left: 50px;
     transition: .5s ease;
     margin-top: -63px;
 }
 
-#check:checked ~ .left-menu .left-menu-icon {
+#check:checked~.left-menu .left-menu-icon {
     margin-left: -3px;
     transition: .5s ease;
 }
 
-#check:checked ~ .left-menu #search-left-menu {
+#check:checked~.left-menu #search-left-menu {
     margin-left: 14%;
 }
 
@@ -387,4 +375,8 @@ label #hamburger {
     font-size: 60px;
     position: absolute;
     right: -25px;
+}
+
+::placeholder {
+    color: #ced2d1;
 }
