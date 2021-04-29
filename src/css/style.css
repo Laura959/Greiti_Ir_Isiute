@@ -196,6 +196,11 @@ label #hamburger {
     text-decoration: none;
 }
 
+.project-page-title:hover {    
+    text-decoration: none;
+    color: rgb(148, 182, 134);
+}
+
 .whole-search {
     margin-right: 2%;
 }
@@ -272,6 +277,10 @@ label #hamburger {
 
 .left-menu ul a i {
     margin-right: 16px;
+}
+
+.left-menu a:hover {
+    text-decoration: none;
 }
 
 .left-menu-titles {
