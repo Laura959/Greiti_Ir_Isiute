@@ -18,7 +18,6 @@ table {
     border-collapse: collapse;
     background: white;
     border-radius: 15px;
-    overflow: hidden;
     max-width: 1800px;
     width: 80%;
     margin: 0 auto;
@@ -200,6 +199,14 @@ label #hamburger {
 
 .whole-search {
     margin-right: 2%;
+}
+
+.project-name-spacing {
+    border-top-left-radius: 15px;
+}
+
+.round-border {
+    border-top-right-radius: 15px;
 }
 
 .grey-border {
