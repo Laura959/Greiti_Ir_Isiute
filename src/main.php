@@ -133,9 +133,9 @@ include_once('db_config.php');
           <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
           <td class='td-spacing'>
-          <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
+          <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
-          <i class='far fa-trash-alt'></i></a>
+          <i class='far fa-trash-alt'></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
           <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
@@ -154,9 +154,9 @@ include_once('db_config.php');
                 <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
                 <td class='grey-border'>
-                <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
+                <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
-                    <i class='far fa-trash-alt'></i></a>
+                    <i class='far fa-trash-alt'></i>
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
                 <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
@@ -180,7 +180,7 @@ include_once('db_config.php');
     <div class="pop-up <?php echo isset($_POST['title']) ? 'pop-up__JS' : '';?>">
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
-            <input class="pop-up__input" type="text" name="title" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+            <input style="text-align:left;" class="pop-up__input" type="text" name="title" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
             <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
@@ -188,8 +188,8 @@ include_once('db_config.php');
             </div>
             <?php
             if(isset($_POST['title']))  {
-                $test1 = new Project(); 
-                $test1->createProject($_POST['title'], $_POST['description'], $_SESSION['userId']);
+                $create = new Project(); 
+                $create->createProject($_POST['title'], $_POST['description'], $_SESSION['userId']);
             }
             if(isset($_SESSION['message'])){
                 echo "<p class='pop-up__error'>".$_SESSION['message']."</p>";
@@ -198,7 +198,30 @@ include_once('db_config.php');
             ?>
         </form>
     </div>
-    <div class="pop-up__delete <?php echo isset($_POST['title']) ? 'pop-up__Delete_JS' : '';?>">
+    <!-- <?php echo print_r($_SESSION) ?>; -->
+    <div class="pop-up__update">
+        <h2 class="pop-up__h2">Update a Project</h2>
+        <form method="POST" class="pop-up__form">
+            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" rows="2"></textarea>
+            <input type="hidden" class="pop-up__update-id" name="updateId"/>
+            <div class="pop-up--flex">
+                <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
+                <div role="button" class="pop-up__cancel-btn">Cancel</div>
+            </div>
+            <?php
+            if(isset($_POST['updateTitle']))  {
+                $update = new Project(); 
+                $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId']);
+            }
+            if(isset($_SESSION['updateError'])){
+                echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
+                unset($_SESSION['updateError']);
+            }
+            ?>
+        </form>
+    </div>
+    <div class="pop-up__delete">
         <h2 class="pop-up__h2">Delete a Project</h2>
         <form method="POST" class="pop-up__form">
             <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
@@ -212,4 +235,5 @@ include_once('db_config.php');
     <script src="./js/createProject.js?rnd=132"></script>
     </section>
     </body>
+    <!-- <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button> -->
 </html>

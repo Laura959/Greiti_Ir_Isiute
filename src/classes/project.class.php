@@ -1,5 +1,4 @@
 <?php
-
     class Project extends Dbh{
 
         private $host = "localhost";  
@@ -41,6 +40,27 @@
                     $pdo->rollBack();
                     $_SESSION['message'] =  "Database connection lost.";
                 }
+            }
+        }
+
+        public function updateProject($name, $description, $id){
+            if(empty($name)){
+                $_SESSION['updateError'] = "Project's title field is required";
+                return;
+            }else if(strlen($id) !== 9){
+                $_SESSION['updateError'] = "Project ID is invalid";
+                return;
+            }
+            try{
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "UPDATE projektai SET Pavadinimas = ?, Aprasymas = ? WHERE Projekto_id = ?";
+                $statement = $pdo->prepare($sql);
+                $statement->execute([$name, $description, $id]);
+                echo "<script> location.replace(\"main.php\"); </script>";
+            }catch(PDOException $error){
+                $_SESSION['updateError'] =  "Database connection lost.";
             }
         }
         //Generuojamas id iki kol bus gauta unikali reiksme

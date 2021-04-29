@@ -41,7 +41,8 @@ body {
 }
 
 .pop-up,
-.pop-up__delete {
+.pop-up__delete,
+.pop-up__update {
     width: clamp(350px, 50vw, 550px);
     min-width: 350px;
     border-radius: 2rem;
@@ -78,7 +79,8 @@ body {
 .pop-up__input,
 .pop-up__textarea,
 .pop-up__cancel-btn,
-.pop-up__confirm-btn {
+.pop-up__confirm-btn,
+.pop-up__update-btn {
     width: 85%;
     padding: .5rem 1.75rem;
     font-size: 1rem;
@@ -89,6 +91,10 @@ body {
     position: relative;
     word-break: break-all;
     font-family: 'Oswald', sans-serif;
+}
+
+.pop-up__input{
+    text-align: left;
 }
 
 .pop-up__textarea {
@@ -117,12 +123,14 @@ body {
 
 .pop-up__create-btn,
 .pop-up__cancel-btn,
-.pop-up__confirm-btn {
+.pop-up__confirm-btn,
+.pop-up__update-btn {
     font-size: 1.2rem;
     text-indent: initial;
     padding: 0;
     color: #ffffff;
     background-color: #a0e383;
+    text-align: center;
     text-transform: uppercase;
     cursor: pointer;
     font-weight: 400;
@@ -150,7 +158,8 @@ body {
 
 .pop-up__create-btn:hover,
 .pop-up__cancel-btn:hover,
-.pop-up__confirm-btn:hover {
+.pop-up__confirm-btn:hover,
+.pop-up__update-btn:hover {
     opacity: .75;
 }
 

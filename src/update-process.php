@@ -5,22 +5,20 @@ include_once('header.php');
     try {
 
 
-$servername='localhost';
-   $username='root';
-   $password='';
-   $dbname = "projektas";
-   $conn=mysqli_connect($servername,$username,$password,"$dbname");
-   if(!$conn){
-      die('Could not Connect My Sql:'.mysql_error());
-   }
-        if(count($_POST)>0) {
-mysqli_query($conn,"UPDATE projektai set Projekto_id='" . $_POST['Projekto_id'] . "', Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Projekto_id='" . $_POST['Projekto_id'] . "'");
-$message = "Record Modified Successfully";
-}
-$result = mysqli_query($conn,"SELECT * FROM projektai WHERE Projekto_id='" . $_GET['Projekto_id'] . "'");
-$row= mysqli_fetch_array($result);
-
-
+    $servername='localhost';
+    $username='root';
+    $password='';
+    $dbname = "projektas";
+    $conn=mysqli_connect($servername,$username,$password,"$dbname");
+    if(!$conn){
+        die('Could not Connect My Sql:'.mysql_error());
+    }
+    if(count($_POST)>0) {
+            mysqli_query($conn,"UPDATE projektai set Projekto_id='" . $_POST['Projekto_id'] . "', Pavadinimas='" . $_POST['Pavadinimas'] . "', Aprasymas='" . $_POST['Aprasymas'] . "' WHERE Projekto_id='" . $_POST['Projekto_id'] . "'");
+            $message = "Record Modified Successfully";
+        }
+            $result = mysqli_query($conn,"SELECT * FROM projektai WHERE Projekto_id='" . $_GET['Projekto_id'] . "'");
+            $row= mysqli_fetch_array($result);
         } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
         echo $error->getMessage();
         }
