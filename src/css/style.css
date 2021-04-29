@@ -458,3 +458,9 @@ input[type="password"] {
     bottom: 4.25rem;
     right: 2rem;
 }
+
+@-moz-document url-prefix() {
+    table {
+        overflow: hidden;
+    }
+}
