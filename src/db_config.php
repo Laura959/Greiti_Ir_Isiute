@@ -3,7 +3,7 @@
 //  $host = "localhost_db";
 //  $user = "root";
 //  $pass = "nera";
-//  $dbName = "task_system";
+//  $dbName = "projektas";
 //  $message = "";
 
 
