@@ -116,7 +116,7 @@ include_once('db_config.php');
 
         echo "<table>";
         echo "<thead>";
-        echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th></th></tr>";
+        echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);

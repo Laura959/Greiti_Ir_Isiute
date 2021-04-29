@@ -18,7 +18,6 @@ table {
     border-collapse: collapse;
     background: white;
     border-radius: 15px;
-    overflow: hidden;
     max-width: 1800px;
     width: 80%;
     margin: 0 auto;
@@ -158,7 +157,6 @@ label #hamburger {
 
 .login-name {
     color: #80807e;
-    ;
     margin: 0px 10px 0px 0px;
     font-weight: bold;
     font-size: 20px;
@@ -198,8 +196,21 @@ label #hamburger {
     text-decoration: none;
 }
 
+.project-page-title:hover {    
+    text-decoration: none;
+    color: rgb(148, 182, 134);
+}
+
 .whole-search {
     margin-right: 2%;
+}
+
+.project-name-spacing {
+    border-top-left-radius: 15px;
+}
+
+.round-border {
+    border-top-right-radius: 15px;
 }
 
 .grey-border {
@@ -266,6 +277,10 @@ label #hamburger {
 
 .left-menu ul a i {
     margin-right: 16px;
+}
+
+.left-menu a:hover {
+    text-decoration: none;
 }
 
 .left-menu-titles {
@@ -410,10 +425,12 @@ label #hamburger {
     margin: 0px auto;
     padding: 10px 20px;
     text-align: center;
-    position: relative;
     color: #ced2d1;
     font-family: 'Oswald';
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -450,4 +467,10 @@ input[type="password"] {
     text-align: center;
     bottom: 4.25rem;
     right: 2rem;
+}
+
+@-moz-document url-prefix() {
+    table {
+        overflow: hidden;
+    }
 }
