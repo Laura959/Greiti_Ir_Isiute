@@ -134,7 +134,9 @@ include_once('db_config.php');
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
           <td class='td-spacing'>
           <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
-          <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+          <i class='far fa-trash-alt'></i></a>
+          </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
           <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
           <button class=\"button\" id='create-button'>
@@ -153,7 +155,9 @@ include_once('db_config.php');
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
                 <td class='grey-border'>
                 <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button>
-                <button><a href='delete.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-trash-alt'></i></a></button>
+                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+                    <i class='far fa-trash-alt'></i></a>
+                    </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
                 <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
 
@@ -184,7 +188,7 @@ include_once('db_config.php');
             </div>
             <?php
             if(isset($_POST['title']))  {
-                $test1 = new Project();
+                $test1 = new Project(); 
                 $test1->createProject($_POST['title'], $_POST['description'], $_SESSION['userId']);
             }
             if(isset($_SESSION['message'])){
@@ -192,6 +196,16 @@ include_once('db_config.php');
                 unset($_SESSION['message']);
             }
             ?>
+        </form>
+    </div>
+    <div class="pop-up__delete <?php echo isset($_POST['title']) ? 'pop-up__Delete_JS' : '';?>">
+        <h2 class="pop-up__h2">Delete a Project</h2>
+        <form method="POST" class="pop-up__form">
+            <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
+            <div class="pop-up--flex">
+                <a href="#" class="pop-up__confirm-btn">Delete</a>
+                <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
+            </div>
         </form>
     </div>
     </main>
