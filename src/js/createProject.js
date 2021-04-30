@@ -1,4 +1,4 @@
-const createBtn     = document.querySelector('.create-project__JS');
+const createBtns    = document.querySelectorAll('.create-project__JS');
 const deleteBtns    = document.querySelectorAll('.delete-project__JS');
 const updateBtns    = document.querySelectorAll('.update-project__JS');
 const cancelBtns    = document.querySelectorAll('.pop-up__cancel-btn');
@@ -61,7 +61,9 @@ const handleClickAddPlaceholder = () => {
     document.querySelector('.pop-up__placeholder').textContent = 'Description';
 }
 
-createBtn.addEventListener('click', handleClickCreateForm);
+createBtns.forEach(
+    createBtn => createBtn.addEventListener('click', handleClickCreateForm)
+);
 
 updateBtns.forEach(
     updateBtn => updateBtn.addEventListener('click', () =>{

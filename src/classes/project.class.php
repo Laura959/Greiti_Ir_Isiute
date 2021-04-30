@@ -35,6 +35,7 @@
                     $statement2 = $pdo->prepare($sql2);
                     $statement2->execute([$id, $role, $user]);
                     $pdo->commit();
+                    $_SESSION['title'] = $name;
                     echo "<script> location.replace(\"task.php\"); </script>";
                 }catch(Exception $e){
                     $pdo->rollBack();
@@ -61,6 +62,7 @@
                 echo "<script> location.replace(\"main.php\"); </script>";
             }catch(PDOException $error){
                 $_SESSION['updateError'] =  "Database connection lost.";
+                $_POST['fail'] = 'set';
             }
         }
         //Generuojamas id iki kol bus gauta unikali reiksme

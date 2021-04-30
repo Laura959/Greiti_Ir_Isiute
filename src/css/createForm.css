@@ -173,7 +173,8 @@ body {
 
 .pop-up__placeholder {
     position: absolute;
-    top: 53.5%;
+    top: 47.5%;
+    /* top: 53.5%; */
     z-index: 10;
     left: 50%;
     transform: translate(-50%, -50%);

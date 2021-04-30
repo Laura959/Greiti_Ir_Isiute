@@ -25,7 +25,7 @@ include_once('db_config.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
    <link href="css/style.css?rnd=132" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -140,7 +140,7 @@ include_once('db_config.php');
           <button class=\"button\"><i class='fas fa-archive'></i></button>
           <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
           <button class=\"button\" id='create-button'>
-          <i class='fas fa-plus-circle' id='plus-button'></i></button></td></tr>";
+          <i class='fas fa-plus-circle create-project__JS' id='plus-button'></i></button></td></tr>";
             break;
             }
 
@@ -198,7 +198,6 @@ include_once('db_config.php');
             ?>
         </form>
     </div>
-    <!-- <?php echo print_r($_SESSION) ?>; -->
     <div class="pop-up__update">
         <h2 class="pop-up__h2">Update a Project</h2>
         <form method="POST" class="pop-up__form">
