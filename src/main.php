@@ -84,7 +84,8 @@ include_once('db_config.php');
         FROM projektai
         LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
         LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id
-        GROUP BY 1";
+        GROUP BY 1
+        ORDER BY Sukurimo_data DESC";
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
@@ -190,6 +191,7 @@ include_once('db_config.php');
             if(isset($_POST['title']))  {
                 $create = new Project(); 
                 $create->createProject($_POST['title'], $_POST['description'], $_SESSION['userId']);
+
             }
             if(isset($_SESSION['message'])){
                 echo "<p class='pop-up__error'>".$_SESSION['message']."</p>";
@@ -209,6 +211,7 @@ include_once('db_config.php');
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
             </div>
             <?php
+            
             if(isset($_POST['updateTitle']))  {
                 $update = new Project(); 
                 $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId']);
@@ -217,6 +220,10 @@ include_once('db_config.php');
                 echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
                 unset($_SESSION['updateError']);
             }
+            //php automatiskai neatnaujina stulpelio 'Sukurimo_data" laiko, del to panaudojau sia komanda. Ji suranda, kur yra neatnaujintas laikas ir ta laika pakeicia i esama
+            $queryTime = "UPDATE projektai SET Sukurimo_data = CURRENT_TIMESTAMP WHERE Sukurimo_data LIKE '%00:00:00'"; 
+            $resultime = $connectM->prepare($queryTime);
+            $resultime->execute();
             ?>
         </form>
     </div>
