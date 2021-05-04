@@ -35,8 +35,7 @@
                     $statement2 = $pdo->prepare($sql2);
                     $statement2->execute([$id, $role, $user]);
                     $pdo->commit();
-                    $_SESSION['title'] = $name;
-                    echo "<script> location.replace(\"task.php\"); </script>";
+                    echo "<script> location.replace(\"task.php?Projekto_id=".$id."&title=".$name."\"); </script>";
                 }catch(Exception $e){
                     $pdo->rollBack();
                     $_SESSION['message'] =  "Database connection lost.";

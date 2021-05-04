@@ -96,7 +96,7 @@ include_once('db_config.php');
             $totalTasks = $rowTotal;
             $finishedTasks = $totalTasks - $rowTodo;
             if ($totalTasks == 0) {
-                $greenBarLength = 140;
+                $greenBarLength = 0;
             } else {
             $percent = $finishedTasks/$totalTasks;
             $greenBarLength = $percent*140; //dauginu iš 140, nes toks yra progress bar width (css)
@@ -126,7 +126,7 @@ include_once('db_config.php');
                 // spausdinama eilutė su "Sukurti projektą mygtuku
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
-          <td>".$row['Pavadinimas']."</td>
+          <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
           <td>".$row['Aprasymas']."</td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
@@ -147,7 +147,7 @@ include_once('db_config.php');
                 // spausdinamos kitos lentelės eilutės
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
-                <td class='grey-border'>".$row['Pavadinimas']."</td>
+                <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
                 <td class='grey-border'>".$row['Aprasymas']."</td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>

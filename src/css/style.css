@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
@@ -11,6 +12,17 @@ body {
     height: 100%;
     width: 100%;
     line-height: 2;
+    overflow-x: hidden;
+}
+
+a {
+    color: #80807e;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #80807e;
+    text-decoration: none;
 }
 
 table {
@@ -43,9 +55,20 @@ thead {
 td,
 th {
     text-align: center;
+    vertical-align: middle;
     padding-top: 24px;
     padding-bottom: 24px;
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+}
+.tasks__td{
+    font-weight: 300;
+}
+
+.tasks__th {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    font-size: clamp(1.15rem, 1.65vw, 1.3rem);
 }
 
 ul {
@@ -196,7 +219,7 @@ label #hamburger {
     text-decoration: none;
 }
 
-.project-page-title:hover {    
+.project-page-title:hover {
     text-decoration: none;
     color: rgb(148, 182, 134);
 }
@@ -473,4 +496,104 @@ input[type="password"] {
     table {
         overflow: hidden;
     }
+}
+
+.table--fixed {
+    table-layout: fixed;
+}
+
+.tasks__priority-Low {
+    padding-right: 1.2rem;
+}
+
+.tasks__priority-High {
+    padding-right: .9rem;
+}
+
+.tasks__priority-Low::before,
+.tasks__priority-Middle::before,
+.tasks__priority-High::before {
+    content: '';
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: .65rem;
+}
+
+.tasks__priority-Low::before {
+    background-color: #00ff00;
+}
+
+.tasks__priority-Middle::before {
+    background-color: #ffe600;
+}
+
+.tasks__priority-High::before {
+    background-color: #ff0011;
+}
+
+.projects__title-hover {
+    position: relative;
+}
+
+.projects__title-hover:hover::before {
+    content: 'Click to add project tasks';
+    position: absolute;
+    bottom: -2.75rem;
+    left: 40%;
+    transform: translateX(-50%);
+    display: inline-block;
+    padding: .15rem .3rem;
+    border-radius: .25rem;
+    background: #a8d381;
+    opacity: 1;
+    color: #fff;
+    font-weight: 500;
+    font-size: .85rem;
+    font-family: sans-serif;
+    white-space: nowrap;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.projects__title-hover:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -.8rem;
+    left: 40%;
+    transform: translateX(-50%);
+    display: inline-block;
+    border: 8px solid transparent;
+    border-bottom: 8px solid #a8d381;
+}
+
+.tasks__add-btn{
+    position: relative;
+    top: -4.5rem;
+    width: 80%;
+    margin: 0 auto;
+    margin-left: 12%;
+}
+
+.tasks__add-btn-i{
+
+    right: -2.25rem !important;
+}
+
+.tasks__title{
+    font-size: 2.15rem; 
+    font-weight: 500;
+}
+
+.tasks__title--uppercase{
+    text-transform: uppercase;
+}
+
+.tasks__th--width{
+    width: 20.5%;
+}
+
+.tasks__tr--border-bottom{
+    border-bottom: 1px solid #D3D3D3;
 }
