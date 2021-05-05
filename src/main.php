@@ -52,7 +52,27 @@ include_once('db_config.php');
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
     <nav class="navbar">
         <a class="project-page-title mr-auto">PROJECTS</a>
-        <div class="whole-search"><input type="text" id="search" name="fname" placeholder="Search" class="input"><i class="fas fa-search" id="search-icon"></i></div>
+        <div class="whole-search">
+    
+    <!-- SEARCH FUNKCIALUMAS -->        
+        <form id="search-form">
+        <?php              
+            if(isset($_GET["search"])) {
+                $SEARCH_QUERY = trim($_GET["search"]);
+                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 4) {
+                    $SEARCH_ERROR = "error";
+                }
+            } else {
+                $SEARCH_QUERY = "";
+            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
+            if(isset($SEARCH_ERROR)) {
+                echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";
+            }
+        ?>
+        </form>        
+        </div>
         <div class="form-inline">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
@@ -72,20 +92,22 @@ include_once('db_config.php');
         $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
-        $queryM = "SELECT
-            projektai.Projekto_id,
-            projektai.Pavadinimas,
-            projektai.Aprasymas,
-            projektai.Busena,
-            projektai.Sukurimo_data,
-            SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
-            SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
-            COUNT(uzduotys.Busena) as Total_tasks
-        FROM projektai
-        LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
-        LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id
-        GROUP BY 1
-        ORDER BY Sukurimo_data DESC";
+        $querySelect = "SELECT
+                projektai.Projekto_id,
+                projektai.Pavadinimas,
+                projektai.Aprasymas,
+                projektai.Busena,
+                projektai.Sukurimo_data,
+                SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
+                SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
+                COUNT(uzduotys.Busena) as Total_tasks
+            FROM projektai
+                LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
+                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id";
+        $queryWhere = !isset($SEARCH_ERROR) ? " WHERE projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
+        $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
+        $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
+        
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
