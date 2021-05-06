@@ -1,6 +1,9 @@
 const createBtns    = document.querySelectorAll('.create-project__JS');
 const deleteBtns    = document.querySelectorAll('.delete-project__JS');
 const updateBtns    = document.querySelectorAll('.update-project__JS');
+
+const updateBtns1    = document.querySelectorAll('.update1-project__JS');
+
 const cancelBtns    = document.querySelectorAll('.pop-up__cancel-btn');
 const textarea      = document.querySelector('.pop-up__textarea');
 const deleteBtns1    = document.querySelectorAll('.delete1-project__JS');
@@ -39,7 +42,7 @@ const handleClickDeleteForm1 = (id, title, Projekto_id) => {
 const handleClickCloseForm1 = () => {
     const blur = document.querySelector('.blur__JS');
     const deleteForm = document.querySelector('.pop-up__delete1');
-    const updateForm = document.querySelector('.pop-up__update');
+    const updateForm = document.querySelector('.pop-up__update1');
     if (deleteForm.classList.contains('pop-up__JS')) {
         deleteForm.classList.remove('pop-up__JS');
     } else if (updateForm.classList.contains('pop-up__JS')){
@@ -62,11 +65,30 @@ const handleClickUpdateForm = (title, description, id) => {
     document.body.appendChild(blur);
 }
 
+const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
+    const blur = document.createElement('div');
+    const form = document.querySelector('.pop-up__update1');
+    const inputTitle = document.querySelector('.pop-up__update-title1');
+    const inputpriority = document.querySelector('.pop-up__update-priority');
+    const inputstatus = document.querySelector('.pop-up__update-status');
+    const inputDescription = document.querySelector('.pop-up__update-description1');
+    const inputId = document.querySelector('.pop-up__update-id1');
+    inputTitle.setAttribute('value', `${title}`);
+    inputId.setAttribute('value', `${id1}`);
+    inputpriority.setAttribute('value', `${priority}`);
+    inputstatus.setAttribute('value', `${busena}`);
+    inputDescription.innerText = `${description}`;
+    form.classList.add('pop-up__JS');
+    blur.classList.add('blur__JS');
+    document.body.appendChild(blur);
+}
+
 const handleClickCloseForm = () => {
     const blur = document.querySelector('.blur__JS');
     const createForm = document.querySelector('.pop-up');
     const deleteForm = document.querySelector('.pop-up__delete');
     const updateForm = document.querySelector('.pop-up__update');
+   
     if (createForm.classList.contains('pop-up__JS')) {
         createForm.classList.remove('pop-up__JS');
     } else if (deleteForm.classList.contains('pop-up__JS')) {
@@ -74,8 +96,10 @@ const handleClickCloseForm = () => {
     } else if (updateForm.classList.contains('pop-up__JS')){
         updateForm.classList.remove('pop-up__JS');
     }
+    
     blur.parentNode.removeChild(blur);
 }
+
 
 const handleClickRemovePlaceholder = () => {
     document.querySelector('.pop-up__placeholder').textContent = '';
@@ -96,6 +120,18 @@ updateBtns.forEach(
     const id = updateBtn.parentElement.children[1].id;
     handleClickUpdateForm(title, description, id);
 }));
+
+updateBtns1.forEach(
+    updateBtn => updateBtn.addEventListener('click', () =>{
+    const title = updateBtn.parentElement.parentElement.children[1].textContent;
+    const description = updateBtn.parentElement.parentElement.children[2].textContent;
+    const priority = updateBtn.parentElement.parentElement.children[3].textContent;
+    const busena = updateBtn.parentElement.parentElement.children[4].textContent
+    const id1 = updateBtn.parentElement.children[1].id;
+    console.log(title, priority, busena, description, id1);
+    handleClickUpdateForm1(title,priority,busena,description,id1);
+}));
+
 deleteBtns1.forEach(
     deleteBtn => deleteBtn.addEventListener('click', () => 
     {
