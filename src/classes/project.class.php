@@ -43,6 +43,47 @@
                 }
             }
         }
+        
+            public function createTask($name, $description, $priority, $status, $user){
+            if(empty($name)){
+                $_SESSION['message'] = "Project's title field is required";
+                return;
+            }
+            if($result = $this->checkIfNameExistsTask($name, $user)){
+                if($result === "error"){
+                    $_SESSION['message'] = "Database connection lost.";
+                }else{
+                    $_SESSION['message'] = "Project with this name already exists";
+                }
+            }else{
+                $id = $this->getUniqueId();
+               // $state = 'In Progress';
+                $date = date("Y-m-d");
+                 $date1 = date("Y-m-d");
+                $role = 1;
+ $projektas = $_GET['Projekto_id'];
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $pdo->beginTransaction();
+                try{
+                   $sql = "INSERT INTO uzduotys (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena` ,`Sukurimo_data`, `Naujinimo_data`, `projekto_id`) VALUES (?, ?, ?, ?, ? ,?, ?,?)";
+                   // $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
+                    $statement = $pdo->prepare($sql);
+                      $statement->execute([$id, $name, $description, $priority, $status, $date, $date1, $projektas]);
+                   // $statement2 = $pdo->prepare($sql2);
+                  //  $statement2->execute([$id, $role, $user]);
+                    $pdo->commit();
+                    
+                    echo "<script> location.replace(\"task.php?Projekto_id=".$projektas."&title=".$name."\"); </script>";
+                }catch(Exception $e){
+                    $pdo->rollBack();
+                    $_SESSION['message'] =  "Database connection lost.";
+                }
+            }
+        }
+        
+        
 
         public function updateProject($name, $description, $id){
             if(empty($name)){
@@ -92,6 +133,29 @@
                 INNER JOIN komandos ON projektai.Projekto_id = komandos.Projekto_id 
                 INNER JOIN vartotojai ON komandos.Vartotojas = vartotojai.Vartotojo_id 
                 WHERE projektai.Pavadinimas = ? && vartotojai.Vartotojo_id = ?
+            ";
+            try{
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
+                $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                $statement = $pdo->prepare($sql);
+                $statement->execute([$name ,$user]);
+                $count = $statement->rowCount();
+                if($count > 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(PDOException $error){
+                return 'error';
+            }
+        }
+             public function checkIfNameExistsTask($name, $user){
+            $sql = "
+            SELECT Pavadinimas FROM uzduotys 
+                INNER JOIN komandos ON uzduotys.Uzduoties_id = komandos.Projekto_id 
+                INNER JOIN vartotojai ON komandos.Vartotojas = vartotojai.Vartotojo_id 
+                WHERE uzduotys.Pavadinimas = ? && vartotojai.Vartotojo_id = ?
             ";
             try{
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
