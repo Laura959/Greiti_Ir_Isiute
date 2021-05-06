@@ -52,7 +52,27 @@ include_once('db_config.php');
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
     <nav class="navbar">
         <a class="project-page-title mr-auto">PROJECTS</a>
-        <div class="whole-search"><input type="text" id="search" name="fname" placeholder="Search" class="input"><i class="fas fa-search" id="search-icon"></i></div>
+        <div class="whole-search">
+    
+    <!-- SEARCH FUNKCIALUMAS -->        
+        <form id="search-form">
+        <?php              
+            if(isset($_GET["search"])) {
+                $SEARCH_QUERY = trim($_GET["search"]);
+                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 4) {
+                    $SEARCH_ERROR = "error";
+                }
+            } else {
+                $SEARCH_QUERY = "";
+            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
+            if(isset($SEARCH_ERROR)) {
+                echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";
+            }
+        ?>
+        </form>        
+        </div>
         <div class="form-inline">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
@@ -72,19 +92,22 @@ include_once('db_config.php');
         $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
-        $queryM = "SELECT
-            projektai.Projekto_id,
-            projektai.Pavadinimas,
-            projektai.Aprasymas,
-            projektai.Busena,
-            projektai.Sukurimo_data,
-            SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
-            SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
-            COUNT(uzduotys.Busena) as Total_tasks
-        FROM projektai
-        LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
-        LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id
-        GROUP BY 1";
+        $querySelect = "SELECT
+                projektai.Projekto_id,
+                projektai.Pavadinimas,
+                projektai.Aprasymas,
+                projektai.Busena,
+                projektai.Sukurimo_data,
+                SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
+                SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
+                COUNT(uzduotys.Busena) as Total_tasks
+            FROM projektai
+                LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
+                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id";
+        $queryWhere = !isset($SEARCH_ERROR) ? " WHERE projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
+        $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
+        $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
+        
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
@@ -96,7 +119,7 @@ include_once('db_config.php');
             $totalTasks = $rowTotal;
             $finishedTasks = $totalTasks - $rowTodo;
             if ($totalTasks == 0) {
-                $greenBarLength = 140;
+                $greenBarLength = 0;
             } else {
             $percent = $finishedTasks/$totalTasks;
             $greenBarLength = $percent*140; //dauginu iš 140, nes toks yra progress bar width (css)
@@ -126,7 +149,7 @@ include_once('db_config.php');
                 // spausdinama eilutė su "Sukurti projektą mygtuku
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
-          <td>".$row['Pavadinimas']."</td>
+          <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
           <td>".$row['Aprasymas']."</td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
@@ -137,17 +160,17 @@ include_once('db_config.php');
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
           <i class='far fa-trash-alt'></i>
           </button>
-          <button class=\"button\"><i class='fas fa-archive'></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
-          <button class=\"button\" id='create-button'>
-          <i class='fas fa-plus-circle create-project__JS' id='plus-button'></i></button></td></tr>";
+          <button class=\"archive-project__JS\"><i class='fas fa-archive'></i></button>
+          <button class=\"import-project__JS\"><i class='fas fa-arrow-down'></i></button>
+          <button class=\"create-project__JS\" id='create-button'>
+          <i class='fas fa-plus-circle ' id='plus-button'></i></button></td></tr>";
             break;
             }
 
                 // spausdinamos kitos lentelės eilutės
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
-                <td class='grey-border'>".$row['Pavadinimas']."</td>
+                <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
                 <td class='grey-border'>".$row['Aprasymas']."</td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
@@ -158,8 +181,8 @@ include_once('db_config.php');
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
                     <i class='far fa-trash-alt'></i>
                     </button> 
-                <button class=\"button\"><i class='fas fa-archive'></i></button>
-                <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
+                <button class=\"archive-project__JS\"><i class='fas fa-archive'></i></button>
+                <button class=\"import-project__JS\"><i class='fas fa-arrow-down'></i></button></td></tr>";
 
             // $count++;
             // if ($count>2) {
@@ -190,6 +213,7 @@ include_once('db_config.php');
             if(isset($_POST['title']))  {
                 $create = new Project(); 
                 $create->createProject($_POST['title'], $_POST['description'], $_SESSION['userId']);
+
             }
             if(isset($_SESSION['message'])){
                 echo "<p class='pop-up__error'>".$_SESSION['message']."</p>";
@@ -209,6 +233,7 @@ include_once('db_config.php');
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
             </div>
             <?php
+            
             if(isset($_POST['updateTitle']))  {
                 $update = new Project(); 
                 $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId']);
@@ -217,6 +242,10 @@ include_once('db_config.php');
                 echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
                 unset($_SESSION['updateError']);
             }
+            //php automatiskai neatnaujina stulpelio 'Sukurimo_data" laiko, del to panaudojau sia komanda. Ji suranda, kur yra neatnaujintas laikas ir ta laika pakeicia i esama
+            $queryTime = "UPDATE projektai SET Sukurimo_data = CURRENT_TIMESTAMP WHERE Sukurimo_data LIKE '%00:00:00'"; 
+            $resultime = $connectM->prepare($queryTime);
+            $resultime->execute();
             ?>
         </form>
     </div>
