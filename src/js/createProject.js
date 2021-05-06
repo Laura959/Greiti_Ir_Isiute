@@ -3,6 +3,8 @@ const deleteBtns    = document.querySelectorAll('.delete-project__JS');
 const updateBtns    = document.querySelectorAll('.update-project__JS');
 const cancelBtns    = document.querySelectorAll('.pop-up__cancel-btn');
 const textarea      = document.querySelector('.pop-up__textarea');
+const deleteBtns1    = document.querySelectorAll('.delete1-project__JS');
+const cancelBtns1    = document.querySelectorAll('.pop-up__cancel-btn1');
 
 const handleClickCreateForm = () => {
     const blur = document.createElement('div');
@@ -22,6 +24,28 @@ const handleClickDeleteForm = id => {
     form.classList.add('pop-up__JS');
     blur.classList.add('blur__JS');
     document.body.appendChild(blur);
+}
+const handleClickDeleteForm1 = (id, title, Projekto_id) => {
+    const blur = document.createElement('div');
+    const form = document.querySelector('.pop-up__delete1');
+    const deleteBtn = document.querySelector('.pop-up__confirm-btn1');
+    const link = `delete1.php?Uzduoties_id=${id}&title=${title}&Projekto_id=${Projekto_id}`;
+    deleteBtn.setAttribute('href', `${link}`);
+    console.log(deleteBtn.getAttribute('href'))
+    form.classList.add('pop-up__JS');
+    blur.classList.add('blur__JS');
+    document.body.appendChild(blur);
+}
+const handleClickCloseForm1 = () => {
+    const blur = document.querySelector('.blur__JS');
+    const deleteForm = document.querySelector('.pop-up__delete1');
+    const updateForm = document.querySelector('.pop-up__update');
+    if (deleteForm.classList.contains('pop-up__JS')) {
+        deleteForm.classList.remove('pop-up__JS');
+    } else if (updateForm.classList.contains('pop-up__JS')){
+        updateForm.classList.remove('pop-up__JS');
+    }
+    blur.parentNode.removeChild(blur);
 }
 
 const handleClickUpdateForm = (title, description, id) => {
@@ -72,12 +96,23 @@ updateBtns.forEach(
     const id = updateBtn.parentElement.children[1].id;
     handleClickUpdateForm(title, description, id);
 }));
+deleteBtns1.forEach(
+    deleteBtn => deleteBtn.addEventListener('click', () => 
+    {
+        const id = deleteBtn.id;
+        const title = deleteBtn.getAttribute('data-title');
+        const project_id = deleteBtn.getAttribute('data-id');
+        handleClickDeleteForm1(id, title, project_id);
+    }));
 
+cancelBtns1.forEach(
+cancelBtn => cancelBtn.addEventListener('click', handleClickCloseForm1)
+);
 deleteBtns.forEach(
     deleteBtn => deleteBtn.addEventListener('click', () => handleClickDeleteForm(deleteBtn.id)));
 
 cancelBtns.forEach(
     cancelBtn => cancelBtn.addEventListener('click', handleClickCloseForm)
 );
-textarea.addEventListener('focus', handleClickRemovePlaceholder);
-textarea.addEventListener('focusout', handleClickAddPlaceholder);
+// textarea.addEventListener('focus', handleClickRemovePlaceholder);
+// textarea.addEventListener('focusout', handleClickAddPlaceholder);

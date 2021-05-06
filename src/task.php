@@ -23,9 +23,9 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link href="css/style.css?rnd=143" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=123" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -45,7 +45,7 @@ include_once('db_config.php');
         <i class="fas fa-bars " id="hamburger"></i>
         <i class="fas fa-times " id="cancel"></i>
     </label>
-    <div class="left-menu"> 
+    <div class="left-menu">
     <div class="whole-search"><input type="text" id="search-left-menu" name="fname" placeholder="search" class="input"><i class="fas fa-search left-menu-search-icon " id="search-icon"></i></div>
         <ul>
             <li><a href="#"><i class="fas fa-th-large left-menu-icon "></i><p class="left-menu-titles">DASHBOARD</p></a></li>
@@ -123,7 +123,7 @@ include_once('db_config.php');
                             <button class=\"update-project__JS\">
                                 <i class='far fa-edit '></i>
                             </button>
-                            <button class=\"delete-project__JS\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
                                 <i class='far fa-trash-alt '></i>
                             </button>
                             <button class=\"button\">
@@ -150,7 +150,7 @@ include_once('db_config.php');
                             <button class=\"update-project__JS\">
                                 <i class='far fa-edit '></i>
                             </button>
-                            <button class=\"delete-project__JS\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
                                 <i class='far fa-trash-alt '></i>
                             </button>
                             <button class=\"button\">
@@ -175,8 +175,18 @@ include_once('db_config.php');
         unset($_SESSION['empty']);
     }
     ?>
+    <div class="pop-up__delete1">
+        <h2 class="pop-up__h2">Delete a Task</h2>
+        <form method="POST" class="pop-up__form">
+            <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
+            <div class="pop-up--flex">
+                <a href="#" class="pop-up__confirm-btn1">Delete</a>
+                <div role="button" class="pop-up__cancel-btn1 pop-up__cancel-btn--bg">Keep</div>
+            </div>
+        </form>
+    </div>
 </main>
-<script src="./js/createProject.js?rnd=132"></script>
+<script src="./js/createProject.js?rnd=666"></script>
 </section>
 </body>
 </html>
