@@ -208,13 +208,13 @@ include_once('db_config.php');
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" checked>
                             <label for="radioLow">Low</label>
 
-                            <input class="pop-up__input" id="radioMedium" type="radio" value="Medium" name="taskPriority" placeholder="Task priority" 
+                            <input class="pop-up__input" id="radioMedium" type="radio" value="Middle" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" >
-                            <label for="radioMedium">Medium</label>
+                            <label for="radioMedium">Middle</label>
 
-                            <input class="pop-up__input" id="radioHight" type="radio" value="Hight" name="taskPriority" placeholder="Task priority" 
+                            <input class="pop-up__input" id="radioHight" type="radio" value="High" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" >
-                            <label for="radioHight">Hight</label>
+                            <label for="radioHight">High</label>
                         </div>
                           
                         <!-- Task status -->
