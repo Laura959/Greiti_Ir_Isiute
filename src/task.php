@@ -11,8 +11,6 @@ if (isset($_SESSION["username"])) {
 //auto-loader pakrauna reikiamas klases
 require_once 'includes/auto-loader.inc.php';
 include_once('db_config.php');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -109,13 +107,11 @@ include_once('db_config.php');
                         $i = 1;
                         if ($number === 0) {
                             $_SESSION['empty'] = true;
-                            
-                               ?> 
-                <div class="div_img">
-                <img class="mx-auto d-block" src="empty.png"> 
-                         </div>   
-                                    <?php
-                            
+                            ?> 
+                            <div class="div_img">
+                                <img class="mx-auto d-block" src="empty.png"> 
+                            </div>   
+                            <?php
                         }
                         echo "</thead>";
                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -138,7 +134,7 @@ include_once('db_config.php');
 
                             <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">
 
-                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">
 
                                 <i class='far fa-trash-alt '></i>
                             </button>
@@ -169,7 +165,7 @@ include_once('db_config.php');
 
                             <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">
 
-                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">
 
                                 <i class='far fa-trash-alt '></i>
                             </button>
@@ -196,7 +192,7 @@ include_once('db_config.php');
                     unset($_SESSION['empty']);
                 }
 
-                //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
+//Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
                 echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
                 ?>
 
@@ -210,11 +206,11 @@ include_once('db_config.php');
 
                         <!-- Task description -->
                         <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="taskDescription" rows="6"></textarea>
-                        
-                     
+
+
                         <div style="display: flex; align-items: flex-start" class="task_insert">
-                            
-                            
+
+
                             <!-- Task priority -->
                             <input class="pop-up__input" id="radioLow" type="radio" value="Low" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" checked>
@@ -228,12 +224,12 @@ include_once('db_config.php');
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" >
                             <label for="radioHight">High</label>
                         </div>
-                          
+
                         <!-- Task status -->
-                               
-                           <div  class="task_status">
+
+                        <div  class="task_status">
                             <!-- Task priority -->
-                          
+
                             <input class="pop-up__input" id="radioTodo" type="radio" value="Todo" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" checked>
                             <label for="radioTodo">Todo</label>
@@ -241,70 +237,71 @@ include_once('db_config.php');
                             <input class="pop-up__input" id="radioFinished" type="radio" value="Finished" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" >
                             <label for="radioFinished">Finished</label>
-                            </div>
-                     
-                        
+                        </div>
+
+
 
                         <!-- Task button -->
                         <div class="pop-up--flex">
                             <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                             <div role="button" class="pop-up__cancel-btn">Cancel</div>
                         </div>
+  </form>
+                </div>
                         <?php
                         if (isset($_POST['taskTitle'])) {
                             $create = new Project();
-                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'],$_POST['taskStatus'],$_POST['projekto_id'], $_POST['title'], $_SESSION['taskId']);
+                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus'], $_POST['projekto_id'], $_POST['title'], $_SESSION['taskId']);
                         }
                         if (isset($_SESSION['message'])) {
                             echo "<p class='pop-up__error'>" . $_SESSION['message'] . "</p>";
                             unset($_SESSION['message']);
                         }
                         ?>
+                  
+                <div class="pop-up__update1">
+                    <h2 class="pop-up__h2">Update Task</h2>
+                    <form method="POST" class="pop-up__form">
+                        <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
+                        <input style="text-align:left;" class="pop-up__input pop-up__update-priority" type="text" name="updatepriority" placeholder="Task Priority" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+                        <input style="text-align:left;" class="pop-up__input pop-up__update-status" type="text" name="updatestatus" placeholder="Task Status" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+
+                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" rows="2"></textarea>
+                        <input type="hidden" class="pop-up__update-id1" name="updateId"/>
+                        <div class="pop-up--flex">
+                            <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
+                            <div role="button" class="pop-up__cancel-btn1">Cancel</div>
+                        </div>
+                        <?php
+                        if (isset($_POST['updateTitle'])) {
+                            $update = new Project();
+                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"]);
+                        }
+                        if (isset($_SESSION['updateError'])) {
+                            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
+                            echo $_POST['updateId'];
+                            unset($_SESSION['updateError']);
+                        }
+                        ?>
                     </form>
                 </div>
-  <div class="pop-up__update1">
-      <h2 class="pop-up__h2">Update Task</h2>
-      <form method="POST" class="pop-up__form">
-          <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
-          <input style="text-align:left;" class="pop-up__input pop-up__update-priority" type="text" name="updatepriority" placeholder="Task Priority" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-          <input style="text-align:left;" class="pop-up__input pop-up__update-status" type="text" name="updatestatus" placeholder="Task Status" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
 
-          <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" rows="2"></textarea>
-          <input type="hidden" class="pop-up__update-id1" name="updateId"/>
-          <div class="pop-up--flex">
-              <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
-              <div role="button" class="pop-up__cancel-btn1">Cancel</div>
-          </div>
-          <?php
-          if(isset($_POST['updateTitle']))  {
-              $update = new Project();
-              $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'],$_GET["Projekto_id"],$_GET["title"]);
-          }
-          if(isset($_SESSION['updateError'])){
-            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
-                echo $_POST['updateId'];
-              unset($_SESSION['updateError']);
-          }
-          ?>
-      </form>
-  </div>
-  
-    <div class="pop-up__delete1">
-        <h2 class="pop-up__h2">Delete a Task</h2>
-        <form method="POST" class="pop-up__form">
-            <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
-            <div class="pop-up--flex">
-                <a href="#" class="pop-up__confirm-btn1">Delete</a>
-                <div role="button" class="pop-up__cancel-btn1 pop-up__cancel-btn--bg">Keep</div>
-            </div>
-        </form>
-    </div>
+                <div class="pop-up__delete1">
+                    <h2 class="pop-up__h2">Delete a Task</h2>
+                    <form method="POST" class="pop-up__form">
+                        <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
+                        <div class="pop-up--flex">
+                            <a href="#" class="pop-up__confirm-btn1">Delete</a>
+                            <div role="button" class="pop-up__cancel-btn1 pop-up__cancel-btn--bg">Keep</div>
+                        </div>
+                    </form>
+                </div>
 
 
             </main>
             <script src="./js/createProject.js?rnd=132"></script>
         </section>
     </body>
-=======
+
 
 </html>
