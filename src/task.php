@@ -251,7 +251,7 @@ include_once('db_config.php');
                         <?php
                         if (isset($_POST['taskTitle'])) {
                             $create = new Project();
-                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus'], $_POST['projekto_id'], $_POST['title'], $_SESSION['taskId']);
+                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus'], $_SESSION['taskId']);
                         }
                         if (isset($_SESSION['message'])) {
                             echo "<p class='pop-up__error'>" . $_SESSION['message'] . "</p>";
