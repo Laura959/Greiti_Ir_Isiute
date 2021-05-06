@@ -65,6 +65,27 @@
                 $_POST['fail'] = 'set';
             }
         }
+
+        public function updateProject1($name, $description1, $priority, $busena, $id1,$projectid,$projecttitle){
+            if(empty($name)){
+                $_SESSION['updateError'] = "Project's title field is required";
+                return;
+            }
+            try{
+                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
+                $pdo = new PDO($dsn, $this->user, $this->pass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "UPDATE uzduotys SET Pavadinimas = ?,Prioritetas =?,Busena = ?,Aprasymas = ? WHERE Uzduoties_id = ?";
+                $statement = $pdo->prepare($sql);
+                $statement->execute([$name,$priority,$busena, $description1,$id1]);
+                $_SESSION['updateError'] = 'ar iki cia atvaziuoja kodas';
+                echo "<script> location.replace(\"task.php?title=".$projecttitle."&Projekto_id=".$projectid."\"); </script>";
+            }catch(PDOException $error){
+                $_SESSION['updateError'] =  "Database connection lost.";
+                $_POST['fail'] = 'set';
+            }
+        }
+        
         //Generuojamas id iki kol bus gauta unikali reiksme
         public function getUniqueId(){
             $id = rand(100000000, 999999999);

@@ -11,6 +11,8 @@ if (isset($_SESSION["username"])) {
 //auto-loader pakrauna reikiamas klases
 require_once 'includes/auto-loader.inc.php';
 include_once('db_config.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +25,9 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link href="css/style.css?rnd=143" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=123" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -45,7 +47,7 @@ include_once('db_config.php');
         <i class="fas fa-bars " id="hamburger"></i>
         <i class="fas fa-times " id="cancel"></i>
     </label>
-    <div class="left-menu"> 
+    <div class="left-menu">
     <div class="whole-search"><input type="text" id="search-left-menu" name="fname" placeholder="search" class="input"><i class="fas fa-search left-menu-search-icon " id="search-icon"></i></div>
         <ul>
             <li><a href="#"><i class="fas fa-th-large left-menu-icon "></i><p class="left-menu-titles">DASHBOARD</p></a></li>
@@ -120,10 +122,10 @@ include_once('db_config.php');
                         <td class='tasks__td'>".$row['Sukurimo_data']."</td>
                         <td class='tasks__td'>".$row['Naujinimo_data']."</td>
                         <td class='tasks__td'>
-                            <button class=\"update-project__JS\">
+                            <button class=\"update1-project__JS\">
                                 <i class='far fa-edit '></i>
                             </button>
-                            <button class=\"delete-project__JS\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
                                 <i class='far fa-trash-alt '></i>
                             </button>
                             <button class=\"button\">
@@ -147,10 +149,10 @@ include_once('db_config.php');
                         <td class='tasks__td'>".$row['Sukurimo_data']."</td>
                         <td class='tasks__td'>".$row['Naujinimo_data']."</td>
                         <td class='tasks__td'>
-                            <button class=\"update-project__JS\">
+                            <button class=\"update1-project__JS\">
                                 <i class='far fa-edit '></i>
                             </button>
-                            <button class=\"delete-project__JS\" id=\"".$row['Uzduoties_id']."\">
+                            <button class=\"delete1-project__JS\" data-id= \"".$_GET['Projekto_id']."\" data-title=\"".$_GET['title']."\" id=\"".$row['Uzduoties_id']."\">
                                 <i class='far fa-trash-alt '></i>
                             </button>
                             <button class=\"button\">
@@ -175,8 +177,45 @@ include_once('db_config.php');
         unset($_SESSION['empty']);
     }
     ?>
+     <div class="pop-up__update1">
+      <h2 class="pop-up__h2">Update Task</h2>
+      <form method="POST" class="pop-up__form">
+          <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
+          <input style="text-align:left;" class="pop-up__input pop-up__update-priority" type="text" name="updatepriority" placeholder="Task Priority" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+          <input style="text-align:left;" class="pop-up__input pop-up__update-status" type="text" name="updatestatus" placeholder="Task Status" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+
+          <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" rows="2"></textarea>
+          <input type="hidden" class="pop-up__update-id1" name="updateId"/>
+          <div class="pop-up--flex">
+              <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
+              <div role="button" class="pop-up__cancel-btn1">Cancel</div>
+          </div>
+          <?php
+          if(isset($_POST['updateTitle']))  {
+              $update = new Project();
+              $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'],$_GET["Projekto_id"],$_GET["title"]);
+          }
+          if(isset($_SESSION['updateError'])){
+            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
+                echo $_POST['updateId'];
+              unset($_SESSION['updateError']);
+          }
+          ?>
+      </form>
+  </div>
+  
+    <div class="pop-up__delete1">
+        <h2 class="pop-up__h2">Delete a Task</h2>
+        <form method="POST" class="pop-up__form">
+            <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
+            <div class="pop-up--flex">
+                <a href="#" class="pop-up__confirm-btn1">Delete</a>
+                <div role="button" class="pop-up__cancel-btn1 pop-up__cancel-btn--bg">Keep</div>
+            </div>
+        </form>
+    </div>
 </main>
-<script src="./js/createProject.js?rnd=132"></script>
+<script src="./js/createProject.js?rnd=666"></script>
 </section>
 </body>
 </html>
