@@ -606,6 +606,10 @@ input[type="password"] {
   width: 0;
 }
 
+.task_insert, .task_status{
+   text-align-last: justify;
+    margin: 0 30px;
+}
 
 .task_insert label, .task_status label{
    display: inline-block;
@@ -613,8 +617,8 @@ input[type="password"] {
     padding: 5px 20px;
     font-family: sans-serif, Arial;
     font-size: 16px;
-    border: 2px solid #444;
-     margin: 10px 30px 0 40px;
+     text-align-last: center;
+    width: 120px;
     border-radius: 20px; 
 }
 .task_insert input[type="radio"]:checked + label, .task_status input[type="radio"]:checked + label  {
