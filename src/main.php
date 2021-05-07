@@ -60,16 +60,18 @@ include_once('db_config.php');
             if(isset($_GET["search"])) {
                 $SEARCH_QUERY = trim($_GET["search"]);
                 $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
-                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 4) {
-                    $SEARCH_ERROR = "error";
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3) {
+                    // $SEARCH_ERROR = "error";
                 }
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
-            if(isset($SEARCH_ERROR)) {
-                echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";
-            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-z][0-9_-]*){3}\" title=\"Enter atleast 3 symbols\" required>
+            <i class=\"fas fa-search\" id=\"search-icon\"></i>";
+             
+            // if(isset($SEARCH_ERROR)) {
+            //     echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";               
+            // }
         ?>
         </form>        
         </div>
