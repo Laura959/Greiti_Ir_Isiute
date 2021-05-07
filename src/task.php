@@ -1,8 +1,19 @@
 <?php
+
 session_start();
+
+if (isset($_GET['title'])) {
+    setcookie("Projektas", $_GET['title'], time() + (3600));
+}
+
+if(isset($_GET['Projekto_id'])){
+    setcookie("Projekto_id", $_GET['Projekto_id'], time() + (3600));
+}
+
 if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
+        setcookie("Projektas", "", time() - 3600);
         header("location:index.php");
     }
 } else {
@@ -21,6 +32,7 @@ include_once('db_config.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="css/style.css?rnd=123" rel="stylesheet">
@@ -59,12 +71,34 @@ include_once('db_config.php');
 <header>
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
     <nav class="navbar">
-        <?php  if(isset($_GET['title'])){
+        
+        <?php 
+        
+        if(isset($_COOKIE["Projektas"])){
+            echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_COOKIE["Projektas"]."</span> / Tasks</a>";
+        }else if (isset($_GET['title'])) {
             echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_GET['title']."</span> / Tasks</a>";
         }else{
             echo "<a class=\"project-page-title tasks__title  mr-auto\"> - / Tasks</a>";
         }?>
-        <div class="whole-search"><input type="text" id="search" name="fname" placeholder="Search" class="input"><i class="fas fa-search" id="search-icon"></i></div>
+        <div class="whole-search"> <!-- SEARCH FUNKCIALUMAS -->        
+        <form id="search-form">
+        <?php              
+            if(isset($_GET["search"])) {
+                $SEARCH_QUERY = trim($_GET["search"]);
+                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
+                    $SEARCH_ERROR = "Enter at least 3 symbols";
+                }
+            } else {
+                $SEARCH_QUERY = "";
+            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
+            if(isset($SEARCH_ERROR)) {
+                echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
+            }
+        ?>
+        </form>        </div>
         <div class="form-inline"  style="margin-left: 2.5%;">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
@@ -91,19 +125,26 @@ include_once('db_config.php');
                 <th class='tasks__th'>Modified</th>
                 <th class='round-border tasks__th'></th>
             </tr>";
-    if(isset($_GET['Projekto_id'])){
+    if(isset($_COOKIE['Projekto_id']) || isset($_GET['Projekto_id'])){
         try {
             $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
             $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
-            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']."";
+            if (isset($SEARCH_ERROR)) {
+                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']."";
+            } else if (isset($_COOKIE['Projekto_id'])) {
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";
+            } else {
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";    
+            }
             $result = $connectM->prepare($queryM);
             $result->execute();
             $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
             $i = 1;
             if($number === 0){
                 $_SESSION['empty'] = true;
+                echo "<span style=\"color: red; margin-left: 73.5%; font-style:italic;\">Tasks with this name or ID do not exist</span";
             }
             echo "</thead>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
@@ -167,7 +208,7 @@ include_once('db_config.php');
     echo "
         </table>
         <br>";
-    if(isset($_SESSION['empty']) && isset($_GET['title'])){
+    if(isset($_SESSION['empty']) && isset($_COOKIE["Projektas"])){
         echo "
         <button id='create-button' class=\"tasks__add-btn\">
             <i class='fas fa-plus-circle create-project__JS tasks__add-btn-i' id='plus-button'></i>
