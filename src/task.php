@@ -208,7 +208,7 @@ include_once('db_config.php');
                         <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="taskDescription" rows="6"></textarea>
 
 
-                        <div style="display: flex; align-items: flex-start" class="task_insert">
+                        <div class="task_insert">
 
 
                             <!-- Task priority -->
@@ -232,7 +232,11 @@ include_once('db_config.php');
 
                             <input class="pop-up__input" id="radioTodo" type="radio" value="Todo" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" checked>
-                            <label for="radioTodo">Todo</label>
+                            <label for="radioTodo">To do</label>
+                            
+                             <input class="pop-up__input" id="radioInProgress" type="radio" value="InProgress" name="taskStatus" placeholder="Task status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'">
+                            <label for="radioInProgress" style="width: auto">In Progress</label>
 
                             <input class="pop-up__input" id="radioFinished" type="radio" value="Finished" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" >
