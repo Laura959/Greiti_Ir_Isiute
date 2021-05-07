@@ -7,7 +7,7 @@ include_once('header.php');
 
     $servername='localhost';
     $username='root';
-    $password='[ems]';
+    $password='';
     $dbname = "projektas";
     $conn=mysqli_connect($servername,$username,$password,"$dbname");
     if(!$conn){
