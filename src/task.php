@@ -93,7 +93,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}||[0-9]||\" title=\"Enter at least 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}||[0-9]||\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
             // if(isset($SEARCH_ERROR)) {
             //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
