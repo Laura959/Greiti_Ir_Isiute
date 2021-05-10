@@ -1,8 +1,19 @@
 <?php
+
 session_start();
+
+if (isset($_GET['title'])) {
+    setcookie("Projektas", $_GET['title'], time() + (3600));
+}
+
+if(isset($_GET['Projekto_id'])){
+    setcookie("Projekto_id", $_GET['Projekto_id'], time() + (3600));
+}
+
 if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
+        setcookie("Projektas", "", time() - 3600);
         header("location:index.php");
     }
 } else {
@@ -16,44 +27,85 @@ include_once('db_config.php');
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>Project manager</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>Project manager</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="css/style.css?rnd=123" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/1b94fb06eb.js"
-        crossorigin="anonymous"></script>
-        <script>
-            function displayError() {
-                document.querySelector('.pop-up__update').classList.add('pop-up__JS');
-                const blur = document.createElement('div');
-                blur.classList.add('blur__JS');
-                document.body.appendChild(blur);
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b94fb06eb.js"
+    crossorigin="anonymous"></script>
+    <script>
+        function displayError (){
+            document.querySelector('.pop-up__update').classList.add('pop-up__JS');
+            const blur = document.createElement('div');
+            blur.classList.add('blur__JS');
+            document.body.appendChild(blur);
+        }
+    </script>
+</head>
+<body>
+    <!-- Kairinis menu -->
+    <input type="checkbox" id="check" class="input">
+    <label for="check" class="label">
+        <i class="fas fa-bars " id="hamburger"></i>
+        <i class="fas fa-times " id="cancel"></i>
+    </label>
+    <div class="left-menu"> 
+    <div class="whole-search"><input type="text" id="search-left-menu" name="fname" placeholder="search" class="input"><i class="fas fa-search left-menu-search-icon " id="search-icon"></i></div>
+        <ul>
+            <li><a href="#"><i class="fas fa-th-large left-menu-icon "></i><p class="left-menu-titles">DASHBOARD</p></a></li>
+            <li><a href="main.php"><i class="fas fa-folder left-menu-icon "></i><p class="left-menu-titles">PROJECTS</p></a></li>
+            <li><a href="#"><i class="fas fa-history left-menu-icon "></i><p class="left-menu-titles">HISTORY</p></a></li>
+            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon "></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
+        </ul>
+    </div>
+    <!-- Kairinio menu pabaiga -->
+    <section>
+<header>
+    <!-- Viršutinė menu juosta su search ir exit laukeliais -->
+    <nav class="navbar">
+        
+        <?php 
+        
+        if(isset($_COOKIE["Projektas"])){
+            echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_COOKIE["Projektas"]."</span> / Tasks</a>";
+        }else if (isset($_GET['title'])) {
+            echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_GET['title']."</span> / Tasks</a>";
+        }else{
+            echo "<a class=\"project-page-title tasks__title  mr-auto\"> - / Tasks</a>";
+        }?>
+        <div class="whole-search"> <!-- SEARCH FUNKCIALUMAS -->        
+        <form id="search-form">
+        <?php              
+            if(isset($_GET["search"])) {
+                $SEARCH_QUERY = trim($_GET["search"]);
+                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
+                    $SEARCH_ERROR = "Enter at least 3 symbols";
+                }
+            } else {
+                $SEARCH_QUERY = "";
             }
-        </script>
-    </head>
-    <body>
-        <!-- Kairinis menu -->
-        <input type="checkbox" id="check" class="input">
-        <label for="check" class="label">
-            <i class="fas fa-bars " id="hamburger"></i>
-            <i class="fas fa-times " id="cancel"></i>
-        </label>
-        <div class="left-menu"> 
-            <div class="whole-search"><input type="text" id="search-left-menu" name="fname" placeholder="search" class="input"><i class="fas fa-search left-menu-search-icon " id="search-icon"></i></div>
-            <ul>
-                <li><a href="#"><i class="fas fa-th-large left-menu-icon "></i><p class="left-menu-titles">DASHBOARD</p></a></li>
-                <li><a href="main.php"><i class="fas fa-folder left-menu-icon "></i><p class="left-menu-titles">PROJECTS</p></a></li>
-                <li><a href="#"><i class="fas fa-history left-menu-icon "></i><p class="left-menu-titles">HISTORY</p></a></li>
-                <li><a href="#" class="create-task__JS"><i class="fas fa-plus-circle left-menu-icon "></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
-            </ul>
-
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
+            if(isset($SEARCH_ERROR)) {
+                echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
+            }
+        ?>
+        </form>        </div>
+        <div class="form-inline"  style="margin-left: 2.5%;">
+            <?php
+            echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
+            ?>
+            <form method="POST">
+                <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
+            </form>
         </div>
         <!-- Kairinio menu pabaiga -->
         <section>
@@ -94,30 +146,47 @@ include_once('db_config.php');
                 <th class='tasks__th'>Modified</th>
                 <th class='round-border tasks__th'></th>
             </tr>";
-                if (isset($_GET['Projekto_id'])) {
-                    try {
-                        $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
-                        $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              
+    if(isset($_COOKIE['Projekto_id']) || isset($_GET['Projekto_id'])){
+        try {
+            $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
+            $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                        // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
-                        $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =" . $_GET['Projekto_id'] . "";
-                        $result = $connectM->prepare($queryM);
-                        $result->execute();
-                        $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
-                        $i = 1;
-                        if ($number === 0) {
-                            $_SESSION['empty'] = true;
-                            ?> 
-                            <div class="div_img">
-                                <img class="mx-auto d-block" src="empty.png"> 
-                            </div>   
-                            <?php
-                        }
-                        echo "</thead>";
-                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            if ($i == $number) {
-                                // spausdinama eilutė su "Sukurti projektą mygtuku
-                                echo "
+            // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
+            if (isset($SEARCH_ERROR)) {
+                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']."";
+            } else if (isset($_COOKIE['Projekto_id'])) {
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";
+            } else {
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";    
+            }
+            $result = $connectM->prepare($queryM);
+            $result->execute();
+            $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
+            $i = 1;
+            if($number === 0){
+                $_SESSION['empty'] = true;
+                echo "<span style=\"color: red; margin-left: 73.5%; font-style:italic;\">Tasks with this name or ID do not exist</span";
+            }
+          
+          // šioje vietoje konfliktas, tad Eduardas su Laura turi išsiaiškinti, nes kaip suprantu šioje vietoke yra įkelta
+          //Eduardo nuotrauka, kai nėra jokių task'ų
+//                if ($number === 0) {
+//                              $_SESSION['empty'] = true;
+//                             ?> 
+//                              <div class="div_img">
+//                                  <img class="mx-auto d-block" src="empty.png"> 
+//                              </div>   
+//                              <?php
+//                          }
+          
+            echo "</thead>";
+            while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                if ($i == $number)
+                {
+                    // spausdinama eilutė su "Sukurti projektą mygtuku
+                    echo "
+
                     <tr>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
                         <td class='tasks__td'>

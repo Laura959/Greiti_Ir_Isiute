@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (isset($_COOKIE["Projektas"])) {
+    setcookie("Projektas", "", time() - 3600);
+}
+
+
 if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
@@ -139,12 +144,21 @@ include_once('db_config.php');
         }
                 //  isspausdinamas projektu sarasas
 
-        echo "<table>";
+        echo "<table class='projects-table'>";
         echo "<thead>";
         echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);
+            $res = $row['Aprasymas'];
+
+            $countS = strlen($res); // jei aprasymas ilgesnis nei 25 raides, bus uzdetas hoveris
+            if ($countS>25) {
+            $className = 'hover';
+            } else {
+            $className = 0;  
+            }
+            
             if ($i == $number)
             
             {
@@ -152,7 +166,7 @@ include_once('db_config.php');
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
           <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
-          <td>".$row['Aprasymas']."</td>
+          <td class='hover-area'><div class='description-".$className."'>".$row['Aprasymas']."</div>".$row['Aprasymas']."</td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
           <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
@@ -173,7 +187,7 @@ include_once('db_config.php');
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
-                <td class='grey-border'>".$row['Aprasymas']."</td>
+                <td class='grey-border hover-area'><div class='description-".$className."'>".$row['Aprasymas']."</div>".$row['Aprasymas']."</td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
@@ -205,8 +219,8 @@ include_once('db_config.php');
     <div class="pop-up <?php echo isset($_POST['title']) ? 'pop-up__JS' : '';?>">
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
-            <input style="text-align:left;" class="pop-up__input" type="text" name="title" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description" rows="6"></textarea>
+            <input style="text-align:left;" class="pop-up__input" type="text" name="title" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="50" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>

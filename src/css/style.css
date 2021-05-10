@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
-
 * {
     margin: 0px;
     padding: 0px;
@@ -60,7 +59,34 @@ th {
     padding-bottom: 24px;
     font-size: clamp(1rem, 1.3vw, 1.3rem);
 }
-.tasks__td{
+
+.projects-table td {
+    max-width: 250px;
+    width: 250px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.description-hover,
+.description-0 {
+    opacity: 0;
+    position: absolute;
+}
+
+.hover-area:hover .description-hover {
+    opacity: 1;
+    position: absolute;
+    margin-top: 0%;
+    margin-left: -1.5%;
+    background: #ffffff;
+    font-size: 17px;
+    padding: 5px;
+}
+
+.tasks__td {
     font-weight: 300;
 }
 
@@ -318,7 +344,7 @@ label #hamburger {
     font-size: 15px;
     padding: 8px;
     border-radius: 12px;
-    margin-left: 11.5%;
+    margin-left: 6.5%;
     margin-top: 0.5%;
     -webkit-box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.62);
     box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.62);
@@ -456,20 +482,6 @@ label #hamburger {
     align-items: center;
 }
 
-
-/* .input-login {
-    width: 30%;
-    margin: 50px auto 0px;
-    min-width: 300px;
-    color: white;
-    background: #5F9EA0;
-    text-align: center;
-    border: 1px solid #B0C4DE;
-    border-bottom: none;
-    border-radius: 10px 10px 0px 0px;
-    padding: 20px;
-} */
-
 input[type="text"],
 input[type="password"] {
     width: 400px;
@@ -568,7 +580,7 @@ input[type="password"] {
     border-bottom: 8px solid #a8d381;
 }
 
-.tasks__add-btn{
+.tasks__add-btn {
     position: relative;
     top: -4.5rem;
     width: 80%;
@@ -576,25 +588,24 @@ input[type="password"] {
     margin-left: 12%;
 }
 
-.tasks__add-btn-i{
-
+.tasks__add-btn-i {
     right: -2.25rem !important;
 }
 
-.tasks__title{
-    font-size: 2.15rem; 
+.tasks__title {
+    font-size: 2.15rem;
     font-weight: 500;
 }
 
-.tasks__title--uppercase{
+.tasks__title--uppercase {
     text-transform: uppercase;
 }
 
-.tasks__th--width{
+.tasks__th--width {
     width: 20.5%;
 }
 
-.tasks__tr--border-bottom{
+.tasks__tr--border-bottom {
     border-bottom: 1px solid #D3D3D3;
 }
 
