@@ -42,6 +42,8 @@ body {
 
 .pop-up,
 .pop-up__delete,
+.pop-up__delete1,
+.pop-up__update1,
 .pop-up__update {
     width: clamp(350px, 50vw, 550px);
     min-width: 350px;
@@ -79,7 +81,9 @@ body {
 .pop-up__input,
 .pop-up__textarea,
 .pop-up__cancel-btn,
+.pop-up__cancel-btn1,
 .pop-up__confirm-btn,
+.pop-up__confirm-btn1,
 .pop-up__update-btn {
     width: 85%;
     padding: .5rem 1.75rem;
@@ -123,7 +127,9 @@ body {
 
 .pop-up__create-btn,
 .pop-up__cancel-btn,
+.pop-up__cancel-btn1,
 .pop-up__confirm-btn,
+.pop-up__confirm-btn1,
 .pop-up__update-btn {
     font-size: 1.2rem;
     text-indent: initial;
@@ -142,11 +148,20 @@ body {
     padding: .5rem 0;
 }
 
+.pop-up__cancel-btn1 {
+    background-color: #d65249;
+    padding: .5rem 0;
+}
+
 .pop-up__cancel-btn--bg{
     background-color: #a0e383;
 }
 
 .pop-up__confirm-btn{
+   padding: 8px 0;
+   background-color: #d65249;
+}
+.pop-up__confirm-btn1{
    padding: 8px 0;
    background-color: #d65249;
 }
@@ -156,6 +171,10 @@ body {
     color: #fff;
 }
 
+.pop-up__confirm-btn1:hover{
+    text-decoration: none;
+    color: #fff;
+}
 .pop-up__create-btn:hover,
 .pop-up__cancel-btn:hover,
 .pop-up__confirm-btn:hover,
