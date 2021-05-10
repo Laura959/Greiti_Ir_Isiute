@@ -13,3 +13,5 @@ $host = "localhost";
  $pass = "";
  $dbName = "projektas";
  $message = "";
+
+ 

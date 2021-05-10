@@ -61,7 +61,11 @@
                 $date = date("Y-m-d");
                  $date1 = date("Y-m-d");
                 $role = 1;
- $projektas = $_GET['Projekto_id'];
+                if (isset($_GET['Projekto_id'])) {
+                $projektas = $_GET['Projekto_id'];
+                } else {
+                    $projektas = $_COOKIE['Projekto_id']; 
+                }
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
