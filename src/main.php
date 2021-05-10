@@ -3,6 +3,9 @@ session_start();
 if (isset($_COOKIE["Projektas"])) {
     setcookie("Projektas", "", time() - 3600);
 }
+if (isset($_COOKIE["Projekto_id"])) {
+    setcookie("Projekto_id", "", time() - 3600);
+}
 
 
 if (isset($_SESSION["username"])) {
