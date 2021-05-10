@@ -31,7 +31,7 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   <link href="css/style.css?rnd=132" rel="stylesheet">
+   <link href="css/style.css?rnd=235" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -50,6 +50,7 @@ include_once('db_config.php');
         <ul>
             <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i><p class="left-menu-titles">DASHBOARD</p></a></li>
             <li><a href="#"><i class="fas fa-folder left-menu-icon"></i><p class="left-menu-titles">PROJECTS</p></a></li>
+            <li><a href="#" class="export" download="Projects.csv"><i class="fas export-icon fa-arrow-down left-menu-icon"></i><p class="left-menu-titles"><span class="export__span">EXPORT</span></p></a></li>
             <li><a href="#"><i class="fas fa-history left-menu-icon"></i><p class="left-menu-titles">HISTORY</p></a></li>
             <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon"></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
         </ul>
@@ -59,7 +60,7 @@ include_once('db_config.php');
 <header>
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
     <nav class="navbar">
-        <a class="project-page-title mr-auto">PROJECTS</a>
+        <a class="project-page-title mr-auto" download="Projects.csv">PROJECTS</a>
         <div class="whole-search">
     
     <!-- SEARCH FUNKCIALUMAS -->        
@@ -118,6 +119,7 @@ include_once('db_config.php');
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
         
+        $linkCSV = "data:text/csv;charset=utf-8,Title, Description, Status, Finished tasks, Total tasks\n";
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
@@ -152,6 +154,7 @@ include_once('db_config.php');
         echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
+            $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
             activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);
             $res = $row['Aprasymas'];
 
@@ -182,7 +185,7 @@ include_once('db_config.php');
           <button class=\"button\"><i class='fas fa-archive'></i></button>
           <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
           <button class=\"button\" id='create-button'>
-          <i class='fas fa-plus-circle create-project__JS' id='plus-button'></i></button></td></tr>";
+          <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
             }
 
@@ -279,8 +282,7 @@ include_once('db_config.php');
         </form>
     </div>
     </main>
-    <script src="./js/createProject.js?rnd=132"></script>
+    <script src="./js/createProject.js?rnd=132" defer></script>
     </section>
     </body>
-    <!-- <button><a href='update-process.php?Projekto_id=".$row['Projekto_id']."'>"."<i class='far fa-edit'></i></a></button> -->
 </html>

@@ -170,3 +170,12 @@ cancelBtns.forEach(
 );
 // textarea.addEventListener('focus', handleClickRemovePlaceholder);
 // textarea.addEventListener('focusout', handleClickAddPlaceholder);
+
+window.addEventListener('load', (event) => {
+    if(document.querySelector('[data-link]')){
+        const exportBtn = document.querySelector('.export');
+        const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
+        console.log(link);
+        exportBtn.setAttribute('href', link);
+    }
+});

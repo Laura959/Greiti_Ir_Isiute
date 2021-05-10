@@ -362,7 +362,8 @@ label #hamburger {
 .fa-th-large,
 .fa-folder,
 .fa-history,
-.fa-plus-circle {
+.fa-plus-circle,
+.export-icon {
     font-size: 30px;
     margin-left: 155px;
 }
@@ -370,6 +371,11 @@ label #hamburger {
 .fa-sign-out-alt {
     background-color: #eeeeee;
     color: #a8d381;
+}
+
+#hamburger,
+#cancel {
+    cursor: pointer;
 }
 
 #check {
@@ -413,6 +419,10 @@ label #hamburger {
 
 #check:checked~.left-menu #search-left-menu {
     margin-left: 14%;
+}
+
+#check:checked~.left-menu .export__span:hover::after {
+    content: ' PROJECTS';
 }
 
 #search-left-menu {
@@ -545,7 +555,8 @@ input[type="password"] {
     background-color: #ff0011;
 }
 
-.projects__title-hover {
+.projects__title-hover,
+.export {
     position: relative;
 }
 
@@ -611,10 +622,11 @@ input[type="password"] {
 
 
 
-.task_insert input[type="radio"], .task_status input[type="radio"]  {
-  opacity: 0;
-  position: fixed;
-  width: 0;
+.task_insert input[type="radio"],
+.task_status input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
 }
 
 .task_insert, .task_status{
@@ -622,28 +634,38 @@ input[type="password"] {
     margin: 0 30px;
 }
 
-.task_insert label, .task_status label{
-   display: inline-block;
+.task_insert label,
+.task_status label {
+    display: inline-block;
     background-color: #a0e383;
     padding: 5px 20px;
     font-family: sans-serif, Arial;
     font-size: 16px;
-     text-align-last: center;
+    border: 2px solid #444;
+    margin: 10px 30px 0 40px;
+    border-radius: 20px;
+/*      text-align-last: center;
     width: 120px;
-    border-radius: 20px; 
+    border-radius: 20px;  */
 }
-.task_insert input[type="radio"]:checked + label, .task_status input[type="radio"]:checked + label  {
+
+.task_insert input[type="radio"]:checked+label,
+.task_status input[type="radio"]:checked+label {
     background-color: #bfb;
     border-color: #4c4;
 }
-.task_insert input[type="radio"]:focus + label, task_status input[type="radio"]:focus + label {
+
+.task_insert input[type="radio"]:focus+label,
+task_status input[type="radio"]:focus+label {
     border: 2px dashed #444;
 }
-.task_insert label:hover, .task_status label:hover {
-  background-color: #dfd;
+
+.task_insert label:hover,
+.task_status label:hover {
+    background-color: #dfd;
 }
 
-.div_img{
+.div_img {
     margin: 0;
     background: yellow;
     position: absolute;
