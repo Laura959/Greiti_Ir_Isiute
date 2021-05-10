@@ -22,6 +22,7 @@ if (isset($_SESSION["username"])) {
 //auto-loader pakrauna reikiamas klases
 require_once 'includes/auto-loader.inc.php';
 include_once('db_config.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -317,15 +318,62 @@ include_once('db_config.php');
                         }
                         ?>
                   
-                <div class="pop-up__update1">
+                  <div class="pop-up__update1">
                     <h2 class="pop-up__h2">Update Task</h2>
                     <form method="POST" class="pop-up__form">
                         <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
-                        <input style="text-align:left;" class="pop-up__input pop-up__update-priority" type="text" name="updatepriority" placeholder="Task Priority" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-                        <input style="text-align:left;" class="pop-up__input pop-up__update-status" type="text" name="updatestatus" placeholder="Task Status" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+
 
                         <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" rows="2"></textarea>
                         <input type="hidden" class="pop-up__update-id1" name="updateId"/>
+                        
+                        
+                                  <div class="task_insert">
+
+
+                            <!-- Task priority -->
+                            <input style="display: none"class="pop-up__inputs pop-up__update-priority" id="radioLow11" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
+                            <label style="display: none" for="radioLow11">Low</label>
+
+                            <input class="pop-up__inputs pop-up__update-priority" id="radioLow1" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
+                            <label  for="radioLow1">Low</label>
+
+                            <input class="pop-up__inputs pop-up__update-priority" id="radioMedium1" type="radio" value="Middle" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required>
+                            <label for="radioMedium1">Middle</label>
+
+                            <input class="pop-up__inputs pop-up__update-priority" id="radioHight1" type="radio" value="High" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'"required >
+                            <label for="radioHight1">High</label>
+                        </div>
+
+                        <!-- Task status -->
+
+                         <div  class="task_status">
+                            <!-- Task priority -->
+
+                            <input style="display: none" class="pop-up__inputs pop-up__update-status" id="radioTodo11" type="radio" value="Todo" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
+                            <label style="display: none"  for="radioTodo11">To do</label>
+
+                            <input  class="pop-up__inputs pop-up__update-status" id="radioTodo1" type="radio" value="Todo" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
+                            <label   for="radioTodo1">To do</label>
+
+                             <input class="pop-up__inputs pop-up__update-status" id="radioInProgress1" type="radio" value="InProgress" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
+                            <label for="radioInProgress1" style="width: auto">In Progress</label>
+
+                            <input class="pop-up__inputs pop-up__update-status" id="radioFinished1" type="radio" value="Finished" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
+                            <label for="radioFinished1">Finished</label>
+                        </div>
+                        
+                        
+                        
+                        
                         <div class="pop-up--flex">
                             <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
                             <div role="button" class="pop-up__cancel-btn1">Cancel</div>
@@ -343,6 +391,7 @@ include_once('db_config.php');
                         ?>
                     </form>
                 </div>
+
 
                 <div class="pop-up__delete1">
                     <h2 class="pop-up__h2">Delete a Task</h2>
