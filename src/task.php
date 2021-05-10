@@ -133,13 +133,13 @@ include_once('db_config.php');
 
             // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
             if (isset($SEARCH_ERROR)) {
-                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']."";
+                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." ORDER BY Eiles_nr DESC";
             } 
             else if (isset($_COOKIE['Projekto_id'])) {
-            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";
             } 
             else {
-            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";    
+            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";    
             }
             $result = $connectM->prepare($queryM);
             $result->execute();
@@ -284,11 +284,11 @@ include_once('db_config.php');
                         <div  class="task_status">
                             <!-- Task priority -->
 
-                            <input class="pop-up__input" id="radioTodo" type="radio" value="Todo" name="taskStatus" placeholder="Task status" 
+                            <input class="pop-up__input" id="radioTodo" type="radio" value="To do" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" checked>
                             <label for="radioTodo">To do</label>
                             
-                             <input class="pop-up__input" id="radioInProgress" type="radio" value="InProgress" name="taskStatus" placeholder="Task status" 
+                             <input class="pop-up__input" id="radioInProgress" type="radio" value="In Progress" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'">
                             <label for="radioInProgress" style="width: auto">In Progress</label>
 
@@ -353,15 +353,15 @@ include_once('db_config.php');
                          <div  class="task_status">
                             <!-- Task priority -->
 
-                            <input style="display: none" class="pop-up__inputs pop-up__update-status" id="radioTodo11" type="radio" value="Todo" name="updatestatus" placeholder="Task Status" 
+                            <input style="display: none" class="pop-up__inputs pop-up__update-status" id="radioTodo11" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
                             <label style="display: none"  for="radioTodo11">To do</label>
 
-                            <input  class="pop-up__inputs pop-up__update-status" id="radioTodo1" type="radio" value="Todo" name="updatestatus" placeholder="Task Status" 
+                            <input  class="pop-up__inputs pop-up__update-status" id="radioTodo1" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
                             <label   for="radioTodo1">To do</label>
 
-                             <input class="pop-up__inputs pop-up__update-status" id="radioInProgress1" type="radio" value="InProgress" name="updatestatus" placeholder="Task Status" 
+                             <input class="pop-up__inputs pop-up__update-status" id="radioInProgress1" type="radio" value="In Progress" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
                             <label for="radioInProgress1" style="width: auto">In Progress</label>
 
