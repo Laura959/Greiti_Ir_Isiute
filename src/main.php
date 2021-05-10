@@ -46,7 +46,6 @@ include_once('db_config.php');
         <i class="fas fa-times" id="cancel"></i>
     </label>
     <div class="left-menu"> 
-    <div class="whole-search"><input type="text" id="search-left-menu" name="fname" placeholder="search" class="input"><i class="fas fa-search left-menu-search-icon" id="search-icon"></i></div>
         <ul>
             <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i><p class="left-menu-titles">DASHBOARD</p></a></li>
             <li><a href="#"><i class="fas fa-folder left-menu-icon"></i><p class="left-menu-titles">PROJECTS</p></a></li>

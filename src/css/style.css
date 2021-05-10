@@ -98,7 +98,7 @@ th {
 }
 
 ul {
-    margin-top: 5%;
+    margin-top: 120px;
 }
 
 ul li:hover a {
@@ -387,7 +387,7 @@ label #hamburger {
 }
 
 #check:checked~.left-menu ul {
-    margin-top: 22%;
+    margin-top: 120px;
 }
 
 #check:checked~label #hamburger {
@@ -437,11 +437,13 @@ label #hamburger {
 
 #search,
 #search-left-menu {
-    width: 170px;
+    width: 200px;
     border-radius: 50px;
-    font-family: 'Oswald', sans-serif;
     text-align: center;
     border: #ececec;
+    font-style: italic;
+    font-weight: 304;
+    color: black;
 }
 
 #search {
