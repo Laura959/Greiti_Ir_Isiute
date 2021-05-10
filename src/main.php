@@ -71,7 +71,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-z][0-9_-]*){3}\" title=\"Enter atleast 3 symbols\" required>
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}\" title=\"Enter atleast 3 symbols\" required>
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {

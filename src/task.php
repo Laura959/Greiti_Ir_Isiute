@@ -87,16 +87,17 @@ include_once('db_config.php');
             if(isset($_GET["search"])) {
                 $SEARCH_QUERY = trim($_GET["search"]);
                 $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
-                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
-                    $SEARCH_ERROR = "Enter at least 3 symbols";
-                }
+                // if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
+                //     $SEARCH_ERROR = "Enter at least 3 symbols";
+                // }
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"input\"><i class=\"fas fa-search\" id=\"search-icon\"></i>";
-            if(isset($SEARCH_ERROR)) {
-                echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
-            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}||[0-9]||\" title=\"Enter at least 3 symbols\">
+            <i class=\"fas fa-search\" id=\"search-icon\"></i>";
+            // if(isset($SEARCH_ERROR)) {
+            //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
+            // }
         ?>
         </form>        </div>
         <div class="form-inline"  style="margin-left: 2.5%;">
@@ -107,29 +108,7 @@ include_once('db_config.php');
                 <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
             </form>
         </div>
-        <!-- Kairinio menu pabaiga -->
-        <section>
-            <header>
-                <!-- Viršutinė menu juosta su search ir exit laukeliais -->
-                <nav class="navbar">
-                    <?php
-                    if (isset($_GET['title'])) {
-                        echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">" . $_GET['title'] . "</span> / Tasks</a>";
-                    } else {
-                        echo "<a class=\"project-page-title tasks__title  mr-auto\"> - / Tasks</a>";
-                    }
-                    ?>
-                    <div class="whole-search"><input type="text" id="search" name="fname" placeholder="Search" class="input"><i class="fas fa-search" id="search-icon"></i></div>
-                    <div class="form-inline"  style="margin-left: 2.5%;">
-                        <?php
-                        echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
-                        ?>
-                        <form method="POST">
-                            <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
-                        </form>
-                    </div>
-                </nav>
-                <!-- Viršutinės menu juostos pabaiga -->
+
             </header>
             <main>
                 <?php
@@ -155,9 +134,11 @@ include_once('db_config.php');
             // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
             if (isset($SEARCH_ERROR)) {
                 $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']."";
-            } else if (isset($_COOKIE['Projekto_id'])) {
+            } 
+            else if (isset($_COOKIE['Projekto_id'])) {
             $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";
-            } else {
+            } 
+            else {
             $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%')";    
             }
             $result = $connectM->prepare($queryM);
@@ -167,18 +148,13 @@ include_once('db_config.php');
             if($number === 0){
                 $_SESSION['empty'] = true;
                 echo "<span style=\"color: red; margin-left: 73.5%; font-style:italic;\">Tasks with this name or ID do not exist</span";
+                ?>
+                <div class="div_img">
+                <img class="mx-auto d-block" src="empty.png"> 
+                </div> 
+                <?php
+
             }
-          
-          // šioje vietoje konfliktas, tad Eduardas su Laura turi išsiaiškinti, nes kaip suprantu šioje vietoke yra įkelta
-          //Eduardo nuotrauka, kai nėra jokių task'ų
-//                if ($number === 0) {
-//                              $_SESSION['empty'] = true;
-//                             ?> 
-//                              <div class="div_img">
-//                                  <img class="mx-auto d-block" src="empty.png"> 
-//                              </div>   
-//                              <?php
-//                          }
           
             echo "</thead>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
@@ -201,9 +177,14 @@ include_once('db_config.php');
                                 <i class='far fa-edit '></i>
                             </button>
 
-                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">
+                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
 
-                            <button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">
+                            if (isset($_COOKIE['Projekto_id']) && isset($_COOKIE['Projektas'])){
+                                echo "<button class=\"delete1-project__JS\" data-id= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                                } else {
+                                echo "<button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                                }
+                                echo "
 
                                 <i class='far fa-trash-alt '></i>
                             </button>
@@ -232,10 +213,14 @@ include_once('db_config.php');
                                 <i class='far fa-edit '></i>
                             </button>
 
-                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">
+                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
 
-                            <button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">
-
+                            if (isset($_COOKIE['Projekto_id']) && isset($_COOKIE['Projektas'])){
+                            echo "<button class=\"delete1-project__JS\" data-id= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            } else {
+                            echo "<button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            }
+                            echo "
                                 <i class='far fa-trash-alt '></i>
                             </button>
                             <button class=\"button\">
