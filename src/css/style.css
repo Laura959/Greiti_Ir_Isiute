@@ -522,6 +522,10 @@ input[type="password"] {
     }
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .table--fixed {
     table-layout: fixed;
 }
@@ -622,8 +626,6 @@ input[type="password"] {
     border-bottom: 1px solid #D3D3D3;
 }
 
-
-
 .task_insert input[type="radio"],
 .task_status input[type="radio"] {
     opacity: 0;
@@ -631,8 +633,9 @@ input[type="password"] {
     width: 0;
 }
 
-.task_insert, .task_status{
-   text-align-last: justify;
+.task_insert,
+.task_status {
+    text-align-last: justify;
     margin: 0 30px;
 }
 
@@ -643,9 +646,9 @@ input[type="password"] {
     padding: 5px 20px;
     font-family: sans-serif, Arial;
     font-size: 16px;
-   text-align-last: center;
+    text-align-last: center;
     width: 120px;
-    border-radius: 20px;  
+    border-radius: 20px;
 }
 
 .task_insert input[type="radio"]:checked+label,
