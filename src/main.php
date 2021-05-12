@@ -148,6 +148,10 @@ include_once('db_config.php');
         }
                 //  isspausdinamas projektu sarasas
 
+        if( $number == 0 && isset($SEARCH_QUERY)) {
+        echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Project with this name does not exist</span></div>";
+        } else {
+
         echo "<table class='projects-table'>";
         echo "<thead>";
         echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
@@ -212,6 +216,7 @@ include_once('db_config.php');
             $i++;
         }
         echo "</table>";
+    }
         echo "<br>";
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
 
