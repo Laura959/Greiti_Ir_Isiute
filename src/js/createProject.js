@@ -74,18 +74,23 @@ const handleClickUpdateForm = (title, description, id) => {
 }
 
 const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
+   
     const blur = document.createElement('div');
     const form = document.querySelector('.pop-up__update1');
     const inputTitle = document.querySelector('.pop-up__update-title1');
-    const inputpriority = document.querySelector('.pop-up__update-priority');
-    const inputstatus = document.querySelector('.pop-up__update-status');
     const inputDescription = document.querySelector('.pop-up__update-description1');
     const inputId = document.querySelector('.pop-up__update-id1');
+    const taskPriority = document.querySelector(`.priority-${priority}`);
+    const masyvas = busena.split(' ');
+    if (masyvas.lenght==2){
+        masyvas.pop();
+    }
+    const taskBusena = document.querySelector(`.status-${masyvas[0]}`);
     inputTitle.setAttribute('value', `${title}`);
     inputId.setAttribute('value', `${id1}`);
-    inputpriority.setAttribute('value', `${priority}`);
-    inputstatus.setAttribute('value', `${busena}`);
     inputDescription.innerText = `${description}`;
+    taskPriority.setAttribute('checked', '');
+    taskBusena.setAttribute('checked', '');
     form.classList.add('pop-up__JS');
     blur.classList.add('blur__JS');
     document.body.appendChild(blur);
