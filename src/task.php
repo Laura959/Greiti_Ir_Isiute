@@ -255,11 +255,11 @@ include_once('db_config.php');
                     <form method="POST" class="pop-up__form">
 
                         <!-- Task title -->
-                        <input style="text-align:left;" class="pop-up__input" type="text" name="taskTitle" placeholder="Task title" 
+                        <input style="text-align:left;" class="pop-up__input" type="text" maxlength="30" name="taskTitle" placeholder="Task title" 
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task title'" required>
 
                         <!-- Task description -->
-                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="taskDescription" rows="6"></textarea>
+                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" maxlength="50" name="taskDescription" rows="6"></textarea>
 
 
                         <div class="task_insert">

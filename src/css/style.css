@@ -61,33 +61,16 @@ th {
 }
 
 .projects-table td {
-    max-width: 250px;
-    width: 250px;
-    overflow-x: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    max-width: 180px;
+    width: 180px;
+    word-break: break-word;
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.description-hover,
-.description-0 {
-    opacity: 0;
-    position: absolute;
-}
-
-.hover-area:hover .description-hover {
-    opacity: 1;
-    position: absolute;
-    margin-top: 0%;
-    margin-left: -1.5%;
-    background: #ffffff;
-    font-size: 17px;
-    padding: 5px;
-}
-
 .tasks__td {
     font-weight: 300;
+    word-break: break-word;
 }
 
 .tasks__th {
@@ -520,10 +503,6 @@ input[type="password"] {
     table {
         overflow: hidden;
     }
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 .table--fixed {
