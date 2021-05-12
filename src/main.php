@@ -159,15 +159,6 @@ include_once('db_config.php');
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
             activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);
-            $res = $row['Aprasymas'];
-
-            $countS = strlen($res); // jei aprasymas ilgesnis nei 25 raides, bus uzdetas hoveris
-            if ($countS>25) {
-            $className = 'hover';
-            } else {
-            $className = 0;  
-            }
-            
             if ($i == $number)
             
             {

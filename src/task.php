@@ -112,20 +112,7 @@ include_once('db_config.php');
             </header>
             <main>
                 <?php
-                echo "
-    <table class=\"table--fixed\">
-        <thead class=\"tasks__thead\" style=\"position: relative;\">
-            <tr>
-                <th class='project-name-spacing tasks__th'>ID</th>
-                <th class='tasks__th--width tasks__th'>Task</th>
-                <th class='tasks__th--width tasks__th'>Description</th>
-                <th class='tasks__th'>Priority</th>
-                <th class='tasks__th'>Status</th>
-                <th class='tasks__th'>Created</th>
-                <th class='tasks__th'>Modified</th>
-                <th class='round-border tasks__th'></th>
-            </tr>";
-              
+
     if(isset($_COOKIE['Projekto_id']) || isset($_GET['Projekto_id'])){
         try {
             $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
@@ -147,13 +134,23 @@ include_once('db_config.php');
             $i = 1;
             if($number === 0){
                 $_SESSION['empty'] = true;
-                echo "<span style=\"color: red; margin-left: 73.5%; font-style:italic;\">Tasks with this name or ID do not exist</span";
-                ?>
-                <div class="div_img">
-                <img class="mx-auto d-block" src="empty.png"> 
-                </div> 
-                <?php
-
+            }
+            if( $number == 0 && isset($SEARCH_QUERY)) {
+                echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Task with this name does not exist</span></div>";
+            } else {
+            echo "
+            <table class=\"table--fixed\">
+                <thead class=\"tasks__thead\" style=\"position: relative;\">
+                    <tr>
+                        <th class='project-name-spacing tasks__th'>ID</th>
+                        <th class='tasks__th--width tasks__th'>Task</th>
+                        <th class='tasks__th--width tasks__th'>Description</th>
+                        <th class='tasks__th'>Priority</th>
+                        <th class='tasks__th'>Status</th>
+                        <th class='tasks__th'>Created</th>
+                        <th class='tasks__th'>Modified</th>
+                        <th class='round-border tasks__th'></th>
+                    </tr>";
             }
           
             echo "</thead>";

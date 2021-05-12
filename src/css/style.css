@@ -661,10 +661,12 @@ task_status input[type="radio"]:focus+label {
     flex-direction: column;
     align-content: center;
 }
+
 .error-search-message {
     color: rgb(191, 198, 187);
     margin-left: 39%;
     font-size: 20px;
+    padding: 20px;
 }
 
 .error-search-img {
