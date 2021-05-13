@@ -74,7 +74,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}\" title=\"Enter atleast 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {
@@ -221,7 +221,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input" type="text" name="title" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="50" rows="6"></textarea>
+            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="80" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
@@ -242,8 +242,8 @@ include_once('db_config.php');
     <div class="pop-up__update">
         <h2 class="pop-up__h2">Update a Project</h2>
         <form method="POST" class="pop-up__form">
-            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" rows="2"></textarea>
+            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
             <input type="hidden" class="pop-up__update-id" name="updateId"/>
             <div class="pop-up--flex">
                 <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">

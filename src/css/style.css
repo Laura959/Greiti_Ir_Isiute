@@ -666,7 +666,6 @@ task_status input[type="radio"]:focus+label {
     color: rgb(191, 198, 187);
     margin-left: 39%;
     font-size: 20px;
-    padding: 20px;
 }
 
 .error-search-img {
