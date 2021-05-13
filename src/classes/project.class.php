@@ -73,10 +73,11 @@
                 try{
                    $sql = "INSERT INTO uzduotys (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena` ,`Sukurimo_data`, `Naujinimo_data`, `projekto_id`) VALUES (?, ?, ?, ?, ? ,?, ?,?)";
                    // $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
+                   $sql2 = "INSERT INTO projektu_uzduotys VALUES (?, ?)";
                     $statement = $pdo->prepare($sql);
                       $statement->execute([$id, $name, $description, $priority, $status, $date, $date1, $projektas]);
-                   // $statement2 = $pdo->prepare($sql2);
-                  //  $statement2->execute([$id, $role, $user]);
+                   $statement2 = $pdo->prepare($sql2);
+                   $statement2->execute([$projektas, $id]);
                     $pdo->commit();
                     
                     echo "<script> location.replace(\"task.php?Projekto_id=".$projektas."&title=".$name."\"); </script>";
