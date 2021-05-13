@@ -110,6 +110,7 @@ include_once('db_config.php');
                 projektai.Sukurimo_data,
                 SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
                 SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
+                SUM(case when uzduotys.Busena ='In Progress' then 1 else 0 end) as InProgress_tasks,
                 COUNT(uzduotys.Busena) as Total_tasks
             FROM projektai
                 LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
@@ -126,9 +127,7 @@ include_once('db_config.php');
             // count naudosime, jei noresime nustatyti eiluciu skaiciu
         // $count = 1;
 
-        function activeProgressBar($rowTotal, $rowTodo, $i) {
-            $totalTasks = $rowTotal;
-            $finishedTasks = $totalTasks - $rowTodo;
+        function activeProgressBar($totalTasks, $finishedTasks, $i) {
             if ($totalTasks == 0) {
                 $greenBarLength = 0;
             } else {
@@ -158,7 +157,7 @@ include_once('db_config.php');
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
-            activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);
+            activeProgressBar($row['Total_tasks'], $row['Finished_tasks'], $i);
             if ($i == $number)
             
             {
@@ -169,8 +168,8 @@ include_once('db_config.php');
           <td>".$row['Aprasymas']."</td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
-          <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
-          <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
+          <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
+          <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing'>
           <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
@@ -190,8 +189,8 @@ include_once('db_config.php');
                 <td class='grey-border'>".$row['Aprasymas']."</td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
-                <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
-                <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
+                <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
+                <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border'>
                 <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
