@@ -74,7 +74,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}\" title=\"Enter atleast 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {
@@ -110,6 +110,7 @@ include_once('db_config.php');
                 projektai.Sukurimo_data,
                 SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
                 SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
+                SUM(case when uzduotys.Busena ='In Progress' then 1 else 0 end) as InProgress_tasks,
                 COUNT(uzduotys.Busena) as Total_tasks
             FROM projektai
                 LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
@@ -126,9 +127,7 @@ include_once('db_config.php');
             // count naudosime, jei noresime nustatyti eiluciu skaiciu
         // $count = 1;
 
-        function activeProgressBar($rowTotal, $rowTodo, $i) {
-            $totalTasks = $rowTotal;
-            $finishedTasks = $totalTasks - $rowTodo;
+        function activeProgressBar($totalTasks, $finishedTasks, $i) {
             if ($totalTasks == 0) {
                 $greenBarLength = 0;
             } else {
@@ -158,7 +157,7 @@ include_once('db_config.php');
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
-            activeProgressBar($row['Total_tasks'], $row['Todo_tasks'], $i);
+            activeProgressBar($row['Total_tasks'], $row['Finished_tasks'], $i);
             if ($i == $number)
             
             {
@@ -169,8 +168,8 @@ include_once('db_config.php');
           <td>".$row['Aprasymas']."</td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
-          <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
-          <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
+          <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
+          <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing'>
           <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
@@ -190,8 +189,8 @@ include_once('db_config.php');
                 <td class='grey-border'>".$row['Aprasymas']."</td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
-                <p class='progress-numbers'>".($row['Total_tasks'] - $row['Todo_tasks'])."/".$row['Total_tasks']."</p>
-                <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", Finished: ".($row['Total_tasks'] - $row['Todo_tasks'])."</div></td>
+                <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
+                <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border'>
                 <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
@@ -221,7 +220,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input" type="text" name="title" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="50" rows="6"></textarea>
+            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="80" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
@@ -242,8 +241,8 @@ include_once('db_config.php');
     <div class="pop-up__update">
         <h2 class="pop-up__h2">Update a Project</h2>
         <form method="POST" class="pop-up__form">
-            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" rows="2"></textarea>
+            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
+            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
             <input type="hidden" class="pop-up__update-id" name="updateId"/>
             <div class="pop-up--flex">
                 <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">

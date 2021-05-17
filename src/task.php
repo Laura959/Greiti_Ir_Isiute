@@ -2,11 +2,11 @@
 
 session_start();
 
-if (isset($_GET['title'])) {
+if (isset($_GET['title']) && (!isset($_COOKIE['Projektas']))) {
     setcookie("Projektas", $_GET['title'], time() + (3600));
 }
 
-if(isset($_GET['Projekto_id'])){
+if(isset($_GET['Projekto_id']) && (!isset($_COOKIE['Projekto_id']))){
     setcookie("Projekto_id", $_GET['Projekto_id'], time() + (3600));
 }
 
@@ -93,7 +93,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}||[0-9]||\" title=\"Enter at least 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
             // if(isset($SEARCH_ERROR)) {
             //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
@@ -256,7 +256,7 @@ include_once('db_config.php');
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task title'" required>
 
                         <!-- Task description -->
-                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" maxlength="50" name="taskDescription" rows="6"></textarea>
+                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" maxlength="80" name="taskDescription" rows="6"></textarea>
 
 
                         <div class="task_insert">
@@ -316,10 +316,10 @@ include_once('db_config.php');
            <div class="pop-up__update1">
                     <h2 class="pop-up__h2">Update Task</h2>
                     <form method="POST" class="pop-up__form">
-                        <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
+                        <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" maxlength="30" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
 
 
-                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" rows="2"></textarea>
+                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
                         <input type="hidden" class="pop-up__update-id1" name="updateId"/>
                         
                         
