@@ -31,7 +31,7 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   <link href="css/style.css?rnd=235" rel="stylesheet">
+    <link href="css/style.css?rnd=123" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -165,7 +165,7 @@ include_once('db_config.php');
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
           <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
-          <td>".$row['Aprasymas']."</td>
+          <td><div class='shortened_description'><a href='#' class=\"update-project__JS\">".$row['Aprasymas']."</a></div></td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -186,7 +186,7 @@ include_once('db_config.php');
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
-                <td class='grey-border'>".$row['Aprasymas']."</td>
+                <td class='grey-border'><div class='shortened_description'><a href='#'>".$row['Aprasymas']."</a></div></td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
