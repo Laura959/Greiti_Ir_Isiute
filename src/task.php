@@ -164,7 +164,7 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
                         <td class='tasks__td'>
                         <a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\" class=\"projects__title-hover\">" . $row['Pavadinimas'] . "</td>
-                        <td class='tasks__td'>" . $row['Aprasymas'] . "</td>
+                        <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\"\">" . $row['Prioritetas'] . "</td>
                         <td class='tasks__td'>" . $row['Busena'] . "</td>
                         <td class='tasks__td'>" . $row['Sukurimo_data'] . "</td>
@@ -200,7 +200,7 @@ include_once('db_config.php');
                     <tr class='tasks__tr--border-bottom'>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
                         <td class='tasks__td'><a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\">" . $row['Pavadinimas'] . "</td>
-                        <td class='tasks__td'>" . $row['Aprasymas'] . "</td>
+                        <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\">" . $row['Prioritetas'] . "</td>
                         <td class='tasks__td'>" . $row['Busena'] . "</td>
                         <td class='tasks__td'>" . $row['Sukurimo_data'] . "</td>
@@ -256,7 +256,7 @@ include_once('db_config.php');
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task title'" required>
 
                         <!-- Task description -->
-                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" maxlength="80" name="taskDescription" rows="6"></textarea>
+                        <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" maxlength="200" name="taskDescription" rows="6"></textarea>
 
 
                         <div class="task_insert">
@@ -319,7 +319,7 @@ include_once('db_config.php');
                         <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" maxlength="30" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
 
 
-                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
+                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" maxlength="200" rows="2"></textarea>
                         <input type="hidden" class="pop-up__update-id1" name="updateId"/>
                         
                         

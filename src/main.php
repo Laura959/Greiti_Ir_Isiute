@@ -31,7 +31,7 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   <link href="css/style.css?rnd=235" rel="stylesheet">
+    <link href="css/style.css?rnd=123" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -165,7 +165,7 @@ include_once('db_config.php');
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
           <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
-          <td>".$row['Aprasymas']."</td>
+          <td><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -186,7 +186,7 @@ include_once('db_config.php');
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
-                <td class='grey-border'>".$row['Aprasymas']."</td>
+                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -220,7 +220,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input" type="text" name="title" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="80" rows="6"></textarea>
+            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="200" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
@@ -242,7 +242,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Update a Project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
+            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="200" rows="2"></textarea>
             <input type="hidden" class="pop-up__update-id" name="updateId"/>
             <div class="pop-up--flex">
                 <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
