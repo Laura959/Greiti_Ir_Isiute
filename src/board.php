@@ -68,31 +68,17 @@ include_once('db_config.php');
     <!-- Kairinio menu pabaiga -->
     <section>
         <header>
-            <!-- Viršutinė menu juosta su search ir exit laukeliais -->
+            <!-- Viršutinė menu juosta su antrašte ir log out -->
             <nav class="navbar">
-                <a class="project-page-title mr-auto" download="Projects.csv">PROJECTS</a>
-                <div class="whole-search">
-
-                    <!-- SEARCH FUNKCIALUMAS -->
-                    <form id="search-form">
-                        <?php
-                        if (isset($_GET["search"])) {
-                            $SEARCH_QUERY = trim($_GET["search"]);
-                            $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);
-                            if ($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3) {
-                                // $SEARCH_ERROR = "error";
-                            }
-                        } else {
-                            $SEARCH_QUERY = "";
-                        }
-                        echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"([0-9_-]*[a-zA-Z_ ,][0-9_-]*){3,}\" title=\"Enter atleast 3 symbols\">
-            <i class=\"fas fa-search\" id=\"search-icon\"></i>";
-
-                        // if(isset($SEARCH_ERROR)) {
-                        //     echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";               
-                        // }
-                        ?>
-                    </form>
+                <div class="board-heading">
+                    <a class="board-page-title mr-auto" href="main.php">PROJECTS</a><span class="symbol">/</span>
+                    <?php
+                    if (isset($_GET['Projekto_id'])) {
+                        echo "<a class=\"board-page-title mr-auto\" href=\"task.php?Projekto_id=" . $_GET['Projekto_id'] . "\">TASKS</a>";
+                    }
+                    ?>
+                    <span class="symbol">/</span>
+                    <a class="board-page-title mr-auto">TASK BOARD</a>
                 </div>
                 <div class="form-inline">
                     <?php

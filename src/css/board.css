@@ -1,7 +1,31 @@
+/* @import url("https://use.typekit.net/dwt6opx.css"); */
+
+.board-heading {
+    display:flex;
+    flex-direction: row;
+    margin-left: 9%;
+}
+
+.board-page-title, .symbol {
+    /* font-family: classico-urw, sans-serif; */
+    /* font-family: alegreya, serif; */
+    font-weight: bold;
+    font-size: 34px;
+    letter-spacing: 2px;
+    color: #a8d381;
+    text-decoration: none;
+}
+
+.board-page-title:hover {
+    text-decoration: none;
+    color: rgb(148, 182, 134);
+}
+
 .board-container {
     display: flex;
     flex-direction: row;
-    margin-left: 90px;
+    margin-left: 5%;
+    margin-top: -1%;
     padding: 2%;
     width: 95%;
 }
@@ -16,7 +40,7 @@
 .board-header {
     color: #ffffff;
     background-color: #a8d381;
-    height: 70px;
+    font-size: 20px;
     text-align: center;
     width: 100%;
     border-radius: 15px 15px 0px 0px;
@@ -44,6 +68,7 @@
     margin: 5px;
     padding: 2%;
     width: 100%;
+    font-size: 17px;
 }
 
 .dot {
