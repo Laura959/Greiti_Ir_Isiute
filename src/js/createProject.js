@@ -75,7 +75,19 @@ const handleClickUpdateForm = (title, description, id) => {
     document.body.appendChild(blur);
 }
 
-const handleClickUpdateForm1 = (title, priority, busena, description, id1) => {
+
+const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
+    let test = document.querySelectorAll('.pop-up__update-priority');
+    let test2 = document.querySelectorAll('.pop-up__update-status');
+    test.forEach(t =>{
+        t.removeAttribute('checked');
+        console.log(t.hasAttribute('checked'));
+    });
+
+    test2.forEach(t2 =>{
+        t2.removeAttribute('checked');
+        console.log(t2.hasAttribute('checked'));
+    });
 
     const blur = document.createElement('div');
     const form = document.querySelector('.pop-up__update1');

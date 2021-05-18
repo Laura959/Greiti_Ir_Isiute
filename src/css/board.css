@@ -1,0 +1,70 @@
+.board-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 90px;
+    padding: 2%;
+    width: 95%;
+}
+
+.task-board {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px 0px 30px;
+    width: 30%;
+}
+
+.board-header {
+    color: #ffffff;
+    background-color: #a8d381;
+    height: 70px;
+    text-align: center;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    text-transform: uppercase;
+    font-weight: 300;
+    line-height: 60px;
+}
+
+.board-background {
+    background-color: white;
+    color: #80807e;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    padding: 1%;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.board-data {
+    background-color: rgb(242, 242, 242);
+    border-radius: 30px;
+    text-align: left;
+    margin: 5px;
+    padding: 2%;
+    width: 100%;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.dot--low {
+    background-color: #00ff00;
+}
+
+.dot--middle {
+    background-color: #ffe600;
+}
+
+.dot--high {
+    background-color: #ff0011;
+}
