@@ -248,13 +248,13 @@ label #hamburger {
     border-bottom: solid 1px #80807e;
 }
 
-.shortened_description {
+#shortened-description {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.shortened_description a:hover {
+#shortened-description a:hover {
     color: rgb(148, 182, 134);
 }
 

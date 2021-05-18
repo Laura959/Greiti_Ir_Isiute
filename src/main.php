@@ -165,7 +165,7 @@ include_once('db_config.php');
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
           <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
-          <td><div class='shortened_description'><a href='#' class=\"update-project__JS\">".$row['Aprasymas']."</a></div></td>
+          <td><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -186,7 +186,7 @@ include_once('db_config.php');
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
-                <td class='grey-border'><div class='shortened_description'><a href='#'>".$row['Aprasymas']."</a></div></td>
+                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -220,7 +220,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Create a new project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input" type="text" name="title" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="80" rows="6"></textarea>
+            <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="200" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
                 <div role="button" class="pop-up__cancel-btn">Cancel</div>
@@ -242,7 +242,7 @@ include_once('db_config.php');
         <h2 class="pop-up__h2">Update a Project</h2>
         <form method="POST" class="pop-up__form">
             <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="updateTitle" maxlength="30" placeholder="Project title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Project title'" required>
-            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="80" rows="2"></textarea>
+            <textarea class="pop-up__textarea pop-up__update-description" placeholder="Description" name="updateDescription" maxlength="200" rows="2"></textarea>
             <input type="hidden" class="pop-up__update-id" name="updateId"/>
             <div class="pop-up--flex">
                 <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">

@@ -1,14 +1,16 @@
-const createBtns    = document.querySelectorAll('.create-project__JS');
-const createBtnsTask    = document.querySelectorAll('.create-task__JS');
-const deleteBtns    = document.querySelectorAll('.delete-project__JS');
-const updateBtns    = document.querySelectorAll('.update-project__JS');
+const createBtns = document.querySelectorAll('.create-project__JS');
+const createBtnsTask = document.querySelectorAll('.create-task__JS');
+const deleteBtns = document.querySelectorAll('.delete-project__JS');
+const updateBtns = document.querySelectorAll('.update-project__JS');
 
-const updateBtns1    = document.querySelectorAll('.update1-project__JS');
+const updateBtns1 = document.querySelectorAll('.update1-project__JS');
 
-const cancelBtns    = document.querySelectorAll('.pop-up__cancel-btn');
-const textarea      = document.querySelector('.pop-up__textarea');
-const deleteBtns1    = document.querySelectorAll('.delete1-project__JS');
-const cancelBtns1    = document.querySelectorAll('.pop-up__cancel-btn1');
+const cancelBtns = document.querySelectorAll('.pop-up__cancel-btn');
+const textarea = document.querySelector('.pop-up__textarea');
+const deleteBtns1 = document.querySelectorAll('.delete1-project__JS');
+const cancelBtns1 = document.querySelectorAll('.pop-up__cancel-btn1');
+const description = document.querySelectorAll('.project-description__JS');
+const descriptionTasks = document.querySelectorAll('.project-description-tasks__JS');
 
 const handleClickCreateForm = () => {
     const blur = document.createElement('div');
@@ -53,7 +55,7 @@ const handleClickCloseForm1 = () => {
     const updateForm = document.querySelector('.pop-up__update1');
     if (deleteForm.classList.contains('pop-up__JS')) {
         deleteForm.classList.remove('pop-up__JS');
-    } else if (updateForm.classList.contains('pop-up__JS')){
+    } else if (updateForm.classList.contains('pop-up__JS')) {
         updateForm.classList.remove('pop-up__JS');
     }
     blur.parentNode.removeChild(blur);
@@ -73,8 +75,8 @@ const handleClickUpdateForm = (title, description, id) => {
     document.body.appendChild(blur);
 }
 
-const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
-   
+const handleClickUpdateForm1 = (title, priority, busena, description, id1) => {
+
     const blur = document.createElement('div');
     const form = document.querySelector('.pop-up__update1');
     const inputTitle = document.querySelector('.pop-up__update-title1');
@@ -82,7 +84,7 @@ const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
     const inputId = document.querySelector('.pop-up__update-id1');
     const taskPriority = document.querySelector(`.priority-${priority}`);
     const masyvas = busena.split(' ');
-    if (masyvas.lenght==2){
+    if (masyvas.lenght == 2) {
         masyvas.pop();
     }
     const taskBusena = document.querySelector(`.status-${masyvas[0]}`);
@@ -102,16 +104,14 @@ const handleClickCloseForm = () => {
     const createFormTask = document.querySelector('.pop-up');
     const deleteForm = document.querySelector('.pop-up__delete');
     const updateForm = document.querySelector('.pop-up__update');
-   
+
     if (createForm.classList.contains('pop-up__JS')) {
         createForm.classList.remove('pop-up__JS');
     } else if (deleteForm.classList.contains('pop-up__JS')) {
         deleteForm.classList.remove('pop-up__JS');
-    } else if (updateForm.classList.contains('pop-up__JS')){
+    } else if (updateForm.classList.contains('pop-up__JS')) {
         updateForm.classList.remove('pop-up__JS');
-    }
-
-    else if(createFormTask.classList.contains('pop-up__JS')){
+    } else if (createFormTask.classList.contains('pop-up__JS')) {
         createFormTask.classList.remove('pop-up__JS');
     }
 
@@ -137,27 +137,45 @@ createBtnsTask.forEach(
 
 
 updateBtns.forEach(
-    updateBtn => updateBtn.addEventListener('click', () =>{
-    const title = updateBtn.parentElement.parentElement.children[1].textContent;
-    const description = updateBtn.parentElement.parentElement.children[2].textContent;
-    const id = updateBtn.parentElement.children[1].id;
-    handleClickUpdateForm(title, description, id);
-}));
+    updateBtn => updateBtn.addEventListener('click', () => {
+        const title = updateBtn.parentElement.parentElement.children[1].textContent;
+        const description = updateBtn.parentElement.parentElement.children[2].textContent;
+        const id = updateBtn.parentElement.children[1].id;
+        handleClickUpdateForm(title, description, id);
+    }));
 
 updateBtns1.forEach(
-    updateBtn => updateBtn.addEventListener('click', () =>{
-    const title = updateBtn.parentElement.parentElement.children[1].textContent;
-    const description = updateBtn.parentElement.parentElement.children[2].textContent;
-    const priority = updateBtn.parentElement.parentElement.children[3].textContent;
-    const busena = updateBtn.parentElement.parentElement.children[4].textContent
-    const id1 = updateBtn.parentElement.children[1].id;
-    console.log(title, priority, busena, description, id1);
-    handleClickUpdateForm1(title,priority,busena,description,id1);
-}));
+    updateBtn => updateBtn.addEventListener('click', () => {
+        const title = updateBtn.parentElement.parentElement.children[1].textContent;
+        const description = updateBtn.parentElement.parentElement.children[2].textContent;
+        const priority = updateBtn.parentElement.parentElement.children[3].textContent;
+        const busena = updateBtn.parentElement.parentElement.children[4].textContent
+        const id1 = updateBtn.parentElement.children[1].id;
+        console.log(title, priority, busena, description, id1);
+        handleClickUpdateForm1(title, priority, busena, description, id1);
+    }));
+
+description.forEach(
+    fullDescription => fullDescription.addEventListener('click', () => {
+        const title = fullDescription.parentElement.parentElement.children[1].textContent;
+        const description = fullDescription.parentElement.parentElement.children[2].textContent;
+        const id = fullDescription.parentElement.parentElement.children[0].textContent;
+        console.log(title, description, id);
+        handleClickUpdateForm(title, description, id);
+    }));
+
+descriptionTasks.forEach(
+    descriptionTask => descriptionTask.addEventListener('click', () => {
+        const title = descriptionTask.parentElement.parentElement.children[1].textContent;
+        const description = descriptionTask.parentElement.parentElement.children[2].textContent;
+        const priority = descriptionTask.parentElement.parentElement.children[3].textContent;
+        const busena = descriptionTask.parentElement.parentElement.children[4].textContent
+        const id1 = descriptionTask.parentElement.parentElement.children[0].textContent;
+        handleClickUpdateForm1(title, priority, busena, description, id1);
+    }));
 
 deleteBtns1.forEach(
-    deleteBtn => deleteBtn.addEventListener('click', () => 
-    {
+    deleteBtn => deleteBtn.addEventListener('click', () => {
         const id = deleteBtn.id;
         const title = deleteBtn.getAttribute('data-title');
         const project_id = deleteBtn.getAttribute('data-id');
@@ -165,7 +183,7 @@ deleteBtns1.forEach(
     }));
 
 cancelBtns1.forEach(
-cancelBtn => cancelBtn.addEventListener('click', handleClickCloseForm1)
+    cancelBtn => cancelBtn.addEventListener('click', handleClickCloseForm1)
 );
 deleteBtns.forEach(
     deleteBtn => deleteBtn.addEventListener('click', () => handleClickDeleteForm(deleteBtn.id)));
@@ -177,7 +195,7 @@ cancelBtns.forEach(
 // textarea.addEventListener('focusout', handleClickAddPlaceholder);
 
 window.addEventListener('load', (event) => {
-    if(document.querySelector('[data-link]')){
+    if (document.querySelector('[data-link]')) {
         const exportBtn = document.querySelector('.export');
         const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
         console.log(link);
