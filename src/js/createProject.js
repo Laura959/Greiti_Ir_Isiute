@@ -10,6 +10,8 @@ const textarea = document.querySelector('.pop-up__textarea');
 const deleteBtns1 = document.querySelectorAll('.delete1-project__JS');
 const cancelBtns1 = document.querySelectorAll('.pop-up__cancel-btn1');
 const togglerMenu = document.querySelectorAll('.left-menu__btn');
+const description = document.querySelectorAll('.project-description__JS');
+const descriptionTasks = document.querySelectorAll('.project-description-tasks__JS');
 
 const handleClickCreateForm = () => {
     const blur = document.createElement('div');
@@ -74,6 +76,7 @@ const handleClickUpdateForm = (title, description, id) => {
     document.body.appendChild(blur);
 }
 
+
 const handleClickUpdateForm1 = (title, priority, busena, description, id1) => {
     let test = document.querySelectorAll('.pop-up__update-priority');
     let test2 = document.querySelectorAll('.pop-up__update-status');
@@ -86,6 +89,7 @@ const handleClickUpdateForm1 = (title, priority, busena, description, id1) => {
         t2.removeAttribute('checked');
         console.log(t2.hasAttribute('checked'));
     });
+
     const blur = document.createElement('div');
     const form = document.querySelector('.pop-up__update1');
     const inputTitle = document.querySelector('.pop-up__update-title1');
@@ -172,6 +176,27 @@ updateBtns1.forEach(
         console.log(title, priority, busena, description, id1);
         handleClickUpdateForm1(title, priority, busena, description, id1);
     }));
+
+
+description.forEach(
+    fullDescription => fullDescription.addEventListener('click', () => {
+        const title = fullDescription.parentElement.parentElement.children[1].textContent;
+        const description = fullDescription.parentElement.parentElement.children[2].textContent;
+        const id = fullDescription.parentElement.parentElement.children[0].textContent;
+        console.log(title, description, id);
+        handleClickUpdateForm(title, description, id);
+    }));
+
+descriptionTasks.forEach(
+    descriptionTask => descriptionTask.addEventListener('click', () => {
+        const title = descriptionTask.parentElement.parentElement.children[1].textContent;
+        const description = descriptionTask.parentElement.parentElement.children[2].textContent;
+        const priority = descriptionTask.parentElement.parentElement.children[3].textContent;
+        const busena = descriptionTask.parentElement.parentElement.children[4].textContent
+        const id1 = descriptionTask.parentElement.parentElement.children[0].textContent;
+        handleClickUpdateForm1(title, priority, busena, description, id1);
+    }));
+
 
 deleteBtns1.forEach(
     deleteBtn => deleteBtn.addEventListener('click', () => {

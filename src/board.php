@@ -31,6 +31,7 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
     <link href="css/style.css?rnd=231" rel="stylesheet">
     <link href="css/board.css?rnd=123" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -78,14 +79,16 @@ include_once('db_config.php');
                 </li>
             </ul>
         </div>
+
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
         <header>
             <!-- Viršutinė menu juosta su antrašte ir log out -->
+
             <nav class="navbar tasks__navbar">
                 <div class="board-heading">
-                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Dashboard</a>
+                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Task board</a>
                 </div>
                 <div class="form-inline form__logout">
                     <?php
