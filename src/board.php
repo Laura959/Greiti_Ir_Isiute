@@ -53,18 +53,20 @@ include_once('db_config.php');
         </div>
         <div class="left-menu__list">
             <ul class="left-menu__items">
-                <li class="left-menu__item">
-                    <a href="#" href="#" class="left-menu__icon">
-                        <i class="fas fa-th-large left-menu-icon"></i>
-                    </a>
-                    <p class="left-menu__title">Dashboard</p>
-                </li>
+           
                 <li class="left-menu__item">
                     <a href="main.php" class="left-menu__icon">
                         <i class="fas fa-folder left-menu-icon"></i>
                     </a>
                     <a href="main.php" class="left-menu__title">Projects</a>
                 </li>
+                <li class="left-menu__item">
+                    <a href="#" href="#" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Task board</p>
+                </li>
+
                 <li class="left-menu__item">
                     <a href="#" class="left-menu__icon">
                         <i class="fas fa-history left-menu-icon"></i>
@@ -86,10 +88,11 @@ include_once('db_config.php');
         <header>
             <!-- Viršutinė menu juosta su antrašte ir log out -->
 
-            <nav class="navbar tasks__navbar">
+            <nav class="navbar">
                 <div class="board-heading">
-                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Task board</a>
+                    <a class="project-page-title board-page-title" href="main.php"> <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?><span class="symbol"> /<span> Tasks <span class="symbol">/<span> Task board</a>
                 </div>
+                
                 <div class="form-inline form__logout">
                     <?php
                     echo '<p class="login-name">' . $_SESSION["username"] . '</p>';

@@ -5,7 +5,7 @@
     text-align: left;
 }
 
-.board-page-title {
+.board-page-title, .symbol {
     /* font-family: classico-urw, sans-serif; */
     /* font-family: alegreya, serif; */
     /* width: 100%; */

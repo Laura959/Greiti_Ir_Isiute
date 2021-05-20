@@ -53,12 +53,6 @@ include_once('db_config.php');
             <ul class="left-menu__items">
                 <li class="left-menu__item">
                     <a href="#" class="left-menu__icon">
-                        <i class="fas fa-th-large left-menu-icon"></i>
-                    </a>
-                    <p class="left-menu__title">Dashboard</p>
-                </li>
-                <li class="left-menu__item">
-                    <a href="#" class="left-menu__icon">
                         <i class="fas fa-folder left-menu-icon"></i>
                     </a>
                     <p class="left-menu__title">Projects</p>
