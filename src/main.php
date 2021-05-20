@@ -118,8 +118,8 @@ include_once('db_config.php');
         $queryWhere = !isset($SEARCH_ERROR) ? " WHERE projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
-        
         $linkCSV = "data:text/csv;charset=utf-8,Title, Description, Status, Finished tasks, Total tasks\n";
+        $linkCSV_tasks = "data:text/csv;charset=utf-8, ID, Title, Description, Priority, Status, Created, Modified\n";
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
@@ -176,7 +176,22 @@ include_once('db_config.php');
           <i class='far fa-trash-alt'></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
+          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>";
+         
+          if(isset($_POST["button"])) {
+            echo "
+            <style>
+            #progressId".$i." {
+                width: ".$greenBarLength."px;
+                background-color: #ffffff;
+                height: 12px;
+                border-radius: 10px;
+                margin-top: -3px;
+            }
+            </style>";
+          }
+
+            echo "
           <button class=\"button\" id='create-button'>
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
@@ -197,7 +212,7 @@ include_once('db_config.php');
                     <i class='far fa-trash-alt'></i>
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
-                <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
+                <button class=\"button\" download='Project_tasks.csv'><i class='fas fa-arrow-down'></i></button></td></tr>";
 
             // $count++;
             // if ($count>2) {

@@ -163,7 +163,7 @@ include_once('db_config.php');
                     <tr>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
                         <td class='tasks__td'>
-                        <a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\" class=\"projects__title-hover\">" . $row['Pavadinimas'] . "</td>
+                        <a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] .  "\">"  . $row['Pavadinimas'] . "</td>
                         <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\"\">" . $row['Prioritetas'] . "</td>
                         <td class='tasks__td'>" . $row['Busena'] . "</td>
