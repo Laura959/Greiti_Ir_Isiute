@@ -63,6 +63,13 @@ th {
     font-size: clamp(1.1rem, 1.75vw, 1.3rem);
 }
 
+.projects-table td {
+    max-width: 180px;
+    width: 180px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 .projects-table td,
 .projects-table th {
     padding: 29px 2rem;
