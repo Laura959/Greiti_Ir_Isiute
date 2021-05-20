@@ -1,0 +1,144 @@
+/* @import url("https://use.typekit.net/dwt6opx.css"); */
+
+.board-heading {
+    display: flex;
+    text-align: left;
+}
+
+.board-page-title {
+    /* font-family: classico-urw, sans-serif; */
+    /* font-family: alegreya, serif; */
+    /* width: 100%; */
+    letter-spacing: 2px;
+    color: #a8d381;
+    padding: .5rem 0;
+    /* text-decoration: none; */
+}
+
+.board-page-title:hover {
+    text-decoration: none;
+    color: rgb(148, 182, 134);
+}
+
+.board-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2.25rem auto 0 12.5%;
+    width: 82.5%;
+}
+
+.task-board {
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    margin: 1.5rem 0;
+    width: 30%;
+}
+
+.board-header {
+    color: #ffffff;
+    background-color: #a8d381;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 1rem;
+    /* line-height: 60px; */
+}
+
+.board-background {
+    background-color: white;
+    color: #80807e;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    padding: 1%;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.board-data {
+    background-color: rgb(242, 242, 242);
+    border-radius: 30px;
+    text-align: left;
+    margin: 5px;
+    padding: 2%;
+    width: 100%;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.board-data:hover {
+    background-color: rgb(229, 235, 214);
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.dot--low {
+    background-color: #00ff00;
+}
+
+.dot--middle {
+    background-color: #ffe600;
+}
+
+.dot--high {
+    background-color: #ff0011;
+}
+
+@media only screen and (max-width: 1500px){
+    .board-heading {
+        width: 100%;
+       
+    }
+    .form__logout{
+        margin-top: 1rem;
+    }
+    
+    .board-page-title {
+        width: 100%;
+        padding: 1.5rem 0 .5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .board-container {
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .form__logout{
+        margin-top: 0;
+    }
+    .board-heading{
+        text-align: center;
+    }
+    .board-page-title {
+        padding: 2.5rem 0 .5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .task-board {
+        min-width: 345px;
+    }
+    .board-container {
+        margin: 0 auto;
+    }
+}

@@ -11,7 +11,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 10;
     background-color: #e0e0e0ab;
 }
 
@@ -54,7 +54,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    z-index: 5;
+    z-index: 11;
 }
 
 .pop-up__JS {
@@ -143,11 +143,7 @@ body {
     width: clamp(7.5rem, 15vw, 10rem);
 }
 
-.pop-up__cancel-btn {
-    background-color: #d65249;
-    padding: .5rem 0;
-}
-
+.pop-up__cancel-btn,
 .pop-up__cancel-btn1 {
     background-color: #d65249;
     padding: .5rem 0;
@@ -157,10 +153,7 @@ body {
     background-color: #a0e383;
 }
 
-.pop-up__confirm-btn{
-   padding: 8px 0;
-   background-color: #d65249;
-}
+.pop-up__confirm-btn,
 .pop-up__confirm-btn1{
    padding: 8px 0;
    background-color: #d65249;
@@ -177,10 +170,13 @@ body {
 }
 .pop-up__create-btn:hover,
 .pop-up__cancel-btn:hover,
+.pop-up__cancel-btn1:hover,
 .pop-up__confirm-btn:hover,
+.pop-up__confirm-btn1:hover,
 .pop-up__update-btn:hover {
     opacity: .75;
 }
+
 
 
 .pop-up--flex {
@@ -193,7 +189,6 @@ body {
 .pop-up__placeholder {
     position: absolute;
     top: 47.5%;
-    /* top: 53.5%; */
     z-index: 10;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -201,7 +196,6 @@ body {
     font-size: 1rem;
     cursor: text;
     pointer-events: none;
-
 }
 
 .pop-up__error {

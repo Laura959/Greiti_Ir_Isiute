@@ -1,10 +1,6 @@
 <?php
 include "db_config.php";
 
-
-
-
-
 try {
     $conn = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,8 +18,9 @@ try {
         // echo "<script> location.replace(\"task.php\"); </script>";
         header('Location: main.php');
     }catch(Exception $e){
-        $pdo->rollBack();
-        // $_SESSION['message'] =  "Database connection lost.";
+        $conn->rollBack();
+        $_SESSION['message'] =  "Database connection lost.";
+        header('Location: main.php');
     }
      /*sql to delete a record*/
     // $sql = "DELETE FROM komandos WHERE Projekto_id='" . $_GET["Projekto_id"] . "'; 
