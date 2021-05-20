@@ -36,9 +36,9 @@ include_once('db_config.php');
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link href="css/style.css?rnd=343" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=235" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=232" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -53,35 +53,60 @@ include_once('db_config.php');
 </head>
 <body>
     <!-- Kairinis menu -->
-    <input type="checkbox" id="check" class="input">
-    <label for="check" class="label">
-        <i class="fas fa-bars " id="hamburger"></i>
-        <i class="fas fa-times " id="cancel"></i>
-    </label>
     <div class="left-menu"> 
-        <ul>
-            <li><a href="#"><i class="fas fa-th-large left-menu-icon "></i><p class="left-menu-titles">DASHBOARD</p></a></li>
-            <li><a href="main.php"><i class="fas fa-folder left-menu-icon "></i><p class="left-menu-titles">PROJECTS</p></a></li>
-            <li><a href="#"><i class="fas fa-history left-menu-icon "></i><p class="left-menu-titles">HISTORY</p></a></li>
-            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon "></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
-        </ul>
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+                <li class="left-menu__item">
+                    <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Dashboard</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="main.php" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon"></i>
+                    </a>
+                    <a href="main.php" class="left-menu__title">Projects</a>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
 <header>
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
-    <nav class="navbar">
+    <nav class="navbar tasks__navbar">
         
         <?php 
         
         if(isset($_COOKIE["Projektas"])){
-            echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_COOKIE["Projektas"]."</span> / Tasks</a>";
+            echo "<h2 class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_COOKIE["Projektas"]."</span> / Tasks</h2>";
         }else if (isset($_GET['title'])) {
-            echo "<a class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_GET['title']."</span> / Tasks</a>";
+            echo "<h2 class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">".$_GET['title']."</span> / Tasks</h2>";
         }else{
-            echo "<a class=\"project-page-title tasks__title  mr-auto\"> - / Tasks</a>";
+            echo "<h2 class=\"project-page-title tasks__title  mr-auto\"> - / Tasks</h2>";
         }?>
-        <div class="whole-search"> <!-- SEARCH FUNKCIALUMAS -->        
+        <div class="whole-search tasks__search"> <!-- SEARCH FUNKCIALUMAS -->        
         <form id="search-form">
         <?php              
             if(isset($_GET["search"])) {
@@ -93,20 +118,21 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
             // if(isset($SEARCH_ERROR)) {
             //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
             // }
         ?>
-        </form>        </div>
-        <div class="form-inline"  style="margin-left: 2.5%;">
+        </form>
+        <div class="form-inline">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form method="POST">
                 <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
             </form>
+            </div>
         </div>
 
             </header>
@@ -139,11 +165,11 @@ include_once('db_config.php');
                 echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Task with this name does not exist</span></div>";
             } else {
             echo "
-            <table class=\"table--fixed\">
+            <table class=\"table--fixed tasks-table\">
                 <thead class=\"tasks__thead\" style=\"position: relative;\">
                     <tr>
                         <th class='project-name-spacing tasks__th'>ID</th>
-                        <th class='tasks__th--width tasks__th'>Task</th>
+                        <th class='tasks__th--width tasks__th tasks__th--radius'>Title</th>
                         <th class='tasks__th--width tasks__th'>Description</th>
                         <th class='tasks__th'>Priority</th>
                         <th class='tasks__th'>Status</th>
@@ -162,6 +188,7 @@ include_once('db_config.php');
 
                     <tr>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
+                        
                         <td class='tasks__td'>
                         <a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\" class=\"projects__title-hover\">" . $row['Pavadinimas'] . "</td>
                         <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
@@ -189,7 +216,7 @@ include_once('db_config.php');
                                 <i class='fas fa-arrow-down '></i>
                             </button>
                             <button class=\"button\" id='create-button' style='padding: 0;'>
-                                <i class='fas fa-plus-circle create-task__JS ' id='plus-button' style=\"bottom: -2.75rem; right: -2rem;\"></i>
+                                <i class='fas fa-plus-circle create-task__JS ' id='plus-button'></i>
                             </button>
                         </td>
                     </tr>";
@@ -199,8 +226,10 @@ include_once('db_config.php');
                             echo "
                     <tr class='tasks__tr--border-bottom'>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
+
                         <td class='tasks__td'><a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\">" . $row['Pavadinimas'] . "</td>
                         <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
+
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\">" . $row['Prioritetas'] . "</td>
                         <td class='tasks__td'>" . $row['Busena'] . "</td>
                         <td class='tasks__td'>" . $row['Sukurimo_data'] . "</td>
@@ -263,15 +292,15 @@ include_once('db_config.php');
 
 
                             <!-- Task priority -->
-                            <input class="pop-up__input" id="radioLow" type="radio" value="Low" name="taskPriority" placeholder="Task priority" 
+                            <input id="radioLow" type="radio" value="Low" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" checked>
                             <label for="radioLow">Low</label>
 
-                            <input class="pop-up__input" id="radioMedium" type="radio" value="Middle" name="taskPriority" placeholder="Task priority" 
+                            <input id="radioMedium" type="radio" value="Middle" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" >
                             <label for="radioMedium">Middle</label>
 
-                            <input class="pop-up__input" id="radioHight" type="radio" value="High" name="taskPriority" placeholder="Task priority" 
+                            <input id="radioHight" type="radio" value="High" name="taskPriority" placeholder="Task priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" >
                             <label for="radioHight">High</label>
                         </div>
@@ -281,15 +310,15 @@ include_once('db_config.php');
                         <div  class="task_status">
                             <!-- Task priority -->
 
-                            <input class="pop-up__input" id="radioTodo" type="radio" value="To do" name="taskStatus" placeholder="Task status" 
+                            <input id="radioTodo" type="radio" value="To do" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" checked>
                             <label for="radioTodo">To do</label>
                             
-                             <input class="pop-up__input" id="radioInProgress" type="radio" value="In Progress" name="taskStatus" placeholder="Task status" 
+                             <input id="radioInProgress" type="radio" value="In Progress" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'">
                             <label for="radioInProgress" style="width: auto">In Progress</label>
 
-                            <input class="pop-up__input" id="radioFinished" type="radio" value="Done" name="taskStatus" placeholder="Task status" 
+                            <input id="radioFinished" type="radio" value="Done" name="taskStatus" placeholder="Task status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" >
                             <label for="radioFinished">Done</label>
                         </div>
@@ -327,19 +356,19 @@ include_once('db_config.php');
 
 
                             <!-- Task priority -->
-                            <input style="display: none"class="pop-up__inputs pop-up__update-priority" id="radioLow11" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                            <input style="display: none"class="pop-up__update-priority" id="radioLow11" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
                             <label style="display: none" for="radioLow11">Low</label>
 
-                            <input class="pop-up__inputs pop-up__update-priority priority-Low" id="radioLow1" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                            <input class="pop-up__update-priority priority-Low" id="radioLow1" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
                             <label  for="radioLow1">Low</label>
 
-                            <input class="pop-up__inputs pop-up__update-priority priority-Middle" id="radioMedium1" type="radio" value="Middle" name="updatepriority" placeholder="Task Priority" 
+                            <input class="pop-up__update-priority priority-Middle" id="radioMedium1" type="radio" value="Middle" name="updatepriority" placeholder="Task Priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required>
                             <label for="radioMedium1">Middle</label>
 
-                            <input class="pop-up__inputs pop-up__update-priority priority-High" id="radioHight1" type="radio" value="High" name="updatepriority" placeholder="Task Priority" 
+                            <input class="pop-up__update-priority priority-High" id="radioHight1" type="radio" value="High" name="updatepriority" placeholder="Task Priority" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'"required>
                             <label for="radioHight1">High</label>
                         </div>
@@ -349,19 +378,19 @@ include_once('db_config.php');
                          <div  class="task_status">
                             <!-- Task priority -->
 
-                            <input style="display: none" class="pop-up__inputs pop-up__update-status " id="radioTodo11" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
+                            <input style="display: none" class="pop-up__update-status " id="radioTodo11" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
                             <label style="display: none"  for="radioTodo11">To do</label>
 
-                            <input  class="pop-up__inputs pop-up__update-status status-To" id="radioTodo1" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
+                            <input  class="pop-up__update-status status-To" id="radioTodo1" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
                             <label   for="radioTodo1">To do</label>
 
-                             <input class="pop-up__inputs pop-up__update-status status-In" id="radioInProgress1" type="radio" value="In Progress" name="updatestatus" placeholder="Task Status" 
+                             <input class="pop-up__update-status status-In" id="radioInProgress1" type="radio" value="In Progress" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
                             <label for="radioInProgress1" style="width: auto">In Progress</label>
 
-                            <input class="pop-up__inputs pop-up__update-status status-Done" id="radioFinished1" type="radio" value="Done" name="updatestatus" placeholder="Task Status" 
+                            <input class="pop-up__update-status status-Done" id="radioFinished1" type="radio" value="Done" name="updatestatus" placeholder="Task Status" 
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
                             <label for="radioFinished1">Done</label>
                         </div>
@@ -403,7 +432,7 @@ include_once('db_config.php');
 
 
             </main>
-            <script src="./js/createProject.js?rnd=132"></script>
+            <script src="./js/createProject.js?rnd=121"></script>
         </section>
     </body>
 

@@ -9,6 +9,7 @@ const cancelBtns = document.querySelectorAll('.pop-up__cancel-btn');
 const textarea = document.querySelector('.pop-up__textarea');
 const deleteBtns1 = document.querySelectorAll('.delete1-project__JS');
 const cancelBtns1 = document.querySelectorAll('.pop-up__cancel-btn1');
+const togglerMenu = document.querySelectorAll('.left-menu__btn');
 const description = document.querySelectorAll('.project-description__JS');
 const descriptionTasks = document.querySelectorAll('.project-description-tasks__JS');
 
@@ -76,15 +77,15 @@ const handleClickUpdateForm = (title, description, id) => {
 }
 
 
-const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
+const handleClickUpdateForm1 = (title, priority, busena, description, id1) => {
     let test = document.querySelectorAll('.pop-up__update-priority');
     let test2 = document.querySelectorAll('.pop-up__update-status');
-    test.forEach(t =>{
+    test.forEach(t => {
         t.removeAttribute('checked');
         console.log(t.hasAttribute('checked'));
     });
 
-    test2.forEach(t2 =>{
+    test2.forEach(t2 => {
         t2.removeAttribute('checked');
         console.log(t2.hasAttribute('checked'));
     });
@@ -100,7 +101,7 @@ const handleClickUpdateForm1 = (title,priority,busena,description,id1) => {
         masyvas.pop();
     }
     const taskBusena = document.querySelector(`.status-${masyvas[0]}`);
-    inputTitle.setAttribute('value', `${title}`);
+    inputTitle.setAttribute('value', `${title.trimStart()}`);
     inputId.setAttribute('value', `${id1}`);
     inputDescription.innerText = `${description}`;
     taskPriority.setAttribute('checked', '');
@@ -139,6 +140,15 @@ const handleClickAddPlaceholder = () => {
     document.querySelector('.pop-up__placeholder').textContent = 'Description';
 }
 
+const handleToggleMenu = () => {
+    const menu = document.querySelector('.left-menu');
+    const body = document.body;
+    body.classList.toggle('left-menu__JS');
+}
+togglerMenu.forEach(btn => {
+    btn.addEventListener('click', handleToggleMenu);
+});
+
 createBtns.forEach(
     createBtn => createBtn.addEventListener('click', handleClickCreateForm)
 );
@@ -167,6 +177,7 @@ updateBtns1.forEach(
         handleClickUpdateForm1(title, priority, busena, description, id1);
     }));
 
+
 description.forEach(
     fullDescription => fullDescription.addEventListener('click', () => {
         const title = fullDescription.parentElement.parentElement.children[1].textContent;
@@ -185,6 +196,7 @@ descriptionTasks.forEach(
         const id1 = descriptionTask.parentElement.parentElement.children[0].textContent;
         handleClickUpdateForm1(title, priority, busena, description, id1);
     }));
+
 
 deleteBtns1.forEach(
     deleteBtn => deleteBtn.addEventListener('click', () => {

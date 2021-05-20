@@ -31,28 +31,60 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link href="css/style.css?rnd=212" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=122" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Kairinis menu -->
-    <input type="checkbox" id="check" class="input">
-    <label for="check" class="label">
-        <i class="fas fa-bars" id="hamburger"></i>
-        <i class="fas fa-times" id="cancel"></i>
-    </label>
+     <!-- Kairinis menu -->
     <div class="left-menu"> 
-        <ul>
-            <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i><p class="left-menu-titles">DASHBOARD</p></a></li>
-            <li><a href="#"><i class="fas fa-folder left-menu-icon"></i><p class="left-menu-titles">PROJECTS</p></a></li>
-            <li><a href="#" class="export" download="Projects.csv"><i class="fas export-icon fa-arrow-down left-menu-icon"></i><p class="left-menu-titles"><span class="export__span">EXPORT</span></p></a></li>
-            <li><a href="#"><i class="fas fa-history left-menu-icon"></i><p class="left-menu-titles">HISTORY</p></a></li>
-            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon"></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
-        </ul>
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Dashboard</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Projects</p>
+                </li>
+                <li class="left-menu__item left-menu__item-hover">
+                    <a href="#" download="Projects.csv" class="left-menu__icon export">
+                        <i class="fas fa-arrow-down left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">
+                        <span class="export__span">Export Projects</span>
+                    </p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
@@ -61,7 +93,7 @@ include_once('db_config.php');
     <nav class="navbar">
         <a class="project-page-title mr-auto" download="Projects.csv">PROJECTS</a>
         <div class="whole-search">
-    
+        <!-- board-page-title propects -->
     <!-- SEARCH FUNKCIALUMAS -->        
         <form id="search-form">
         <?php              
@@ -74,7 +106,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input search-form__input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {
@@ -82,14 +114,16 @@ include_once('db_config.php');
             // }
         ?>
         </form>        
-        </div>
         <div class="form-inline">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form method="POST">
-                <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt"></i></button>
+                <button class="button" type="submit" name="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </form>
+        </div>
         </div>
     </nav>
     <!-- Viršutinės menu juostos pabaiga -->
@@ -132,7 +166,7 @@ include_once('db_config.php');
                 $greenBarLength = 0;
             } else {
             $percent = $finishedTasks/$totalTasks;
-            $greenBarLength = $percent*140; //dauginu iš 140, nes toks yra progress bar width (css)
+            $greenBarLength = $percent*130; //dauginu iš 130, nes toks yra progress bar width (css)
             }
             echo "
             <style>
@@ -151,9 +185,15 @@ include_once('db_config.php');
         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Project with this name does not exist</span></div>";
         } else {
 
-        echo "<table class='projects-table'>";
+        echo "<table class='projects-table projects-table__main'>";
         echo "<thead>";
-        echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
+        echo "<tr>
+        <th class='project-name-spacing projects-th-width'>PROJECT NAME</th>
+        <th class=\"projects-description projects-th-width\">DESCRIPTION</th>
+        <th class=\"projects-status\">STATUS</th>
+        <th class='completion-spacing'>COMPLETION</th>
+        <th class='round-border projects-functions'></th>
+        </tr>";
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
@@ -170,7 +210,7 @@ include_once('db_config.php');
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
-          <td class='td-spacing'>
+          <td class='td-spacing projects-functions'>
           <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
           <i class='far fa-trash-alt'></i>
@@ -191,7 +231,7 @@ include_once('db_config.php');
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
-                <td class='grey-border'>
+                <td class='grey-border projects-functions'>
                 <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
                     <i class='far fa-trash-alt'></i>
@@ -276,7 +316,7 @@ include_once('db_config.php');
         </form>
     </div>
     </main>
-    <script src="./js/createProject.js?rnd=132" defer></script>
+    <script src="./js/createProject.js?rnd=555" defer></script>
     </section>
     </body>
 </html>

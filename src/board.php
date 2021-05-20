@@ -31,8 +31,9 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=235" rel="stylesheet">
-    <link href="css/board.css" rel="stylesheet">
+
+    <link href="css/style.css?rnd=231" rel="stylesheet">
+    <link href="css/board.css?rnd=123" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -40,47 +41,56 @@ include_once('db_config.php');
 </head>
 
 <body>
-    <!-- Kairinis menu -->
-    <input type="checkbox" id="check" class="input">
-    <label for="check" class="label">
-        <i class="fas fa-bars" id="hamburger"></i>
-        <i class="fas fa-times" id="cancel"></i>
-    </label>
-    <div class="left-menu">
-        <ul>
-            <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i>
-                    <p class="left-menu-titles">DASHBOARD</p>
-                </a></li>
-            <li><a href="#"><i class="fas fa-folder left-menu-icon"></i>
-                    <p class="left-menu-titles">PROJECTS</p>
-                </a></li>
-            <li><a href="#" class="export" download="Projects.csv"><i class="fas export-icon fa-arrow-down left-menu-icon"></i>
-                    <p class="left-menu-titles"><span class="export__span">EXPORT</span></p>
-                </a></li>
-            <li><a href="#"><i class="fas fa-history left-menu-icon"></i>
-                    <p class="left-menu-titles">HISTORY</p>
-                </a></li>
-            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon"></i>
-                    <p class="left-menu-titles ">NEW PROJECT</p>
-                </a></li>
-        </ul>
+     <!-- Kairinis menu -->
+     <div class="left-menu"> 
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+                <li class="left-menu__item">
+                    <a href="#" href="#" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Dashboard</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="main.php" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon"></i>
+                    </a>
+                    <a href="main.php" class="left-menu__title">Projects</a>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
+
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
         <header>
             <!-- Viršutinė menu juosta su antrašte ir log out -->
-            <nav class="navbar">
+
+            <nav class="navbar tasks__navbar">
                 <div class="board-heading">
-                    <a class="board-page-title mr-auto" href="main.php">PROJECTS</a><span class="symbol">/</span>
-                    <?php
-                    if (isset($_GET['Projekto_id'])) {
-                        echo "<a class=\"board-page-title mr-auto\" href=\"task.php?Projekto_id=" . $_GET['Projekto_id'] . "\">TASKS</a>";
-                    }
-                    ?>
-                    <span class="symbol">/</span>
-                    <a class="board-page-title mr-auto">TASK BOARD</a>
+                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Task board</a>
                 </div>
-                <div class="form-inline">
+                <div class="form-inline form__logout">
                     <?php
                     echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
                     ?>
@@ -129,3 +139,7 @@ include_once('db_config.php');
                 </div>
             </div>
         </main>
+        <script src="./js/createProject.js?rnd=555" defer></script>
+    </section>
+    </body>
+</html>
