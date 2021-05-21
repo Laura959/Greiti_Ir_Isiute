@@ -603,7 +603,7 @@ task_status input[type="radio"]:focus+label {
     position: absolute;
     width: 100%;
     left: 50%;
-    top: 20rem;
+    top: 17rem;
     transform: translate(-50%, -50%);
 }
 
@@ -712,6 +712,12 @@ task_status input[type="radio"]:focus+label {
     height: 40px;
     cursor: pointer;
     margin: 11.5px 0;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
 }
 
 @media only screen and (max-width: 1550px) {

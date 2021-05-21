@@ -64,18 +64,20 @@ include_once('db_config.php');
         </div>
         <div class="left-menu__list">
             <ul class="left-menu__items">
-                <li class="left-menu__item">
-                    <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon">
-                        <i class="fas fa-th-large left-menu-icon"></i>
-                    </a>
-                    <p class="left-menu__title">Dashboard</p>
-                </li>
+           
                 <li class="left-menu__item">
                     <a href="main.php" class="left-menu__icon">
                         <i class="fas fa-folder left-menu-icon"></i>
                     </a>
                     <a href="main.php" class="left-menu__title">Projects</a>
                 </li>
+                <li class="left-menu__item">
+                    <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Task board</p>
+                </li>
+
                 <li class="left-menu__item">
                     <a href="#" class="left-menu__icon">
                         <i class="fas fa-history left-menu-icon"></i>
