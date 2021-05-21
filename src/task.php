@@ -36,7 +36,7 @@ include_once('db_config.php');
     <meta content='width=device-width; initial-scale=1.0;' name='viewport' />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=321" rel="stylesheet">
+    <link href="css/style.css?rnd=326" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=711" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">

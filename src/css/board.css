@@ -120,6 +120,9 @@
         justify-content: center;
         gap: 1rem;
     }
+    .task-board {
+        min-width: 300px;
+    }
 }
 
 @media only screen and (max-width: 750px) {
@@ -132,12 +135,12 @@
     .board-page-title {
         padding: 2.25rem 0 .5rem;
     }
-}
-
-@media only screen and (max-width: 600px) {
     .task-board {
         min-width: 345px;
     }
+}
+
+@media only screen and (max-width: 600px) {
     .board-container {
         margin: 0 auto;
     }
