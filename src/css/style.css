@@ -135,7 +135,10 @@ form button {
     text-align: center;
     position: relative;
 }
-
+.form-inline{
+    display: flex;
+    flex-wrap: nowrap;
+}
 .label {
     display: block;
     text-align: left;
@@ -929,7 +932,7 @@ task_status input[type="radio"]:focus+label {
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 475px) {
     .left-menu__item {
         padding: 1.5rem 12.5% 1.5rem 12.5%;
     }
