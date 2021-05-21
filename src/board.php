@@ -190,14 +190,45 @@ include_once('db_config.php');
                         <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"Done\"  data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
                     }
                 }
-                if($doneFirst){
+                if($todoFirst && $inProgressFirst && $doneFirst){
                     echo "
+                        <div class=\"board-container\">
+                        <div class=\"task-board\">
+                        <div class=\"board-header\">to do</div>
+                        <div class=\"board-background\">
+                        </div>
+                        </div>
+                        <div class=\"task-board\">
+                                <div class=\"board-header\">in progress</div>
+                                <div class=\"board-background\">
                         </div>
                         </div>
                         <div class=\"task-board\">
                                 <div class=\"board-header\">Done</div>
                                 <div class=\"board-background\">
                         ";
+                }else if($inProgressFirst && $doneFirst){
+                    echo "
+                    </div>
+                    </div>
+                    <div class=\"task-board\">
+                    <div class=\"board-header\">in progress</div>
+                    <div class=\"board-background\">
+                    </div>
+                    </div>
+                    <div class=\"task-board\">
+                            <div class=\"board-header\">Done</div>
+                            <div class=\"board-background\">
+                    ";
+                }
+                else if($doneFirst){
+                    echo "
+                        </div>
+                        </div>
+                        <div class=\"task-board\">
+                                <div class=\"board-header\">Done</div>
+                                <div class=\"board-background\">
+                    ";
                 }
             } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
                 echo $error->getMessage();

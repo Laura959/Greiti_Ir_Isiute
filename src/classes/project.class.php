@@ -67,11 +67,10 @@
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $pdo->beginTransaction();
                 try{
-                   $sql = "INSERT INTO uzduotys (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena` ,`Sukurimo_data`, `Naujinimo_data`) VALUES (?, ?, ?, ?, ? ,?, ?)";
-                   // $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
+                   $sql = "INSERT INTO uzduotys (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena` ,`Sukurimo_data`, `Naujinimo_data`, `Projekto_id`) VALUES (?, ?, ?, ?, ? ,?, ?, ?)";
                    $sql2 = "INSERT INTO projektu_uzduotys VALUES (?, ?)";
                     $statement = $pdo->prepare($sql);
-                      $statement->execute([$id, $name, $description, $priority, $status, $date, $date]);
+                      $statement->execute([$id, $name, $description, $priority, $status, $date, $date, $projektas]);
                    $statement2 = $pdo->prepare($sql2);
                    $statement2->execute([$projektas, $id]);
                     $pdo->commit();
