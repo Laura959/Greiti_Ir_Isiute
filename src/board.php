@@ -112,7 +112,12 @@ include_once('db_config.php');
                 $doneFirst = true;
                 $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
                 $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $queryM = "SELECT * FROM `uzduotys` WHERE Projekto_id =".$_GET['Projekto_id']." ORDER BY Busena DESC, Eiles_nr DESC
+                $queryM = "
+                SELECT uzduotys.* FROM uzduotys 
+                    INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
+                    INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
+                    WHERE projektai.Projekto_id = ".$_GET['Projekto_id']."
+                    ORDER BY Busena Desc, Eiles_nr DESC
                 ";
                 $result = $connectM->prepare($queryM);
                 $result->execute();
