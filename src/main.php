@@ -31,9 +31,9 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=212" rel="stylesheet">
+    <link href="css/style.css?rnd=221" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=122" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=221" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -106,7 +106,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input search-form__input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"search-form__input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {
@@ -134,22 +134,24 @@ include_once('db_config.php');
         try {
         $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
         $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
         $querySelect = "SELECT
                 projektai.Projekto_id,
                 projektai.Pavadinimas,
                 projektai.Aprasymas,
                 projektai.Busena,
                 projektai.Sukurimo_data,
+                komandos.role,
                 SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
                 SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
                 SUM(case when uzduotys.Busena ='In Progress' then 1 else 0 end) as InProgress_tasks,
                 COUNT(uzduotys.Busena) as Total_tasks
-            FROM projektai
+                FROM projektai
                 LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
-                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id";
-        $queryWhere = !isset($SEARCH_ERROR) ? " WHERE projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
+                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id
+                RIGHT JOIN komandos ON komandos.Projekto_id = projektai.Projekto_id
+                RIGHT JOIN vartotojai ON vartotojai.Vartotojo_id = komandos.Vartotojas
+                WHERE vartotojai.Vartotojo_id = ".$_SESSION['userId']."";
+        $queryWhere = !isset($SEARCH_ERROR) ? " AND projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
         
@@ -211,8 +213,8 @@ include_once('db_config.php');
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing projects-functions'>
-          <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
-          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
           <i class='far fa-trash-alt'></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
@@ -232,8 +234,8 @@ include_once('db_config.php');
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border projects-functions'>
-                <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
-                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
+                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
+                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
                     <i class='far fa-trash-alt'></i>
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
@@ -315,8 +317,13 @@ include_once('db_config.php');
             </div>
         </form>
     </div>
+    <!-- <div class="pop-up__warning">
+        <h2 class="pop-up__warning-title">Warning!</h2>
+        <h3>Not Authorized</h3>
+        <p>You are not authorized to perform the request on this project.</p>
+    </div> -->
     </main>
-    <script src="./js/createProject.js?rnd=555" defer></script>
+    <script type="module" src="./js/createProject.js?rnd=444" defer></script>
     </section>
     </body>
 </html>

@@ -33,12 +33,12 @@ include_once('db_config.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta content='width=device-width; initial-scale=1.0;' name='viewport' />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=343" rel="stylesheet">
+    <link href="css/style.css?rnd=321" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=232" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=711" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
@@ -88,6 +88,35 @@ include_once('db_config.php');
                     </a>
                     <p class="left-menu__title">New project</p>
                 </li>
+                <?php 
+                $usersinfo = "";
+                if(isset($_GET['Projekto_id'])){
+                    try {
+                        $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
+                        $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "
+                            SELECT vartotojai.Vardas, vartotojai.Pavarde FROM vartotojai
+                            LEFT JOIN komandos ON komandos.Vartotojas = vartotojai.Vartotojo_id
+                            LEFT JOIN projektai ON projektai.Projekto_id = komandos.Projekto_id
+                            WHERE projektai.Projekto_id =".$_GET['Projekto_id']."
+                        ";
+
+                    }catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
+                        echo $error->getMessage();
+                    }
+                    $result = $connectM->prepare($sql);
+                    $result->execute();
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                        $usersinfo .= $row['Vardas']." ".$row['Pavarde'].",";
+                    }
+                }
+                ?>
+                <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo;?>">
+                        <a href="#" class="left-menu__icon">
+                            <i class="fas fa-users left-menu-icon"></i>
+                        </a>
+                        <p class="left-menu__title left-menu__title--margin">Manage members</p>
+                </li>
             </ul>
         </div>
     </div>
@@ -118,7 +147,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search tasks\" class=\"input search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
             // if(isset($SEARCH_ERROR)) {
             //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
@@ -143,16 +172,21 @@ include_once('db_config.php');
         try {
             $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
             $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
-            if (isset($SEARCH_ERROR)) {
-                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." ORDER BY Eiles_nr DESC";
-            } 
-            else if (isset($_COOKIE['Projekto_id'])) {
-            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";
+            if (isset($_COOKIE['Projekto_id'])) {
+                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";
+                $queryM = "SELECT uzduotys.* FROM uzduotys 
+                    INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
+                    INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
+                    WHERE projektai.Projekto_id = ".$_COOKIE['Projekto_id']."
+                    AND (uzduotys.Pavadinimas LIKE '%".$SEARCH_QUERY."%' OR uzduotys.Pavadinimas LIKE '%".$SEARCH_QUERY."%')
+                    ORDER BY uzduotys.Eiles_nr DESC";
             } 
             else {
-            $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_GET['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";    
+                $queryM = "SELECT uzduotys.* FROM uzduotys 
+                    INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
+                    INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
+                    WHERE projektai.Projekto_id = ".$_GET['Projekto_id']."
+                    ORDER BY Eiles_nr DESC";   
             }
             $result = $connectM->prepare($queryM);
             $result->execute();
@@ -169,7 +203,7 @@ include_once('db_config.php');
                 <thead class=\"tasks__thead\" style=\"position: relative;\">
                     <tr>
                         <th class='project-name-spacing tasks__th'>ID</th>
-                        <th class='tasks__th--width tasks__th tasks__th--radius'>Title</th>
+                        <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Title</th>
                         <th class='tasks__th--width tasks__th'>Description</th>
                         <th class='tasks__th'>Priority</th>
                         <th class='tasks__th'>Status</th>
@@ -273,10 +307,10 @@ include_once('db_config.php');
                 }
 
 //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
-                echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
-                ?>
+                echo isset($_POST['taskTitle']) ? '<div class="blur__JS"></div>' : '';                
+            ?>
 
-                <div class="pop-up <?php echo isset($_POST['title']) ? 'pop-up__JS' : ''; ?>">
+                <div class="pop-up <?php echo isset($_POST['taskTitle']) ? 'pop-up__JS' : ''; ?>">
                     <h2 class="pop-up__h2">Create a new task</h2>
                     <form method="POST" class="pop-up__form">
 
@@ -331,17 +365,17 @@ include_once('db_config.php');
                             <div role="button" class="pop-up__cancel-btn">Cancel</div>
                         </div>
   </form>
-                </div>
-                        <?php
+  <?php
                         if (isset($_POST['taskTitle'])) {
                             $create = new Project();
-                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus'], $_SESSION['taskId']);
+                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus']);
                         }
                         if (isset($_SESSION['message'])) {
                             echo "<p class='pop-up__error'>" . $_SESSION['message'] . "</p>";
                             unset($_SESSION['message']);
                         }
                         ?>
+                </div>
            <div class="pop-up__update1">
                     <h2 class="pop-up__h2">Update Task</h2>
                     <form method="POST" class="pop-up__form">
@@ -395,44 +429,64 @@ include_once('db_config.php');
                             <label for="radioFinished1">Done</label>
                         </div>
                         
-                        
-                        
-                        
                         <div class="pop-up--flex">
                             <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
-                            <div role="button" class="pop-up__cancel-btn1">Cancel</div>
+                            <div role="button" class="pop-up__cancel-btn">Cancel</div>
                         </div>
                         <?php
                         if (isset($_POST['updateTitle'])) {
                             $update = new Project();
-                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"]);
+                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'task.php');
                         }
                         if (isset($_SESSION['updateError'])) {
-                            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
-                            echo $_POST['updateId'];
+                              echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
                             unset($_SESSION['updateError']);
                         }
                         ?>
                     </form>
                 </div>
-
-
-
-
                 <div class="pop-up__delete1">
                     <h2 class="pop-up__h2">Delete a Task</h2>
                     <form method="POST" class="pop-up__form">
                         <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
                         <div class="pop-up--flex">
                             <a href="#" class="pop-up__confirm-btn1">Delete</a>
-                            <div role="button" class="pop-up__cancel-btn1 pop-up__cancel-btn--bg">Keep</div>
+                            <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
                         </div>
                     </form>
                 </div>
-
-
+                <div class="pop-up__invite">
+                    <h2 class="pop-up__h2 pop-up__h2--margin">Manage members</h2>
+                    <form method="POST" class="pop-up__form">
+                            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="inviteEmail" maxlength="30" placeholder="Invite by email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Invite by email'" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" title="Enter a valid email address" required>
+                            <input type="hidden" class="pop-up__update-id" name="updateId"/>
+                            <div class="pop-up--flex">
+                                <input type="submit" name="invite" value="Invite" class="pop-up__update-btn pop-up__input" id="project-btn">
+                                <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                            </div>
+                            <?php
+                            
+                            if(isset($_POST['inviteEmail']))  {
+                                $update = new Project(); 
+                                $update->inviteMember($_POST['inviteEmail']);
+                            }
+                            if(isset($_SESSION['inviteError'])){
+                                echo "<p class='pop-up__error'>".$_SESSION['inviteError']."</p>";
+                                unset($_SESSION['inviteError']);
+                            }
+                            ?>  
+                    </form>
+                </div>
+                <div class="pop-up__members">
+                    <h2 class="pop-up__h2 pop-up__h2--margin">Manage team members</h2>
+                    <table class="pop-up__users"></table>
+                    <div class="pop-up--flex">
+                        <a href="#" class="pop-up__invite-btn">Invite member</a>
+                        <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                    </div>
+                </div>
             </main>
-            <script src="./js/createProject.js?rnd=121"></script>
+            <script type="module" src="./js/createProject.js?rnd=217"></script>
         </section>
     </body>
 

@@ -211,7 +211,7 @@ form button {
     font-weight: bold;
     font-size: 2rem;
     font-size: clamp(1.65rem, 3vw, 2.25rem);
-    padding-left: .1rem;
+    padding: 0 0 0 .1rem;
     letter-spacing: 2px;
     color: #a8d381;
     text-decoration: none;
@@ -306,6 +306,7 @@ form button {
 .fa-sign-out-alt {
     background-color: transparent;
     color: #a0e383;
+    margin-top: .2rem;
 }
 
 .export {
@@ -535,10 +536,10 @@ form button {
     border-color: #4c4;
 }
 
-.task_insert input[type="radio"]:focus+label,
+/* .task_insert input[type="radio"]:focus+label,
 task_status input[type="radio"]:focus+label {
     border: 2px dashed #444;
-}
+} */
 
 .task_insert label:hover,
 .task_status label:hover {
@@ -697,8 +698,20 @@ task_status input[type="radio"]:focus+label {
     margin-bottom: 0;
 }
 
+.left-menu__title--margin{
+ margin-left: -4px;
+}
+.fa-users{
+    
+    margin-left: -3.5px;
+}
 .left-menu__JS .left-menu__title {
     transform: scaleX(1);
+}
+.search-form__input{
+    height: 40px;
+    cursor: pointer;
+    margin: 11.5px 0;
 }
 
 @media only screen and (max-width: 1550px) {
@@ -834,17 +847,17 @@ task_status input[type="radio"]:focus+label {
 
     .whole-search {
         width: 100%;
-        justify-content: space-between;
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: flex-end;
+        align-items: flex-start;
     }
 
     #search-form {
-        padding: 1rem 0;
         margin: 0 auto;
+        margin-left: calc(2rem + auto);
     }
-
+    .search-form__input{
+        margin: 0 0 0 6.25rem;
+        height: 31.5px;
+    }
     .projects-functions {
         width: initial;
         text-align: center;
@@ -853,6 +866,7 @@ task_status input[type="radio"]:focus+label {
 
     .project-page-title {
         align-self: center;
+        padding-top: 32px;
     }
 
     .mr-auto {
@@ -896,9 +910,11 @@ task_status input[type="radio"]:focus+label {
         width: 92.5%;
         margin: 2rem auto;
     }
-
+    .tasks__navbar {
+        text-align: center;
+    }
     .tasks__title{
-        padding: 0;
+        padding: 32px 0 0 0;
     }
     .navbar {
         flex-direction: column-reverse;
@@ -916,5 +932,14 @@ task_status input[type="radio"]:focus+label {
     .tasks-table td
         {
         padding: 20px .75rem;
+    }
+    .search-form__input{
+        margin-left: 1.75rem;
+    }
+    .login-name{
+        display: none;
+    }
+    .login-name__board{
+        display: block;
     }
 }
