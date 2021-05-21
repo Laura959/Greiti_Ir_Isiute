@@ -176,22 +176,7 @@ include_once('db_config.php');
           <i class='far fa-trash-alt'></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>";
-         
-          if(isset($_POST["button"])) {
-            echo "
-            <style>
-            #progressId".$i." {
-                width: ".$greenBarLength."px;
-                background-color: #ffffff;
-                height: 12px;
-                border-radius: 10px;
-                margin-top: -3px;
-            }
-            </style>";
-          }
-
-            echo "
+          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
           <button class=\"button\" id='create-button'>
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
@@ -212,8 +197,9 @@ include_once('db_config.php');
                     <i class='far fa-trash-alt'></i>
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
-                <button class=\"button\" download='Project_tasks.csv'><i class='fas fa-arrow-down'></i></button></td></tr>";
-
+                <form method='post' style='display:inline-block'>
+                <button class=\"button export\" download='Project_tasks.csv' type='submit' name='id' value='".$row['Projekto_id']."'><i class='fas fa-arrow-down'></i></button></td></tr>
+                </form>";
             // $count++;
             // if ($count>2) {
             //     break;  cia galesime nustatyti salygas, kas bus kai pvz isspausdins 10 eiluciu
@@ -222,12 +208,24 @@ include_once('db_config.php');
         }
         echo "</table>";
     }
+
         echo "<br>";
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
 
 
         echo $error->getMessage();
         }
+
+        if (isset($_POST['id'])) {
+            $ID = $_POST['id'];
+            $query = "SELECT * FROM uzduotys WHERE Projekto_id = ".$ID." ORDER BY Eiles_nr DESC";
+            $result = $connectM->prepare($query);
+            $result->execute();
+            while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                // echo "".$row['Uzduoties_id'].", ".$row['Pavadinimas']."";
+            $linkCSV_tasks .= "&quot;".$row['Uzduoties_id']."&quot;,&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,&quot;".$row['Prioritetas']."&quot;,".$row['Busena'].",".$row['Sukurimo_data'].",".$row['Naujinimo_data']."\n";
+            }
+        }    
         //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
         echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
     ?>
