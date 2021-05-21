@@ -88,15 +88,15 @@
     vertical-align: middle;
 }
 
-.dot--low {
+.dot--Low {
     background-color: #00ff00;
 }
 
-.dot--middle {
+.dot--Middle {
     background-color: #ffe600;
 }
 
-.dot--high {
+.dot--High {
     background-color: #ff0011;
 }
 
@@ -130,7 +130,7 @@
         text-align: center;
     }
     .board-page-title {
-        padding: 2.5rem 0 .5rem;
+        padding: 2.25rem 0 .5rem;
     }
 }
 
