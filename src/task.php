@@ -175,7 +175,6 @@ include_once('db_config.php');
             $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
             $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             if (isset($_COOKIE['Projekto_id'])) {
-                $queryM = "SELECT * FROM uzduotys WHERE Projekto_id =".$_COOKIE['Projekto_id']." AND (uzduotys.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' OR uzduotys.Uzduoties_id  LIKE '%" . $SEARCH_QUERY . "%') ORDER BY Eiles_nr DESC";
                 $queryM = "SELECT uzduotys.* FROM uzduotys 
                     INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
                     INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
@@ -188,7 +187,7 @@ include_once('db_config.php');
                     INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
                     INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
                     WHERE projektai.Projekto_id = ".$_GET['Projekto_id']."
-                    ORDER BY Eiles_nr DESC";   
+                    ORDER BY uzduotys.Eiles_nr DESC";   
             }
             $result = $connectM->prepare($queryM);
             $result->execute();
@@ -224,9 +223,7 @@ include_once('db_config.php');
 
                     <tr>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
-                        
-                        <td class='tasks__td'>
-                        <a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\" class=\"projects__title-hover\">" . $row['Pavadinimas'] . "</td>
+                        <td class='tasks__td'>" . $row['Pavadinimas'] . "</td>
                         <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\"\">" . $row['Prioritetas'] . "</td>
                         <td class='tasks__td'>" . $row['Busena'] . "</td>
@@ -263,7 +260,7 @@ include_once('db_config.php');
                     <tr class='tasks__tr--border-bottom'>
                         <td class='tasks__td'>" . $row['Uzduoties_id'] . "</td>
 
-                        <td class='tasks__td'><a href=\"task.php?Projekto_id=" . $row['Uzduoties_id'] . "&title=" . $row['Pavadinimas'] . "&description =" . $row['Aprasymas'] . "&priority =" . $row['Prioritetas'] . "&status=" . $row['Busena'] . "\">" . $row['Pavadinimas'] . "</td>
+                        <td class='tasks__td'>" . $row['Pavadinimas'] . "</td>
                         <td class='tasks__td'><div class=\"project-description-tasks__JS\" id='shortened-description'><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
 
                         <td class=\"tasks__td tasks__priority-" . $row['Prioritetas'] . "\">" . $row['Prioritetas'] . "</td>

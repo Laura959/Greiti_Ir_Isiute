@@ -12,6 +12,7 @@ try {
     try{
         $sql = "DELETE FROM komandos WHERE Projekto_id='" . $_GET["Projekto_id"] ."'";
         $sql2 = "DELETE FROM projektu_uzduotys WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
+
         $sql3 = "DELETE FROM projektai WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
         $sql4 = "DELETE FROM uzduotys WHERE Projekto_id='" . $_GET["Projekto_id"] . "'";
         
@@ -20,6 +21,7 @@ try {
         
         $pav = "???";
         
+
         $conn->exec($sql);
         $conn->exec($sql2);
         $conn->exec($sql3);
@@ -34,7 +36,9 @@ try {
     }catch(Exception $e){
         $conn->rollBack();
         $_SESSION['message'] =  "Database connection lost.";
-        header('Location: main.php');
+        $_SESSION['message'] =  "";
+        echo $e;
+        // header('Location: main.php');
     }
      /*sql to delete a record*/
     // $sql = "DELETE FROM komandos WHERE Projekto_id='" . $_GET["Projekto_id"] . "'; 
