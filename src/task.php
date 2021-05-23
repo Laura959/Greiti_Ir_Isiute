@@ -79,7 +79,7 @@ include_once('db_config.php');
                 </li>
 
                 <li class="left-menu__item">
-                    <a href="#" class="left-menu__icon">
+                    <a href="history.php" class="left-menu__icon">
                         <i class="fas fa-history left-menu-icon"></i>
                     </a>
                     <p class="left-menu__title">History</p>
@@ -367,7 +367,7 @@ include_once('db_config.php');
   <?php
                         if (isset($_POST['taskTitle'])) {
                             $create = new Project();
-                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus']);
+                            $create->createTask($_POST['taskTitle'], $_POST['taskDescription'], $_POST['taskPriority'], $_POST['taskStatus'], $_SESSION['userId']);
                         }
                         if (isset($_SESSION['message'])) {
                             echo "<p class='pop-up__error'>" . $_SESSION['message'] . "</p>";
@@ -427,15 +427,17 @@ include_once('db_config.php');
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
                             <label for="radioFinished1">Done</label>
                         </div>
-                        
+             
                         <div class="pop-up--flex">
                             <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
                             <div role="button" class="pop-up__cancel-btn">Cancel</div>
                         </div>
+                        
                         <?php
                         if (isset($_POST['updateTitle'])) {
                             $update = new Project();
-                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'task.php');
+                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], 
+                                    $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], $_SESSION['userId'], 'task.php');
                         }
                         if (isset($_SESSION['updateError'])) {
                               echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
@@ -451,7 +453,7 @@ include_once('db_config.php');
                         <div class="pop-up--flex">
                             <a href="#" class="pop-up__confirm-btn1">Delete</a>
                             <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
-                        </div>
+                        </div>                   
                     </form>
                 </div>
                 <div class="pop-up__invite">

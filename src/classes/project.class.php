@@ -23,6 +23,8 @@
                 $state = 'In Progress';
                 $date = date("Y-m-d");
                 $role = 1;
+                $ivykis = 'Project / Create';
+                $date1 = date("Y-m-d H:i:s");
 
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
@@ -31,10 +33,17 @@
                 try{
                     $sql = "INSERT INTO projektai VALUES (?, ?, ?, ?, ?)";
                     $sql2 = "INSERT INTO komandos VALUES (?, ?, ?)";
+                    
+                    $sql3 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
+                    
                     $statement = $pdo->prepare($sql);
                     $statement->execute([$id, $name, $description, $state, $date]);
                     $statement2 = $pdo->prepare($sql2);
                     $statement2->execute([$id, $role, $user]);
+                    
+                    $statement3 = $pdo->prepare($sql3);
+                    $statement3->execute(['', $ivykis, $name, $date1, $user, $_SESSION['username']]);
+                    
                     $pdo->commit();
                     echo "<script> location.replace(\"task.php?Projekto_id=".$id."&title=".$name."\"); </script>";
                 }catch(Exception $e){
@@ -43,7 +52,7 @@
                 }
             }
         }
-        public function createTask($name, $description, $priority, $status){
+        public function createTask($name, $description, $priority, $status, $user){
             if(empty($name)){
                 $_SESSION['message'] = "Project's title field is required";
                 return;
@@ -57,11 +66,16 @@
             }else{
                 $id = $this->getUniqueId();
                 $date = date("Y-m-d");
+                $date1 = date("Y-m-d H:i:s");
                 if (isset($_GET['Projekto_id'])) {
                 $projektas = $_GET['Projekto_id'];
                 } else {
                     $projektas = $_COOKIE['Projekto_id']; 
                 }
+                    $ivykis = 'Task / Create';
+                   
+                           
+                    
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -69,10 +83,17 @@
                 try{
                    $sql = "INSERT INTO uzduotys (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena` ,`Sukurimo_data`, `Naujinimo_data`, `Projekto_id`) VALUES (?, ?, ?, ?, ? ,?, ?, ?)";
                    $sql2 = "INSERT INTO projektu_uzduotys VALUES (?, ?)";
+                   
+                   $sql3 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
+                   
                     $statement = $pdo->prepare($sql);
                       $statement->execute([$id, $name, $description, $priority, $status, $date, $date, $projektas]);
                    $statement2 = $pdo->prepare($sql2);
                    $statement2->execute([$projektas, $id]);
+                   
+                   $statement3 = $pdo->prepare($sql3);
+                   $statement3->execute(['', $ivykis,$name, $date1, $user, $_SESSION['username']]);
+                                      
                     $pdo->commit();
                     
                     echo "<script> location.replace(\"task.php?Projekto_id=".$projektas."&title=".$name."\"); </script>";
@@ -107,7 +128,7 @@
             }
         }
 
-        public function updateProject($name, $description, $id){
+        public function updateProject($name, $description, $id, $user){
             if(empty($name)){
                 $_SESSION['updateError'] = "Project's title field is required";
                 return;
@@ -115,13 +136,23 @@
                 $_SESSION['updateError'] = "Project ID is invalid";
                 return;
             }
+            $ivykis = 'Project / Update';
+          $id1 = $this->getUniqueId();
+           $date = date("Y-m-d H:i:s");
             try{
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "UPDATE projektai SET Pavadinimas = ?, Aprasymas = ? WHERE Projekto_id = ?";
+                
+                $sql2 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
+                
                 $statement = $pdo->prepare($sql);
                 $statement->execute([$name, $description, $id]);
+                
+                $statement2 = $pdo->prepare($sql2);
+                $statement2->execute(['', $ivykis,$name, $date, $user, $_SESSION['username']]);
+                
                 echo "<script> location.replace(\"main.php\"); </script>";
             }catch(PDOException $error){
                 $_SESSION['updateError'] =  "Database connection lost.";
@@ -129,19 +160,31 @@
             }
         }
 
-        public function updateProject1($name, $description1, $priority, $busena, $id1,$projectid,$projecttitle, $page){
+        public function updateProject1($name, $description1, $priority, $busena, $id1,$projectid,$projecttitle, $user, $page){
         if(empty($name)){
                 $_SESSION['updateError'] = "Project's title field is required";
                 return;
             }
+           // $id = $this->getUniqueId();
+             $ivykis = 'Task / Update';
+               $naujinimas = date("Y-m-d ");
+               $naujinimas1 = date("Y-m-d H:i:s");
+               
             try{
-                $naujinimas = date("Y-m-d");
+              
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "UPDATE uzduotys SET Pavadinimas = ?,Prioritetas =?,Busena = ?,Aprasymas = ?, Naujinimo_data = ? WHERE Uzduoties_id = ?";
+                
+                 $sql2 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
+                 
                 $statement = $pdo->prepare($sql);
                 $statement->execute([$name,$priority,$busena, $description1, $naujinimas, $id1]);
+                
+                $statement2 = $pdo->prepare($sql2);
+                $statement2->execute(['',$ivykis,$name, $naujinimas1, $user, $_SESSION['username']]);
+                
                 echo "<script> location.replace(\"".$page."?title=".$projecttitle."&Projekto_id=".$projectid."\"); </script>";
             }catch(PDOException $error){
                 $_SESSION['updateError'] =  "Database connection lost.";
@@ -149,6 +192,7 @@
             }
         }
         
+     
         //Generuojamas id iki kol bus gauta unikali reiksme
         public function getUniqueId(){
             $id = rand(100000000, 999999999);

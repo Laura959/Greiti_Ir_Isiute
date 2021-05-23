@@ -66,7 +66,7 @@ include_once('db_config.php');
                     </p>
                 </li>
                 <li class="left-menu__item">
-                    <a href="#" class="left-menu__icon">
+                    <a href="history.php" class="left-menu__icon">
                         <i class="fas fa-history left-menu-icon"></i>
                     </a>
                     <p class="left-menu__title">History</p>
@@ -288,7 +288,7 @@ include_once('db_config.php');
             
             if(isset($_POST['updateTitle']))  {
                 $update = new Project(); 
-                $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId']);
+                $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId'], $_SESSION['userId']);
             }
             if(isset($_SESSION['updateError'])){
                 echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
@@ -304,7 +304,7 @@ include_once('db_config.php');
     <div class="pop-up__delete">
         <h2 class="pop-up__h2">Delete a Project</h2>
         <form method="POST" class="pop-up__form">
-            <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
+                     <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
             <div class="pop-up--flex">
                 <a href="#" class="pop-up__confirm-btn">Delete</a>
                 <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
