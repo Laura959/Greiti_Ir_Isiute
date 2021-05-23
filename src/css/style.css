@@ -723,6 +723,66 @@ task_status input[type="radio"]:focus+label {
     flex-flow: row;
 }
 
+.fa-archive:hover, .fa-arrow-down:hover, .fa-edit:hover, .fa-trash-alt:hover, .fa-sign-out-alt:hover {
+    text-decoration: none;
+    color: #a8d381;
+}
+
+.fa-folder:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 10% 10% 9% 10%;
+    margin-left: 5%;
+    font-size: 16px;
+    color: #c0f292;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 0%;
+}
+
+.fa-history:hover::after {
+    content: attr(data-text);
+      background-color: #ecf9e6;
+    padding: 10% 10% 9% 10%;
+    margin-left: 5%;
+    font-size: 16px;
+    color: #c0f292;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 50%;
+    text-align: center;
+}
+
+.fa-file-download:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 7% 10% 6.8% 10%;
+  margin-left: 9%;
+  font-size: 15px;
+  color: #c0f292;
+  font-weight: bold;
+  border-radius: 0px 15px 15px 0px;
+  position:absolute;
+    top: 25%;
+    text-align: center;
+}
+
+.fa-plus-circle:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 6% 10% 8% 10%;
+  margin-left: 5%;
+  font-size: 15px;
+  color: #c0f292;
+  font-weight: bold;
+  border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 75%;
+    text-align: center;
+}
+
 @media only screen and (max-width: 1550px) {
 
     .tasks-table tr th:nth-child(6),

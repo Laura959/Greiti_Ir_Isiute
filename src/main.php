@@ -53,13 +53,13 @@ include_once('db_config.php');
             <ul class="left-menu__items">
                 <li class="left-menu__item">
                     <a href="#" class="left-menu__icon">
-                        <i class="fas fa-folder left-menu-icon"></i>
+                        <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
                     </a>
                     <p class="left-menu__title">Projects</p>
                 </li>
                 <li class="left-menu__item left-menu__item-hover">
                     <a href="#" download="Projects.csv" class="left-menu__icon export">
-                        <i class="fas fa-arrow-down left-menu-icon"></i>
+                        <i class="fas fa-file-download left-menu-icon" data-text="Export projects"></i>
                     </a>
                     <p class="left-menu__title">
                         <span class="export__span">Export Projects</span>
@@ -67,13 +67,13 @@ include_once('db_config.php');
                 </li>
                 <li class="left-menu__item">
                     <a href="history.php" class="left-menu__icon">
-                        <i class="fas fa-history left-menu-icon"></i>
+                        <i class="fas fa-history left-menu-icon" data-text="History"></i>
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>
                 <li class="left-menu__item">
                     <a href="#" class="create-project__JS left-menu__icon">
-                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                        <i class="fas fa-plus-circle left-menu-icon" data-text="New project"></i>
                     </a>
                     <p class="left-menu__title">New project</p>
                 </li>
@@ -207,12 +207,12 @@ include_once('db_config.php');
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing projects-functions'>
-          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
+          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit' data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-          <i class='far fa-trash-alt'></i>
+          <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
           </button>
-          <button class=\"button\"><i class='fas fa-archive'></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
+          <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
+          <button class=\"button\"><i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i></button>
           <button class=\"button\" id='create-button'>
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
@@ -228,12 +228,12 @@ include_once('db_config.php');
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border projects-functions'>
-                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
+                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-                    <i class='far fa-trash-alt'></i>
+                    <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
                     </button> 
-                <button class=\"button\"><i class='fas fa-archive'></i></button>
-                <button class=\"button\"><i class='fas fa-arrow-down'></i></button></td></tr>";
+                <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
+                <button class=\"button\"><i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i></button></td></tr>";
 
             // $count++;
             // if ($count>2) {
