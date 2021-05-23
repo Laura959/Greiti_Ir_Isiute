@@ -87,7 +87,7 @@ include_once('db_config.php');
             <!-- Viršutinė menu juosta su antrašte ir log out -->
             <nav class="navbar tasks__navbar">
                 <div class="board-heading">
-                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Dashboard</a>
+                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Task board</a>
                 </div>
                 
                 <div class="form-inline form__logout">
