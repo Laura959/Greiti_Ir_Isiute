@@ -12,18 +12,6 @@ const cancelBtns1 = document.querySelectorAll('.pop-up__cancel-btn1');
 const description = document.querySelectorAll('.project-description__JS');
 const descriptionTasks = document.querySelectorAll('.project-description-tasks__JS');
 
-var div = document.getElementById("dom-target");
-var data = div.textContent;
-console.log(data);
-
-function download_csv() {
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = encodeURI(data);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'Project_tasks.csv';
-    hiddenElement.click();
-}
-
 const handleClickCreateForm = () => {
     const blur = document.createElement('div');
     const form = document.querySelector('.pop-up');

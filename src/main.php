@@ -172,7 +172,11 @@ include_once('db_config.php');
           <i class='far fa-trash-alt'></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive'></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down'></i></button>
+          <form method='post' style='display:inline-block'>
+                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
+                <i class='fas fa-arrow-down'></i>
+                </button>
+          </form>
           <button class=\"button\" id='create-button'>
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
@@ -193,7 +197,7 @@ include_once('db_config.php');
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
                 <form method='post' style='display:inline-block'>
-                <button class=\"button export\" onclick='download_csv()' type='submit' name='id' value='".$row['Projekto_id']."'>
+                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
                 <i class='fas fa-arrow-down'></i>
                 </button></td></tr>
                 </form>";
@@ -209,8 +213,9 @@ include_once('db_config.php');
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
         echo $error->getMessage();
         }
-        echo "<div id='dom-target' style='display: none;'>";
-        if (isset($_POST['id'])) {
+
+        if (isset($_POST['id'])) { //paspaudus vieno iš projektų csv atsisiuntimo mygtuką, įvykdoma sql užklausa, kuri išrenka to projekto užduotis ir jas atsiunčia csv formatu
+            
                     $ID = $_POST['id'];
                     $query = "SELECT * FROM uzduotys WHERE Projekto_id = ".$ID." ORDER BY Eiles_nr DESC";
                     $result = $connectM->prepare($query);
@@ -219,9 +224,27 @@ include_once('db_config.php');
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     $linkCSV_tasks .= "".$row['Uzduoties_id'].",".$row['Pavadinimas'].",".$row['Aprasymas'].",".$row['Prioritetas'].",".$row['Busena'].",".$row['Sukurimo_data'].",".$row['Naujinimo_data']."\n"; 
                 }
+                echo "<div id='dom-target' style='display: none;'>";
                 echo htmlspecialchars($linkCSV_tasks);
-                }
-        echo "</div>";
+                echo "</div>";
+                ?>
+                <script>
+                var div = document.getElementById('dom-target');
+                var val = '<?php echo $ID ?>';
+                var data = div.textContent;
+                
+                    var hiddenElement = document.createElement('a');
+                    hiddenElement.href = encodeURI(data);
+                    hiddenElement.target = '_blank';
+                    hiddenElement.download = 'Project_ID'+val+'_tasks.csv';
+                    hiddenElement.click();
+                
+                </script> 
+                <?php
+        }
+                
+                
+
         //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
         echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
     ?>

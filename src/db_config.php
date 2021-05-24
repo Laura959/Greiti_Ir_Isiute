@@ -10,7 +10,7 @@
 // Xampp DB
 $host = "localhost";
  $user = "root";
- $pass = "[ems]";
+ $pass = "";
  $dbName = "projektas";
  $message = "";
 
