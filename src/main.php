@@ -126,7 +126,6 @@ include_once('db_config.php');
         $i = 1;
             // count naudosime, jei noresime nustatyti eiluciu skaiciu
         // $count = 1;
-
         function activeProgressBar($totalTasks, $finishedTasks, $i) {
             if ($totalTasks == 0) {
                 $greenBarLength = 0;
@@ -146,11 +145,9 @@ include_once('db_config.php');
             </style>";
         }
                 //  isspausdinamas projektu sarasas
-
         if( $number == 0 && isset($SEARCH_QUERY)) {
         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Project with this name does not exist</span></div>";
         } else {
-
         echo "<table class='projects-table'>";
         echo "<thead>";
         echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
@@ -159,7 +156,6 @@ include_once('db_config.php');
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
             activeProgressBar($row['Total_tasks'], $row['Finished_tasks'], $i);
             if ($i == $number)
-            
             {
                 // spausdinama eilutė su "Sukurti projektą mygtuku
           echo "<tr>
@@ -181,7 +177,6 @@ include_once('db_config.php');
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
             }
-
                 // spausdinamos kitos lentelės eilutės
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
@@ -198,7 +193,9 @@ include_once('db_config.php');
                     </button> 
                 <button class=\"button\"><i class='fas fa-archive'></i></button>
                 <form method='post' style='display:inline-block'>
-                <button class=\"button export\" download='Project_tasks.csv' type='submit' name='id' value='".$row['Projekto_id']."'><i class='fas fa-arrow-down'></i></button></td></tr>
+                <button class=\"button export\" onclick='download_csv()' type='submit' name='id' value='".$row['Projekto_id']."'>
+                <i class='fas fa-arrow-down'></i>
+                </button></td></tr>
                 </form>";
             // $count++;
             // if ($count>2) {
@@ -208,24 +205,23 @@ include_once('db_config.php');
         }
         echo "</table>";
     }
-
         echo "<br>";
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
-
-
         echo $error->getMessage();
         }
-
+        echo "<div id='dom-target' style='display: none;'>";
         if (isset($_POST['id'])) {
-            $ID = $_POST['id'];
-            $query = "SELECT * FROM uzduotys WHERE Projekto_id = ".$ID." ORDER BY Eiles_nr DESC";
-            $result = $connectM->prepare($query);
-            $result->execute();
-            while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                // echo "".$row['Uzduoties_id'].", ".$row['Pavadinimas']."";
-            $linkCSV_tasks .= "&quot;".$row['Uzduoties_id']."&quot;,&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,&quot;".$row['Prioritetas']."&quot;,".$row['Busena'].",".$row['Sukurimo_data'].",".$row['Naujinimo_data']."\n";
-            }
-        }    
+                    $ID = $_POST['id'];
+                    $query = "SELECT * FROM uzduotys WHERE Projekto_id = ".$ID." ORDER BY Eiles_nr DESC";
+                    $result = $connectM->prepare($query);
+                    $result->execute();
+        
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $linkCSV_tasks .= "".$row['Uzduoties_id'].",".$row['Pavadinimas'].",".$row['Aprasymas'].",".$row['Prioritetas'].",".$row['Busena'].",".$row['Sukurimo_data'].",".$row['Naujinimo_data']."\n"; 
+                }
+                echo htmlspecialchars($linkCSV_tasks);
+                }
+        echo "</div>";
         //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
         echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
     ?>
