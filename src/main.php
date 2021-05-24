@@ -31,28 +31,54 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=123" rel="stylesheet">
+    <link href="css/style.css?rnd=221" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
+    <link href="css/createForm.css?rnd=221" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Kairinis menu -->
-    <input type="checkbox" id="check" class="input">
-    <label for="check" class="label">
-        <i class="fas fa-bars" id="hamburger"></i>
-        <i class="fas fa-times" id="cancel"></i>
-    </label>
+     <!-- Kairinis menu -->
     <div class="left-menu"> 
-        <ul>
-            <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i><p class="left-menu-titles">DASHBOARD</p></a></li>
-            <li><a href="#"><i class="fas fa-folder left-menu-icon"></i><p class="left-menu-titles">PROJECTS</p></a></li>
-            <li><a href="#" class="export" download="Projects.csv"><i class="fas export-icon fa-arrow-down left-menu-icon"></i><p class="left-menu-titles"><span class="export__span">EXPORT</span></p></a></li>
-            <li><a href="#"><i class="fas fa-history left-menu-icon"></i><p class="left-menu-titles">HISTORY</p></a></li>
-            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon"></i><p class="left-menu-titles ">NEW PROJECT</p></a></li>
-        </ul>
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
+                    </a>
+                    <p class="left-menu__title">Projects</p>
+                </li>
+                <li class="left-menu__item left-menu__item-hover">
+                    <a href="#" download="Projects.csv" class="left-menu__icon export">
+                        <i class="fas fa-file-download left-menu-icon" data-text="Export projects"></i>
+                    </a>
+                    <p class="left-menu__title">
+                        <span class="export__span">Export Projects</span>
+                    </p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="history.php" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon" data-text="History"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon" data-text="New project"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
@@ -61,7 +87,7 @@ include_once('db_config.php');
     <nav class="navbar">
         <a class="project-page-title mr-auto" download="Projects.csv">PROJECTS</a>
         <div class="whole-search">
-    
+        <!-- board-page-title propects -->
     <!-- SEARCH FUNKCIALUMAS -->        
         <form id="search-form">
         <?php              
@@ -74,7 +100,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"search projects\" class=\"input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"search-form__input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
              
             // if(isset($SEARCH_ERROR)) {
@@ -82,14 +108,16 @@ include_once('db_config.php');
             // }
         ?>
         </form>        
-        </div>
         <div class="form-inline">
             <?php
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form method="POST">
-                <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt"></i></button>
+                <button class="button" type="submit" name="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </form>
+        </div>
         </div>
     </nav>
     <!-- Viršutinės menu juostos pabaiga -->
@@ -100,22 +128,24 @@ include_once('db_config.php');
         try {
         $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
         $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // SQL užklausa, iš kurios gausime projektų lentelei reikalingus rezultatus
         $querySelect = "SELECT
                 projektai.Projekto_id,
                 projektai.Pavadinimas,
                 projektai.Aprasymas,
                 projektai.Busena,
                 projektai.Sukurimo_data,
+                komandos.role,
                 SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
                 SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
                 SUM(case when uzduotys.Busena ='In Progress' then 1 else 0 end) as InProgress_tasks,
                 COUNT(uzduotys.Busena) as Total_tasks
-            FROM projektai
+                FROM projektai
                 LEFT JOIN projektu_uzduotys ON projektu_uzduotys.Projekto_id = projektai.Projekto_id
-                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id";
-        $queryWhere = !isset($SEARCH_ERROR) ? " WHERE projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
+                LEFT JOIN uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id
+                RIGHT JOIN komandos ON komandos.Projekto_id = projektai.Projekto_id
+                RIGHT JOIN vartotojai ON vartotojai.Vartotojo_id = komandos.Vartotojas
+                WHERE vartotojai.Vartotojo_id = ".$_SESSION['userId']."";
+        $queryWhere = !isset($SEARCH_ERROR) ? " AND projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
         $linkCSV = "data:text/csv;charset=utf-8,Title, Description, Status, Finished tasks, Total tasks\n";
@@ -131,7 +161,7 @@ include_once('db_config.php');
                 $greenBarLength = 0;
             } else {
             $percent = $finishedTasks/$totalTasks;
-            $greenBarLength = $percent*140; //dauginu iš 140, nes toks yra progress bar width (css)
+            $greenBarLength = $percent*130; //dauginu iš 130, nes toks yra progress bar width (css)
             }
             echo "
             <style>
@@ -148,9 +178,15 @@ include_once('db_config.php');
         if( $number == 0 && isset($SEARCH_QUERY)) {
         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Project with this name does not exist</span></div>";
         } else {
-        echo "<table class='projects-table'>";
+        echo "<table class='projects-table projects-table__main'>";
         echo "<thead>";
-        echo "<tr><th class='project-name-spacing'>PROJECT NAME</th><th>DESCRIPTION</th><th>STATUS</th><th class='completion-spacing'>COMPLETION</th><th class='round-border'></th></tr>";
+        echo "<tr>
+        <th class='project-name-spacing projects-th-width'>PROJECT NAME</th>
+        <th class=\"projects-description projects-th-width\">DESCRIPTION</th>
+        <th class=\"projects-status\">STATUS</th>
+        <th class='completion-spacing'>COMPLETION</th>
+        <th class='round-border projects-functions'></th>
+        </tr>";
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
@@ -166,15 +202,15 @@ include_once('db_config.php');
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
-          <td class='td-spacing'>
-          <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
-          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
-          <i class='far fa-trash-alt'></i>
+          <td class='td-spacing projects-functions'>
+          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit' data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
+          <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
           </button>
-          <button class=\"button\"><i class='fas fa-archive'></i></button>
+          <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
           <form method='post' style='display:inline-block'>
                 <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down'></i>
+                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
                 </button>
           </form>
           <button class=\"button\" id='create-button'>
@@ -190,17 +226,19 @@ include_once('db_config.php');
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
-                <td class='grey-border'>
-                <button class=\"update-project__JS\"><i class='far fa-edit'></i></button>
-                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\">
-                    <i class='far fa-trash-alt'></i>
+                <td class='grey-border projects-functions'>
+                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
+                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
+                    <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
                     </button> 
-                <button class=\"button\"><i class='fas fa-archive'></i></button>
+
+                <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
                 <form method='post' style='display:inline-block'>
                 <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down'></i>
+                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
                 </button></td></tr>
                 </form>";
+
             // $count++;
             // if ($count>2) {
             //     break;  cia galesime nustatyti salygas, kas bus kai pvz isspausdins 10 eiluciu
@@ -284,7 +322,7 @@ include_once('db_config.php');
             
             if(isset($_POST['updateTitle']))  {
                 $update = new Project(); 
-                $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId']);
+                $update->updateProject($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updateId'], $_SESSION['userId']);
             }
             if(isset($_SESSION['updateError'])){
                 echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
@@ -300,15 +338,20 @@ include_once('db_config.php');
     <div class="pop-up__delete">
         <h2 class="pop-up__h2">Delete a Project</h2>
         <form method="POST" class="pop-up__form">
-            <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
+                     <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
             <div class="pop-up--flex">
                 <a href="#" class="pop-up__confirm-btn">Delete</a>
                 <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
             </div>
         </form>
     </div>
+    <!-- <div class="pop-up__warning">
+        <h2 class="pop-up__warning-title">Warning!</h2>
+        <h3>Not Authorized</h3>
+        <p>You are not authorized to perform the request on this project.</p>
+    </div> -->
     </main>
-    <script src="./js/createProject.js?rnd=132" defer></script>
+    <script type="module" src="./js/createProject.js?rnd=444" defer></script>
     </section>
     </body>
 </html>

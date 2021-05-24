@@ -31,8 +31,8 @@ include_once('db_config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=235" rel="stylesheet">
-    <link href="css/board.css" rel="stylesheet">
+    <link href="css/style.css?rnd=221" rel="stylesheet">
+    <link href="css/board.css?rnd=145" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -40,49 +40,59 @@ include_once('db_config.php');
 </head>
 
 <body>
-    <!-- Kairinis menu -->
-    <input type="checkbox" id="check" class="input">
-    <label for="check" class="label">
-        <i class="fas fa-bars" id="hamburger"></i>
-        <i class="fas fa-times" id="cancel"></i>
-    </label>
-    <div class="left-menu">
-        <ul>
-            <li><a href="#"><i class="fas fa-th-large left-menu-icon"></i>
-                    <p class="left-menu-titles">DASHBOARD</p>
-                </a></li>
-            <li><a href="#"><i class="fas fa-folder left-menu-icon"></i>
-                    <p class="left-menu-titles">PROJECTS</p>
-                </a></li>
-            <li><a href="#" class="export" download="Projects.csv"><i class="fas export-icon fa-arrow-down left-menu-icon"></i>
-                    <p class="left-menu-titles"><span class="export__span">EXPORT</span></p>
-                </a></li>
-            <li><a href="#"><i class="fas fa-history left-menu-icon"></i>
-                    <p class="left-menu-titles">HISTORY</p>
-                </a></li>
-            <li><a href="#" class="create-project__JS"><i class="fas fa-plus-circle left-menu-icon"></i>
-                    <p class="left-menu-titles ">NEW PROJECT</p>
-                </a></li>
-        </ul>
+     <!-- Kairinis menu -->
+     <div class="left-menu"> 
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+           
+                <li class="left-menu__item">
+                    <a href="main.php" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon"></i>
+                    </a>
+                    <a href="main.php" class="left-menu__title">Projects</a>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" href="#" class="left-menu__icon">
+                        <i class="fas fa-th-large left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">Task board</p>
+                </li>
+
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
     </div>
     <!-- Kairinio menu pabaiga -->
     <section>
         <header>
             <!-- Viršutinė menu juosta su antrašte ir log out -->
-            <nav class="navbar">
+            <nav class="navbar tasks__navbar">
                 <div class="board-heading">
-                    <a class="board-page-title mr-auto" href="main.php">PROJECTS</a><span class="symbol">/</span>
-                    <?php
-                    if (isset($_GET['Projekto_id'])) {
-                        echo "<a class=\"board-page-title mr-auto\" href=\"task.php?Projekto_id=" . $_GET['Projekto_id'] . "\">TASKS</a>";
-                    }
-                    ?>
-                    <span class="symbol">/</span>
-                    <a class="board-page-title mr-auto">TASK BOARD</a>
+                    <a class="project-page-title board-page-title" href="main.php">Projects/ <?php echo isset($_GET['title']) ? $_GET['title'] : '..'; ?>/ Tasks/ Task board</a>
                 </div>
-                <div class="form-inline">
+                
+                <div class="form-inline form__logout">
                     <?php
-                    echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
+                    echo '<p class="login-name login-name__board">' . $_SESSION["username"] . '</p>';
                     ?>
                     <form method="POST">
                         <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt"></i></button>
@@ -91,41 +101,218 @@ include_once('db_config.php');
             </nav>
             <!-- Viršutinės menu juostos pabaiga -->
         </header>
-
         <!-- TASK BOARDS -->
         <main>
-            <div class="board-container">
-                <div class="task-board">
-                    <div class="board-header">to do</div>
-                    <div class="board-background">
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--middle"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--high"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget ligula non augue finibus mattis. Phasellus eget massa in nulla vestibulum lacinia. Ut non felis finibus sapien posuere mattis in non purus. Donec non erat aliquet nibh hendrerit vehicula. Proin eget nisl tristique, semper enim a, tincidunt sem. Vivamus tempor, lorem nec dignissim commodo, neque turpis pellentesque orci, sit amet vulputate arcu metus et ligula. Suspendisse potenti. Fusce at tristique nunc.</div>
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
-                    </div>
-                </div>
+        <?php
 
-                <div class="task-board">
-                    <div class="board-header">in progress</div>
-                    <div class="board-background">
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--middle"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget ligula non augue finibus mattis. Phasellus eget massa in nulla vestibulum lacinia. Ut non felis finibus sapien posuere mattis in non purus. Donec non erat aliquet nibh hendrerit vehicula. Proin eget nisl tristique, semper enim a, tincidunt sem.</div>
-                        <div class="board-data"><span class="dot dot--high"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
+        if (isset($_GET['Projekto_id'])) {
+            try {
+                $todoFirst = true;
+                $inProgressFirst = true;
+                $doneFirst = true;
+                $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
+                $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $queryM = "
+                SELECT uzduotys.* FROM uzduotys 
+                    INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
+                    INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
+                    WHERE projektai.Projekto_id = ".$_GET['Projekto_id']."
+                    ORDER BY Busena Desc, Eiles_nr DESC
+                ";
+                $result = $connectM->prepare($queryM);
+                $result->execute();
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    if ($row['Busena'] === 'To do') {
+                        if($todoFirst){
+                            $todoFirst = false;
+                            echo "
+                            <div class=\"board-container\">
+                            <div class=\"task-board\">
+                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-background\">
+                            ";
+                        }
+                        echo "
+                                <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"To do\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                    }else if($row['Busena'] === 'In Progress'){
+                        if($todoFirst){
+                            $todoFirst = false;
+                            echo "
+                            <div class=\"board-container\">
+                            <div class=\"task-board\">
+                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-background\">
+                            ";
+                        }
+                        if($inProgressFirst){
+                            $inProgressFirst = false;
+                            echo"
+                            </div>
+                            </div>
+                            <div class=\"task-board\">
+                                    <div class=\"board-header\">in progress</div>
+                                    <div class=\"board-background\">
+                            ";
+                        }
+                        echo "
+                                <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"In Progress\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                    }else if($row['Busena'] === 'Done'){
+                        if($todoFirst){
+                            $todoFirst = false;
+                            echo "
+                            <div class=\"board-container\">
+                            <div class=\"task-board\">
+                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-background\">
+                            ";
+                        }
+                        if($inProgressFirst){
+                            $inProgressFirst = false;
+                            echo"
+                            </div>
+                            </div>
+                            <div class=\"task-board\">
+                                    <div class=\"board-header\">in progress</div>
+                                    <div class=\"board-background\">
+                            ";
+                        }
+                        if($doneFirst){
+                            $doneFirst = false;
+                            echo "
+                            </div>
+                            </div>
+                            <div class=\"task-board\">
+                                    <div class=\"board-header\">Done</div>
+                                    <div class=\"board-background\">
+                            ";
+                        }
+                        echo "
+                        <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"Done\"  data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                    }
+                }
+                if($todoFirst && $inProgressFirst && $doneFirst){
+                    echo "
+                        <div class=\"board-container\">
+                        <div class=\"task-board\">
+                        <div class=\"board-header\">to do</div>
+                        <div class=\"board-background\">
+                        </div>
+                        </div>
+                        <div class=\"task-board\">
+                                <div class=\"board-header\">in progress</div>
+                                <div class=\"board-background\">
+                        </div>
+                        </div>
+                        <div class=\"task-board\">
+                                <div class=\"board-header\">Done</div>
+                                <div class=\"board-background\">
+                        ";
+                }else if($inProgressFirst && $doneFirst){
+                    echo "
                     </div>
-                </div>
-
-                <div class="task-board">
-                    <div class="board-header">done</div>
-                    <div class="board-background">
-                        <div class="board-data"><span class="dot dot--high"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget ligula non augue finibus mattis. Phasellus eget massa in nulla vestibulum lacinia. Ut non felis finibus sapien posuere mattis in non purus. Donec non erat aliquet nibh hendrerit vehicula. Proin eget nisl tristique, semper enim a, tincidunt sem. Vivamus tempor, lorem nec dignissim commodo, neque turpis pellentesque orci, sit amet vulputate arcu metus et ligula. Suspendisse potenti. Fusce at tristique nunc.</div>
-                        <div class="board-data"><span class="dot dot--middle"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
-                        <div class="board-data"><span class="dot dot--low"></span>123456</div>
                     </div>
+                    <div class=\"task-board\">
+                    <div class=\"board-header\">in progress</div>
+                    <div class=\"board-background\">
+                    </div>
+                    </div>
+                    <div class=\"task-board\">
+                            <div class=\"board-header\">Done</div>
+                            <div class=\"board-background\">
+                    ";
+                }
+                else if($doneFirst){
+                    echo "
+                        </div>
+                        </div>
+                        <div class=\"task-board\">
+                                <div class=\"board-header\">Done</div>
+                                <div class=\"board-background\">
+                    ";
+                }
+            } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
+                echo $error->getMessage();
+            }
+        }
+        ?>
                 </div>
             </div>
+        </div>
+        <div class="pop-up__update1">
+                    <h2 class="pop-up__h2">Update Task</h2>
+                    <form method="POST" class="pop-up__form">
+                        <input style="text-align:left;" class="pop-up__input pop-up__update-title1" type="text" name="updateTitle" maxlength="30" placeholder="Task Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task Title'" required>
+
+
+                        <textarea class="pop-up__textarea pop-up__update-description1" placeholder="Description" name="updateDescription" maxlength="200" rows="2"></textarea>
+                        <input type="hidden" class="pop-up__update-id1" name="updateId"/>
+                        
+                        
+                                  <div class="task_insert">
+
+
+                            <!-- Task priority -->
+                            <input style="display: none"class="pop-up__update-priority" id="radioLow11" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
+                            <label style="display: none" for="radioLow11">Low</label>
+
+                            <input class="pop-up__update-priority priority-Low" id="radioLow1" type="radio" value="Low" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required >
+                            <label  for="radioLow1">Low</label>
+
+                            <input class="pop-up__update-priority priority-Middle" id="radioMedium1" type="radio" value="Middle" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'" required>
+                            <label for="radioMedium1">Middle</label>
+
+                            <input class="pop-up__update-priority priority-High" id="radioHight1" type="radio" value="High" name="updatepriority" placeholder="Task Priority" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task priority'"required>
+                            <label for="radioHight1">High</label>
+                        </div>
+
+                        <!-- Task status -->
+
+                         <div  class="task_status">
+                            <!-- Task priority -->
+
+                            <input style="display: none" class="pop-up__update-status " id="radioTodo11" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
+                            <label style="display: none"  for="radioTodo11">To do</label>
+
+                            <input  class="pop-up__update-status status-To" id="radioTodo1" type="radio" value="To do" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required >
+                            <label   for="radioTodo1">To do</label>
+
+                             <input class="pop-up__update-status status-In" id="radioInProgress1" type="radio" value="In Progress" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
+                            <label for="radioInProgress1" style="width: auto">In Progress</label>
+
+                            <input class="pop-up__update-status status-Done" id="radioFinished1" type="radio" value="Done" name="updatestatus" placeholder="Task Status" 
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
+                            <label for="radioFinished1">Done</label>
+                        </div>
+                        
+                        
+                        
+                        
+                        <div class="pop-up--flex">
+                            <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
+                            <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                        </div>
+                        <?php
+                        if (isset($_POST['updateTitle'])) {
+                            $update = new Project();
+                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'board.php');
+                        }
+                        if (isset($_SESSION['updateError'])) {
+                            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
+                            echo $_POST['updateId'];
+                            unset($_SESSION['updateError']);
+                        }
+                        ?>
+                    </form>
+                </div>
         </main>
+        <script type="module" src="./js/createProject.js?rnd=551" defer></script>
+    </section>
+    </body>
+</html>
