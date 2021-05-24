@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+@import url("https://use.typekit.net/dwt6opx.css");
 
 body {
     background-color: #f1f1f1;
-    font-family: 'Oswald', sans-serif;
+    font-family: classico-urw, sans-serif;
 }
 
 .blur__JS {
@@ -25,7 +25,7 @@ body {
 
 .pop-up__h2,
 .pop-up__warning-title {
-    background-color: #a0e383;
+    background-color: #a8d381;
     text-transform: uppercase;
     font-weight: 300;
     font-size: clamp(1.25rem, 3vw, 1.5rem);
@@ -107,7 +107,7 @@ body {
     outline: transparent;
     position: relative;
     word-break: break-all;
-    font-family: 'Oswald', sans-serif;
+    font-family: classico-urw, sans-serif;
 }
 
 .pop-up__warning {
