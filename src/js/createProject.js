@@ -26,6 +26,7 @@ const handleProjectCreateForm = () => {
     renderBlur();
 }
 
+
 const handleTaskCreateForm = () => {
     const form = document.querySelector('.pop-up');
     form.classList.add('pop-up__JS');
@@ -111,6 +112,7 @@ const handleUpdateForm = (title, description, id, role) => {
     renderBlur();
 }
 
+
 const removeChecked = () => {
     let test = document.querySelectorAll('.pop-up__update-priority');
     let test2 = document.querySelectorAll('.pop-up__update-status');
@@ -149,7 +151,6 @@ const handleCloseForm = () => {
     form.classList.remove('pop-up__JS');
     removeBlur();
 }
-
 
 const handleClickRemovePlaceholder = () => {
     document.querySelector('.pop-up__placeholder').textContent = '';

@@ -148,15 +148,14 @@ include_once('db_config.php');
         $queryWhere = !isset($SEARCH_ERROR) ? " AND projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
-        
         $linkCSV = "data:text/csv;charset=utf-8,Title, Description, Status, Finished tasks, Total tasks\n";
+        $linkCSV_tasks = "data:text/csv;charset=utf-8, ID, Title, Description, Priority, Status, Created, Modified\n";
         $result = $connectM->prepare($queryM);
         $result->execute();
         $number = $result->rowCount(); //paskutines eilus stilizavimui reikalinga
         $i = 1;
             // count naudosime, jei noresime nustatyti eiluciu skaiciu
         // $count = 1;
-
         function activeProgressBar($totalTasks, $finishedTasks, $i) {
             if ($totalTasks == 0) {
                 $greenBarLength = 0;
@@ -176,11 +175,9 @@ include_once('db_config.php');
             </style>";
         }
                 //  isspausdinamas projektu sarasas
-
         if( $number == 0 && isset($SEARCH_QUERY)) {
         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Project with this name does not exist</span></div>";
         } else {
-
         echo "<table class='projects-table projects-table__main'>";
         echo "<thead>";
         echo "<tr>
@@ -195,7 +192,6 @@ include_once('db_config.php');
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
             activeProgressBar($row['Total_tasks'], $row['Finished_tasks'], $i);
             if ($i == $number)
-            
             {
                 // spausdinama eilutė su "Sukurti projektą mygtuku
           echo "<tr>
@@ -212,12 +208,15 @@ include_once('db_config.php');
           <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
           </button>
           <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
-          <button class=\"button\"><i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i></button>
+          <form method='post' style='display:inline-block'>
+                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
+                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
+                </button>
+          </form>
           <button class=\"button\" id='create-button'>
           <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
             }
-
                 // spausdinamos kitos lentelės eilutės
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
@@ -232,8 +231,13 @@ include_once('db_config.php');
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
                     <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
                     </button> 
+
                 <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
-                <button class=\"button\"><i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i></button></td></tr>";
+                <form method='post' style='display:inline-block'>
+                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
+                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
+                </button></td></tr>
+                </form>";
 
             // $count++;
             // if ($count>2) {
@@ -245,10 +249,40 @@ include_once('db_config.php');
     }
         echo "<br>";
     } catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
-
-
         echo $error->getMessage();
         }
+
+        if (isset($_POST['id'])) { //paspaudus vieno iš projektų csv atsisiuntimo mygtuką, įvykdoma sql užklausa, kuri išrenka to projekto užduotis ir jas atsiunčia csv formatu
+            
+                    $ID = $_POST['id'];
+                    $query = "SELECT * FROM uzduotys WHERE Projekto_id = ".$ID." ORDER BY Eiles_nr DESC";
+                    $result = $connectM->prepare($query);
+                    $result->execute();
+        
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $linkCSV_tasks .= "".$row['Uzduoties_id'].",".$row['Pavadinimas'].",".$row['Aprasymas'].",".$row['Prioritetas'].",".$row['Busena'].",".$row['Sukurimo_data'].",".$row['Naujinimo_data']."\n"; 
+                }
+                echo "<div id='dom-target' style='display: none;'>";
+                echo htmlspecialchars($linkCSV_tasks);
+                echo "</div>";
+                ?>
+                <script>
+                var div = document.getElementById('dom-target');
+                var val = '<?php echo $ID ?>';
+                var data = div.textContent;
+                
+                    var hiddenElement = document.createElement('a');
+                    hiddenElement.href = encodeURI(data);
+                    hiddenElement.target = '_blank';
+                    hiddenElement.download = 'Project_ID'+val+'_tasks.csv';
+                    hiddenElement.click();
+                
+                </script> 
+                <?php
+        }
+                
+                
+
         //Pridedamas html blur'as, jei nesekminga uzklausa ('toks pavadinimas jau yra' ir t.t.)
         echo isset($_POST['title']) ? '<div class="blur__JS"></div>' : '';
     ?>

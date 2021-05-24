@@ -245,9 +245,6 @@ include_once('db_config.php');
 
                                 <i class='far fa-trash-alt '></i>
                             </button>
-                            <button class=\"button\">
-                                <i class='fas fa-arrow-down '></i>
-                            </button>
                             <button class=\"button\" id='create-button' style='padding: 0;'>
                                 <i class='fas fa-plus-circle create-task__JS ' id='plus-button'></i>
                             </button>
@@ -281,9 +278,6 @@ include_once('db_config.php');
                             }
                             echo "
                                 <i class='far fa-trash-alt '></i>
-                            </button>
-                            <button class=\"button\">
-                                <i class='fas fa-arrow-down '></i>
                             </button>
                         </td>
                     </tr>";
