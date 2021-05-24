@@ -783,6 +783,86 @@ task_status input[type="radio"]:focus+label {
     text-align: center;
 }
 
+.fa-archive:hover::after{
+    content: 'Archive project';
+    position: absolute;
+    right: 2%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.fa-arrow-down:hover::after{
+    content: 'Export project';
+    position: absolute;
+    right: 0%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.fa-trash-alt:hover::after{
+    content: 'Delete project';
+    position: absolute;
+    right: 5%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.fa-edit:hover::after{
+    content: 'Edit project';
+    position: absolute;
+    right: 6%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+#plus-button:hover::after {
+    content: 'Create project';
+    position: absolute;
+    right: 6%;
+    padding: 10%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: inlne-block;
+    color: grey;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
 @media only screen and (max-width: 1550px) {
 
     .tasks-table tr th:nth-child(6),

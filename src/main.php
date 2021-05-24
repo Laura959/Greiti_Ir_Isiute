@@ -203,14 +203,14 @@ include_once('db_config.php');
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing projects-functions'>
-          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit' data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
+          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
           <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-          <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
+          <i class='far fa-trash-alt'></i>
           </button>
-          <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
+          <button class=\"button\"><i class='fas fa-archive'></i></button>
           <form method='post' style='display:inline-block'>
                 <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
+                <i class='fas fa-arrow-down'></i>
                 </button>
           </form>
           <button class=\"button\" id='create-button'>
@@ -227,15 +227,15 @@ include_once('db_config.php');
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border projects-functions'>
-                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'data-toggle=\"tooltip\" title=\"Edit project\"></i></button>
+                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
                 <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-                    <i class='far fa-trash-alt' data-toggle=\"tooltip\" title=\"Delete project\"></i>
+                    <i class='far fa-trash-alt'></i>
                     </button> 
 
-                <button class=\"button\"><i class='fas fa-archive' data-toggle=\"tooltip\" title=\"Archive\"></i></button>
+                <button class=\"button\"><i class='fas fa-archive'></i></button>
                 <form method='post' style='display:inline-block'>
                 <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down' data-toggle=\"tooltip\" title=\"Export\"></i>
+                <i class='fas fa-arrow-down'></i>
                 </button></td></tr>
                 </form>";
 
