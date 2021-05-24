@@ -55,28 +55,28 @@ include_once('db_config.php');
            
                 <li class="left-menu__item">
                     <a href="main.php" class="left-menu__icon">
-                        <i class="fas fa-folder left-menu-icon"></i>
+                        <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
                     </a>
                     <a href="main.php" class="left-menu__title">Projects</a>
                 </li>
                 <li class="left-menu__item">
                     <a href="#" href="#" class="left-menu__icon">
-                        <i class="fas fa-th-large left-menu-icon"></i>
+                        <i class="fas fa-th-large left-menu-icon task-board-btn" data-text="Task board"></i>
                     </a>
                     <p class="left-menu__title">Task board</p>
                 </li>
 
                 <li class="left-menu__item">
                     <a href="#" class="left-menu__icon">
-                        <i class="fas fa-history left-menu-icon"></i>
+                        <i class="fas fa-history left-menu-icon" data-text="History"></i>
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>
                 <li class="left-menu__item">
                     <a href="#" class="create-project__JS left-menu__icon">
-                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                        <i class="fas fa-plus-circle left-menu-icon board-task-btn" data-text="New task"></i>
                     </a>
-                    <p class="left-menu__title">New project</p>
+                    <p class="left-menu__title">New task</p>
                 </li>
             </ul>
         </div>

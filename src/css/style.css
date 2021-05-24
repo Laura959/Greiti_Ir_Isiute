@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+@import url("https://use.typekit.net/dwt6opx.css");
 
 * {
     margin: 0px;
@@ -12,7 +13,7 @@ html {
 }
 
 body {
-    font-family: 'Oswald', sans-serif;
+    font-family: classico-urw, sans-serif;
     background-color: #eeeeee;
     width: 100%;
     transition: padding-left .3s ease-in;
@@ -50,7 +51,7 @@ tr {
 
 thead {
     color: #ffffff;
-    background-color: #82bb4c;
+    background-color: #a8d381;
     height: 70px;
     text-align: left;
     width: 100%;
@@ -210,7 +211,6 @@ form button {
 
 
 .project-page-title {
-    font-family: 'Oswald', sans-serif;
     font-weight: bold;
     font-size: 2rem;
     font-size: clamp(1.65rem, 3vw, 2.25rem);
@@ -490,10 +490,9 @@ form button {
     right: -2.25rem !important;
 }
 
-.tasks__title--uppercase {
+/* .tasks__title--uppercase {
     text-transform: uppercase;
-
-}
+} */
 
 .tasks__th--width {
     width: 15%;
@@ -741,6 +740,32 @@ task_status input[type="radio"]:focus+label {
     top: 0%;
 }
 
+.fa-th-large:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding:6.9% 10% 6.9% 12%;
+    margin-left: 4%;
+    font-size: 15px;
+    color: #c0f292;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 19.9%;
+}
+
+.task-board-btn:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding:6.9% 10% 6.9% 12%;
+    margin-left: 4%;
+    font-size: 15px;
+    color: #c0f292;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 24.9%;
+}
+
 .fa-history:hover::after {
     content: attr(data-text);
       background-color: #ecf9e6;
@@ -752,6 +777,20 @@ task_status input[type="radio"]:focus+label {
     border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 50%;
+    text-align: center;
+}
+
+.history-btn:hover::after {
+    content: attr(data-text);
+      background-color: #ecf9e6;
+    padding: 10% 10% 9% 10%;
+    margin-left: 5%;
+    font-size: 16px;
+    color: #c0f292;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 40%;
     text-align: center;
 }
 
@@ -780,6 +819,48 @@ task_status input[type="radio"]:focus+label {
   border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 75%;
+    text-align: center;
+}
+
+.new-task-btn:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 6% 10% 7.7% 10%;
+  margin-left: 5%;
+  font-size: 15px;
+  color: #c0f292;
+  font-weight: bold;
+  border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 60%;
+    text-align: center;
+}
+
+.board-task-btn:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 6% 10% 7.7% 10%;
+  margin-left: 5%;
+  font-size: 15px;
+  color: #c0f292;
+  font-weight: bold;
+  border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 75%;
+    text-align: center;
+}
+
+.fa-users:hover::after {
+    content: attr(data-text);
+    background-color: #ecf9e6;
+    padding: 6% 10% 7.7% 10%;
+  margin-left: 5%;
+  font-size: 15px;
+  color: #c0f292;
+  font-weight: bold;
+  border-radius: 0px 15px 15px 0px;
+    position:absolute;
+    top: 80%;
     text-align: center;
 }
 
@@ -847,6 +928,38 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
+.edit-task-btn:hover::after{
+    content: 'Edit task';
+    position: absolute;
+    right: 4%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.delete-task-btn:hover::after{
+    content: 'Delete task';
+    position: absolute;
+    right: 2%;
+    padding: 1%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
 #plus-button:hover::after {
     content: 'Create project';
     position: absolute;
@@ -854,7 +967,7 @@ task_status input[type="radio"]:focus+label {
     padding: 10%;
     border-radius: 15px;
     background: #ffffff;
-    display: inlne-block;
+    display: block;
     color: grey;
     font-weight: 300;
     font-size: 15px;

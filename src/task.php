@@ -67,28 +67,28 @@ include_once('db_config.php');
            
                 <li class="left-menu__item">
                     <a href="main.php" class="left-menu__icon">
-                        <i class="fas fa-folder left-menu-icon"></i>
+                        <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
                     </a>
                     <a href="main.php" class="left-menu__title">Projects</a>
                 </li>
                 <li class="left-menu__item">
                     <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon">
-                        <i class="fas fa-th-large left-menu-icon"></i>
+                        <i class="fas fa-th-large left-menu-icon" data-text="Task Board"></i>
                     </a>
                     <p class="left-menu__title">Task board</p>
                 </li>
 
                 <li class="left-menu__item">
                     <a href="history.php" class="left-menu__icon">
-                        <i class="fas fa-history left-menu-icon"></i>
+                        <i class="fas fa-history left-menu-icon history-btn" data-text="History"></i>
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>
                 <li class="left-menu__item">
                     <a href="#" class="create-project__JS left-menu__icon">
-                        <i class="fas fa-plus-circle left-menu-icon"></i>
+                        <i class="fas fa-plus-circle left-menu-icon new-task-btn" data-text="New task"></i>
                     </a>
-                    <p class="left-menu__title">New project</p>
+                    <p class="left-menu__title">New task</p>
                 </li>
                 <?php 
                 $usersinfo = "";
@@ -115,7 +115,7 @@ include_once('db_config.php');
                 ?>
                 <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo;?>">
                         <a href="#" class="left-menu__icon">
-                            <i class="fas fa-users left-menu-icon"></i>
+                            <i class="fas fa-users left-menu-icon" data-text="Manage members"></i>
                         </a>
                         <p class="left-menu__title left-menu__title--margin">Manage members</p>
                 </li>
@@ -231,7 +231,7 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Naujinimo_data'] . "</td>
                         <td class='tasks__td'>
                             <button class=\"update1-project__JS\">
-                                <i class='far fa-edit '></i>
+                                <i class='far fa-edit edit-task-btn'></i>
                             </button>
 
                             <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
@@ -243,7 +243,7 @@ include_once('db_config.php');
                                 }
                                 echo "
 
-                                <i class='far fa-trash-alt '></i>
+                                <i class='far fa-trash-alt delete-task-btn'></i>
                             </button>
                             <button class=\"button\" id='create-button' style='padding: 0;'>
                                 <i class='fas fa-plus-circle create-task__JS ' id='plus-button'></i>
@@ -266,7 +266,7 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Naujinimo_data'] . "</td>
                         <td class='tasks__td'>
                             <button class=\"update1-project__JS\">
-                                <i class='far fa-edit '></i>
+                                <i class='far fa-edit edit-task-btn'></i>
                             </button>
 
                             <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
@@ -277,7 +277,7 @@ include_once('db_config.php');
                             echo "<button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
                             }
                             echo "
-                                <i class='far fa-trash-alt '></i>
+                                <i class='far fa-trash-alt delete-task-btn'></i>
                             </button>
                         </td>
                     </tr>";

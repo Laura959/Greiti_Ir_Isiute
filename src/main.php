@@ -85,7 +85,7 @@ include_once('db_config.php');
 <header>
     <!-- Viršutinė menu juosta su search ir exit laukeliais -->
     <nav class="navbar">
-        <a class="project-page-title mr-auto" download="Projects.csv">PROJECTS</a>
+        <a class="project-page-title mr-auto" download="Projects.csv">Projects</a>
         <div class="whole-search">
         <!-- board-page-title propects -->
     <!-- SEARCH FUNKCIALUMAS -->        
@@ -214,7 +214,7 @@ include_once('db_config.php');
                 </button>
           </form>
           <button class=\"button\" id='create-button'>
-          <i class='fas fa-plus-circle create-project__JS' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
+          <i class='fas fa-plus-circle create-project__JS add-project-btn' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
             }
                 // spausdinamos kitos lentelės eilutės

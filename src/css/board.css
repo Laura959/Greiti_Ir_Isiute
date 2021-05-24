@@ -1,4 +1,4 @@
-/* @import url("https://use.typekit.net/dwt6opx.css"); */
+@import url("https://use.typekit.net/dwt6opx.css");
 
 .board-heading {
     display: flex;
@@ -6,7 +6,7 @@
 }
 
 .board-page-title, .symbol {
-    /* font-family: classico-urw, sans-serif; */
+    font-family: classico-urw, sans-serif;
     /* font-family: alegreya, serif; */
     /* width: 100%; */
     letter-spacing: 2px;

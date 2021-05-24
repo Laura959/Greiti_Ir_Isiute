@@ -34,4 +34,4 @@ services:
       ports:
         - 9000:80
       volumes:
-        - ./src:/var/www/html
+        - ./src:/var/www/html:consistent
