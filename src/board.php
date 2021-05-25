@@ -6,8 +6,6 @@ if (isset($_COOKIE["Projektas"])) {
 if (isset($_COOKIE["Projekto_id"])) {
     setcookie("Projekto_id", "", time() - 3600);
 }
-
-
 if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
@@ -29,12 +27,12 @@ include_once('db_config.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=221" rel="stylesheet">
-    <link href="css/board.css?rnd=145" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=132" type="text/css" rel="stylesheet">
+    <meta name="description" content="Take a look and manage your tasks in project management system via dashboard!"/>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <link href="css/style.css?rnd=215" rel="stylesheet">
+    <link href="css/board.css?rnd=721" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <link href="css/createForm.css?rnd=212" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js" crossorigin="anonymous"></script>
 </head>
@@ -43,10 +41,10 @@ include_once('db_config.php');
      <!-- Kairinis menu -->
      <div class="left-menu"> 
         <div class="left-menu__controls">
-            <button class="left-menu__show-btn left-menu__btn">
+            <button class="left-menu__show-btn left-menu__btn" aria-label="Open">
                 <i class="fas fa-bars" id="hamburger"></i>
             </button>
-            <button class="left-menu__hide-btn left-menu__btn">
+            <button class="left-menu__hide-btn left-menu__btn" aria-label="Close">
                 <i class="fas fa-times" id="cancel"></i>
             </button>
         </div>
@@ -95,7 +93,7 @@ include_once('db_config.php');
                     echo '<p class="login-name login-name__board">' . $_SESSION["username"] . '</p>';
                     ?>
                     <form method="POST">
-                        <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt"></i></button>
+                        <button class="button" type="submit" name="logout" aria-label="logout"><i class="fas fa-sign-out-alt" ></i></button>
                     </form>
                 </div>
             </nav>
@@ -105,7 +103,7 @@ include_once('db_config.php');
         <main>
         <?php
 
-        if (isset($_GET['Projekto_id'])) {
+        if (isset($_GET['Projekto_id']) && !empty($_GET['Projekto_id'])) {
             try {
                 $todoFirst = true;
                 $inProgressFirst = true;
@@ -128,19 +126,19 @@ include_once('db_config.php');
                             echo "
                             <div class=\"board-container\">
                             <div class=\"task-board\">
-                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-header\">To do</div>
                             <div class=\"board-background\">
                             ";
                         }
                         echo "
-                                <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"To do\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                                <div class=\"board-data update-dashboard__JS drag-item\" data-priority=\"".$row['Prioritetas']."\" data-status=\"To do\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\" draggable=\"true\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
                     }else if($row['Busena'] === 'In Progress'){
                         if($todoFirst){
                             $todoFirst = false;
                             echo "
                             <div class=\"board-container\">
                             <div class=\"task-board\">
-                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-header\">To do</div>
                             <div class=\"board-background\">
                             ";
                         }
@@ -150,19 +148,19 @@ include_once('db_config.php');
                             </div>
                             </div>
                             <div class=\"task-board\">
-                                    <div class=\"board-header\">in progress</div>
+                                    <div class=\"board-header\">In Progress</div>
                                     <div class=\"board-background\">
                             ";
                         }
                         echo "
-                                <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"In Progress\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                                <div class=\"board-data update-dashboard__JS drag-item\" data-priority=\"".$row['Prioritetas']."\" data-status=\"In Progress\" data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\" draggable=\"true\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
                     }else if($row['Busena'] === 'Done'){
                         if($todoFirst){
                             $todoFirst = false;
                             echo "
                             <div class=\"board-container\">
                             <div class=\"task-board\">
-                            <div class=\"board-header\">to do</div>
+                            <div class=\"board-header\">To do</div>
                             <div class=\"board-background\">
                             ";
                         }
@@ -172,7 +170,7 @@ include_once('db_config.php');
                             </div>
                             </div>
                             <div class=\"task-board\">
-                                    <div class=\"board-header\">in progress</div>
+                                    <div class=\"board-header\">In Progress</div>
                                     <div class=\"board-background\">
                             ";
                         }
@@ -187,19 +185,19 @@ include_once('db_config.php');
                             ";
                         }
                         echo "
-                        <div class=\"board-data update-dashboard__JS\" data-priority=\"".$row['Prioritetas']."\" data-status=\"Done\"  data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
+                        <div class=\"board-data update-dashboard__JS drag-item\" data-priority=\"".$row['Prioritetas']."\" data-status=\"Done\"  data-id=\"".$row['Uzduoties_id']."\" data-description=\"".$row['Aprasymas']."\" draggable=\"true\"><span class=\"dot dot--".$row['Prioritetas']."\"></span>".$row['Pavadinimas']."</div>";
                     }
                 }
                 if($todoFirst && $inProgressFirst && $doneFirst){
                     echo "
                         <div class=\"board-container\">
                         <div class=\"task-board\">
-                        <div class=\"board-header\">to do</div>
+                        <div class=\"board-header\">To do</div>
                         <div class=\"board-background\">
                         </div>
                         </div>
                         <div class=\"task-board\">
-                                <div class=\"board-header\">in progress</div>
+                                <div class=\"board-header\">In Progress</div>
                                 <div class=\"board-background\">
                         </div>
                         </div>
@@ -212,7 +210,7 @@ include_once('db_config.php');
                     </div>
                     </div>
                     <div class=\"task-board\">
-                    <div class=\"board-header\">in progress</div>
+                    <div class=\"board-header\">In Progress</div>
                     <div class=\"board-background\">
                     </div>
                     </div>
@@ -290,21 +288,17 @@ include_once('db_config.php');
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Task status'" required>
                             <label for="radioFinished1">Done</label>
                         </div>
-                        
-                        
-                        
-                        
                         <div class="pop-up--flex">
                             <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
-                            <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                            <div role="button" class="pop-up__cancel-btn" aria-label="Cancel">Cancel</div>
                         </div>
                         <?php
                         if (isset($_POST['updateTitle'])) {
                             $update = new Project();
-                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'board.php');
+                            $update->updateTask($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'board.php');
                         }
                         if (isset($_SESSION['updateError'])) {
-                            //   echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
+                            echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
                             echo $_POST['updateId'];
                             unset($_SESSION['updateError']);
                         }
@@ -312,7 +306,7 @@ include_once('db_config.php');
                     </form>
                 </div>
         </main>
-        <script type="module" src="./js/createProject.js?rnd=551" defer></script>
+        <script type="module" src="./js/createProject.js?rnd=121" defer></script>
     </section>
     </body>
 </html>

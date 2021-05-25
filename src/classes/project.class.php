@@ -160,16 +160,16 @@
             }
         }
 
-        public function updateProject1($name, $description1, $priority, $busena, $id1,$projectid,$projecttitle, $user, $page){
-        if(empty($name)){
+        public function updateTask($name, $description1, $priority, $busena, $id1, $projectid, $projecttitle, $page){
+            if(empty($name)){
                 $_SESSION['updateError'] = "Project's title field is required";
                 return;
             }
+
            // $id = $this->getUniqueId();
              $ivykis = 'Task / Update';
                $naujinimas = date("Y-m-d ");
                $naujinimas1 = date("Y-m-d H:i:s");
-               
             try{
               
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
@@ -183,9 +183,11 @@
                 $statement->execute([$name,$priority,$busena, $description1, $naujinimas, $id1]);
                 
                 $statement2 = $pdo->prepare($sql2);
-                $statement2->execute(['',$ivykis,$name, $naujinimas1, $user, $_SESSION['username']]);
+                $statement2->execute(['',$ivykis,$name, $naujinimas1, $_SESSION['userId'], $_SESSION['username']]);
                 
-                echo "<script> location.replace(\"".$page."?title=".$projecttitle."&Projekto_id=".$projectid."\"); </script>";
+                if($page !== 'success'){                    
+                    echo "<script> location.replace(\"".$page."?title=".$projecttitle."&Projekto_id=".$projectid."\"); </script>";
+                }
             }catch(PDOException $error){
                 $_SESSION['updateError'] =  "Database connection lost.";
                 $_POST['fail'] = 'set';

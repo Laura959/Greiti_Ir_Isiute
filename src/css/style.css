@@ -14,20 +14,20 @@ html {
 
 body {
     font-family: classico-urw, sans-serif;
+    /* font-family: 'Oswald', sans-serif; */
     background-color: #eeeeee;
     width: 100%;
     transition: padding-left .3s ease-in;
-    /* line-height: 2; */
     overflow-x: hidden;
 }
 
 a {
-    color: #80807e;
+    color: #777766;
     text-decoration: none;
 }
 
 a:hover {
-    color: #80807e;
+    color: #777766;
     text-decoration: none;
 }
 
@@ -41,7 +41,7 @@ a:hover {
     width: 82.5%;
     margin: 3.25rem auto 0 12.5%;
     position: relative;
-    color: #80807e;
+    color: #777766;
     z-index: 0;
 }
 
@@ -73,13 +73,18 @@ th {
 
 .projects-table td,
 .projects-table th {
-    padding: 29px 2rem;
+    padding: 29px 1.5rem;
+}
+
+.projects-table th,
+.tasks-table th {
+    white-space: nowrap;
+
 }
 
 .tasks-table td,
 .tasks-table th {
     padding: 29px 1rem;
-
 }
 
 .projects-table__main td {
@@ -89,15 +94,14 @@ th {
 
 .tasks__td {
     font-weight: 300;
-    word-break: break-word;
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
 }
 
 .tasks__th {
+    word-break: break-word;
     text-transform: uppercase;
     font-weight: 500;
-    letter-spacing: .1rem;
-    font-size: clamp(1.25rem, 1.65vw, 1.3rem);
+    font-size: clamp(1.25rem, 1.45vw, 1.3rem);
 }
 
 section {
@@ -107,6 +111,7 @@ section {
 button {
     border: #ffffff;
     background-color: #ffffff;
+    background-color: transparent;
 }
 
 form button {
@@ -136,10 +141,12 @@ form button {
     text-align: center;
     position: relative;
 }
-.form-inline{
+
+.form-inline {
     display: flex;
     flex-wrap: nowrap;
 }
+
 .label {
     display: block;
     text-align: left;
@@ -236,6 +243,7 @@ form button {
 
 .project-name-spacing {
     border-top-left-radius: 15px;
+    word-break: break-word;
 }
 
 .round-border {
@@ -260,7 +268,6 @@ form button {
     margin-left: -55px;
     margin-bottom: -18.5px;
     margin-right: 25px;
-    /* display: inline; */
 }
 
 .round {
@@ -275,7 +282,7 @@ form button {
 .far,
 .fas {
     color: #c0f292;
-    background-color: #ffffff;
+    background-color: transparent;
     font-size: 26px;
 }
 
@@ -312,8 +319,8 @@ form button {
     margin-top: .2rem;
 }
 
-.export {
-    margin-left: 3.75px;
+.export__span {
+    padding-left: .425rem;
 }
 
 #search {
@@ -324,7 +331,7 @@ form button {
     font-weight: 304;
     font-size: 1.15rem;
     font-style: normal;
-    color: #666666;
+    color: #777766;
 }
 
 #search:focus {
@@ -418,19 +425,14 @@ form button {
     margin-right: .65rem;
 }
 
-/* .tasks__priority-Low::before {
-    margin-right: 1.8rem;
-}
-
-.tasks__priority-High::before {
-    margin-right: 1.4rem;
-} */
-.tasks__priority-Low{
+.tasks__priority-Low {
     text-indent: -1.2rem;
 }
-.tasks__priority-High{
+
+.tasks__priority-High {
     text-indent: -.95rem;
 }
+
 .tasks__priority-Low::before {
     background-color: #00ff00;
 }
@@ -456,7 +458,7 @@ form button {
     display: inline-block;
     padding: .15rem .3rem;
     border-radius: .25rem;
-    background: #a8d381;
+    background-color: #a8d381;
     opacity: 1;
     color: #fff;
     font-weight: 500;
@@ -490,10 +492,6 @@ form button {
     right: -2.25rem !important;
 }
 
-/* .tasks__title--uppercase {
-    text-transform: uppercase;
-} */
-
 .tasks__th--width {
     width: 15%;
     text-align: center;
@@ -506,7 +504,6 @@ form button {
 .task_insert input[type="radio"],
 .task_status input[type="radio"] {
     opacity: 0;
-    /* position: fixed; */
     width: 0;
 }
 
@@ -535,11 +532,6 @@ form button {
     background-color: #bfb;
     border-color: #4c4;
 }
-
-/* .task_insert input[type="radio"]:focus+label,
-task_status input[type="radio"]:focus+label {
-    border: 2px dashed #444;
-} */
 
 .task_insert label:hover,
 .task_status label:hover {
@@ -570,7 +562,8 @@ task_status input[type="radio"]:focus+label {
 
 .error-search-img {
     margin-left: 35%;
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
 }
 
 .projects-status {
@@ -625,7 +618,8 @@ task_status input[type="radio"]:focus+label {
     padding: 1rem 0;
     align-items: baseline;
     margin-bottom: 0;
-    font-size: 19px;
+    font-size: 18px;
+    letter-spacing: -.5px;
     transition: background-color .15s;
     cursor: pointer;
 }
@@ -655,6 +649,7 @@ task_status input[type="radio"]:focus+label {
 .left-menu__show-btn,
 .left-menu__hide-btn {
     position: fixed;
+    cursor: pointer;
 }
 
 
@@ -692,23 +687,27 @@ task_status input[type="radio"]:focus+label {
     transition: transform .3s ease-in;
     white-space: nowrap;
     color: #7e7e7e;
+    color: #777766;
 }
 
 .left-menu__title {
     margin-bottom: 0;
 }
 
-.left-menu__title--margin{
- margin-left: -4px;
+.left-menu__title--margin {
+    margin-left: -4px;
 }
-.fa-users{
-    
+
+.fa-users {
+
     margin-left: -3.5px;
 }
+
 .left-menu__JS .left-menu__title {
     transform: scaleX(1);
 }
-.search-form__input{
+
+.search-form__input {
     height: 40px;
     cursor: pointer;
     margin: 11.5px 0;
@@ -720,7 +719,7 @@ task_status input[type="radio"]:focus+label {
     flex-flow: row;
 }
 
-.fa-archive:hover, .fa-arrow-down:hover, .fa-edit:hover, .fa-trash-alt:hover, .fa-sign-out-alt:hover, .add-task-btn:hover, .add-project-btn:hover {
+    .fa-archive:hover, .fa-arrow-down:hover, .fa-edit:hover, .fa-trash-alt:hover, .fa-sign-out-alt:hover, .add-task-btn:hover, .add-project-btn:hover {
     text-decoration: none;
     color: #a8d381;
 }
@@ -734,33 +733,33 @@ task_status input[type="radio"]:focus+label {
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position:absolute;
+    position: absolute;
     top: 0%;
 }
 
 .fa-th-large:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding:6.9% 10% 6.9% 12%;
+    padding: 6.9% 10% 6.9% 12%;
     margin-left: 4%;
     font-size: 15px;
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position:absolute;
+    position: absolute;
     top: 19.9%;
 }
 
 .task-board-btn:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding:6.9% 10% 6.9% 12%;
+    padding: 6.9% 10% 6.9% 12%;
     margin-left: 4%;
     font-size: 15px;
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position:absolute;
+    position: absolute;
     top: 24.9%;
 }
 
@@ -773,7 +772,7 @@ task_status input[type="radio"]:focus+label {
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position:absolute;
+    position: absolute;
     top: 50%;
     text-align: center;
 }
@@ -787,7 +786,7 @@ task_status input[type="radio"]:focus+label {
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position:absolute;
+    position: absolute;
     top: 40%;
     text-align: center;
 }
@@ -796,25 +795,44 @@ task_status input[type="radio"]:focus+label {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 7% 10% 6.1% 10%;
-  margin-left: 9%;
-  font-size: 15px;
-  color: #80807e;
-  font-weight: bold;
-  border-radius: 0px 15px 15px 0px;
-  position:absolute;
+    margin-left: 9%;
+    font-size: 15px;
+    color: #80807e;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    position:absolute;
     top: 25%;
     text-align: center;
+}
+
+#plus-button:hover::after,
+.delete-task-btn:hover::after,
+.edit-task-btn:hover::after,
+.fa-edit:hover::after,
+.fa-trash-alt:hover::after,
+.fa-archive:hover::after,
+.fa-arrow-down:hover::after,
+.fa-users:hover::after,
+.board-task-btn:hover::after,
+.new-task-btn:hover::after,
+.fa-plus-circle:hover::after,
+.fa-file-download:hover::after,
+.history-btn:hover::after,
+.fa-history:hover::after,
+.fa-folder:hover::after,
+.fa-th-large:hover::after {
+    z-index: 20;
 }
 
 .fa-plus-circle:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 7.6% 10%;
-  margin-left: 5%;
-  font-size: 15px;
-  color: #80807e;
-  font-weight: bold;
-  border-radius: 0px 15px 15px 0px;
+    margin-left: 5%;
+    font-size: 15px;
+    color: #80807e;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 75%;
     text-align: center;
@@ -824,11 +842,11 @@ task_status input[type="radio"]:focus+label {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 7.5% 10%;
-  margin-left: 5%;
-  font-size: 15px;
-  color: #80807e;
-  font-weight: bold;
-  border-radius: 0px 15px 15px 0px;
+    margin-left: 5%;
+    font-size: 15px;
+    color: #80807e;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 60%;
     text-align: center;
@@ -838,11 +856,11 @@ task_status input[type="radio"]:focus+label {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 7.7% 10%;
-  margin-left: 5%;
-  font-size: 15px;
-  color: #80807e;
-  font-weight: bold;
-  border-radius: 0px 15px 15px 0px;
+    margin-left: 5%;
+    font-size: 15px;
+    color: #80807e;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 75%;
     text-align: center;
@@ -852,17 +870,17 @@ task_status input[type="radio"]:focus+label {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 7.2% 10%;
-  margin-left: 5%;
-  font-size: 15px;
-  color: #80807e;
-  font-weight: bold;
-  border-radius: 0px 15px 15px 0px;
+    margin-left: 5%;
+    font-size: 15px;
+    color: #80807e;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
     position:absolute;
     top: 80%;
     text-align: center;
 }
 
-.fa-archive:hover::after{
+.fa-archive:hover::after {
     content: 'Archive project';
     position: absolute;
     right: 2%;
@@ -878,7 +896,7 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-.fa-arrow-down:hover::after{
+.fa-arrow-down:hover::after {
     content: 'Export project';
     position: absolute;
     right: 0%;
@@ -894,7 +912,7 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-.fa-trash-alt:hover::after{
+.fa-trash-alt:hover::after {
     content: 'Delete project';
     position: absolute;
     right: 5%;
@@ -910,11 +928,12 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-.fa-edit:hover::after{
+.fa-edit:hover::after {
     content: 'Edit project';
     position: absolute;
     right: 6%;
     padding: 1%;
+    z-index: 15;
     border-radius: 15px;
     background: #ffffff;
     display: block;
@@ -926,7 +945,7 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-.edit-task-btn:hover::after{
+.edit-task-btn:hover::after {
     content: 'Edit task';
     position: absolute;
     right: 4%;
@@ -942,7 +961,7 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-.delete-task-btn:hover::after{
+.delete-task-btn:hover::after {
     content: 'Delete task';
     position: absolute;
     right: 2%;
@@ -974,6 +993,9 @@ task_status input[type="radio"]:focus+label {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
+.edit-task-btn--padding{
+    padding-right: .25rem;
+ }
 .add-task-btn:hover::after {
     content: 'Create task';
     position: absolute;
@@ -1048,6 +1070,7 @@ task_status input[type="radio"]:focus+label {
         min-width: 105px;
         padding: 5px 15px;
     }
+
     .tasks__th--radius {
         border-top-left-radius: 15px;
     }
@@ -1083,6 +1106,7 @@ task_status input[type="radio"]:focus+label {
     .left-menu__JS {
         padding-left: 0;
     }
+
     .task_insert label,
     .task_status label {
         min-width: 95px;
@@ -1134,10 +1158,23 @@ task_status input[type="radio"]:focus+label {
         margin: 0 auto;
         margin-left: calc(2rem + auto);
     }
-    .search-form__input{
+    .error-search-img {
+        margin: 0 auto;
+    }
+    .search-form__input {
         margin: 0 0 0 6.25rem;
         height: 31.5px;
     }
+
+    .error-search-group {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .error-search-message {
+        margin: 0 auto;
+    }
+
     .projects-functions {
         width: initial;
         text-align: center;
@@ -1190,12 +1227,15 @@ task_status input[type="radio"]:focus+label {
         width: 92.5%;
         margin: 2rem auto;
     }
+
     .tasks__navbar {
         text-align: center;
     }
-    .tasks__title{
+
+    .tasks__title {
         padding: 32px 0 0 0;
     }
+
     .navbar {
         flex-direction: column-reverse;
         align-items: flex-end;
@@ -1209,17 +1249,24 @@ task_status input[type="radio"]:focus+label {
     }
 
     .projects-table td,
-    .tasks-table td
-        {
+    .tasks-table td {
         padding: 20px .75rem;
     }
-    .search-form__input{
+
+    .search-form__input {
         margin-left: 1.75rem;
     }
-    .login-name{
+
+    .login-name {
         display: none;
     }
-    .login-name__board{
+
+    .login-name__board {
         display: block;
     }
+
+    .icon--mobile{
+        font-size: 17.5px;
+    }
 }
+

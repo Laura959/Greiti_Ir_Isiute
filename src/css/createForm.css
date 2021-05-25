@@ -1,8 +1,12 @@
 @import url("https://use.typekit.net/dwt6opx.css");
 
 body {
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1;
+    /* other */
+    /* background-color: #9D8D8F; */ 
+
     font-family: classico-urw, sans-serif;
+    /* font-family: 'Oswald', sans-serif; */
 }
 
 .blur__JS {
@@ -13,6 +17,7 @@ body {
     height: 100%;
     z-index: 10;
     background-color: #e0e0e0ab;
+
 }
 
 @supports ((-webkit-backdrop-filter: blur(.25rem)) or (backdrop-filter: blur(.25rem))) {
