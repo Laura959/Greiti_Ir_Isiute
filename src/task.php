@@ -62,7 +62,7 @@ include_once('db_config.php');
             </button>
         </div>
         <div class="left-menu__list">
-            <ul class="left-menu__items">
+            <ul class="left-menu__items sidebar-tasks">
            
                 <li class="left-menu__item">
                     <a href="main.php" class="left-menu__icon" aria-label="Main page">
@@ -243,7 +243,7 @@ include_once('db_config.php');
                                 <i class='far fa-trash-alt delete-task-btn icon--mobile'></i>
                             </button>
                             <button class=\"button\" id='create-button' style='padding: 0;' aria-label=\"create a task\">
-                                <i class='fas fa-plus-circle create-task__JS ' id='plus-button'></i>
+                                <i class='fas fa-plus-circle create-task__JS add-task-btn' id='plus-button'></i>
                             </button>
                         </td>
                     </tr>";

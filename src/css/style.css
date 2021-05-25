@@ -520,8 +520,6 @@ form button {
     display: inline-block;
     background-color: #a0e383;
     padding: 5px 20px;
-    font-family: sans-serif, Arial;
-    font-weight: 500;
     font-size: 1rem;
     font-size: clamp(.9rem, 1.2vw, 1.1rem);
     min-width: 120px;
@@ -586,7 +584,7 @@ form button {
     position: fixed;
     background-color: #ffffff;
     height: 100%;
-    width: 250px;
+    width: 270px;
     left: -170px;
     z-index: 4;
     top: 0;
@@ -604,7 +602,7 @@ form button {
 
 .left-menu__icon {
     padding: 0 1.6rem;
-    padding-left: 12.2rem;
+    padding-left: 12.7rem;
     transition: padding .3s ease-in;
 }
 
@@ -656,7 +654,7 @@ form button {
 
 
 .left-menu__show-btn {
-    left: 1.6rem;
+    left: 2.3rem;
     top: 3rem;
     z-index: 5;
 }
@@ -678,7 +676,7 @@ form button {
 }
 
 .left-menu__JS .left-menu__hide-btn {
-    left: 12.5rem;
+    left: 13.6rem;
     opacity: 1;
 }
 
@@ -721,11 +719,7 @@ form button {
     flex-flow: row;
 }
 
-.fa-archive:hover,
-.fa-arrow-down:hover,
-.fa-edit:hover,
-.fa-trash-alt:hover,
-.fa-sign-out-alt:hover {
+    .fa-archive:hover, .fa-arrow-down:hover, .fa-edit:hover, .fa-trash-alt:hover, .fa-sign-out-alt:hover, .add-task-btn:hover, .add-project-btn:hover {
     text-decoration: none;
     color: #a8d381;
 }
@@ -733,10 +727,10 @@ form button {
 .fa-folder:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 10% 10% 9% 10%;
+    padding: 10% 10% 8.5% 10%;
     margin-left: 5%;
     font-size: 16px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     position: absolute;
@@ -749,7 +743,7 @@ form button {
     padding: 6.9% 10% 6.9% 12%;
     margin-left: 4%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     position: absolute;
@@ -762,7 +756,7 @@ form button {
     padding: 6.9% 10% 6.9% 12%;
     margin-left: 4%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     position: absolute;
@@ -771,11 +765,11 @@ form button {
 
 .fa-history:hover::after {
     content: attr(data-text);
-    background-color: #ecf9e6;
-    padding: 10% 10% 9% 10%;
+      background-color: #ecf9e6;
+    padding: 10% 10% 8.3% 10%;
     margin-left: 5%;
     font-size: 16px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     position: absolute;
@@ -785,11 +779,11 @@ form button {
 
 .history-btn:hover::after {
     content: attr(data-text);
-    background-color: #ecf9e6;
-    padding: 10% 10% 9% 10%;
+      background-color: #ecf9e6;
+    padding: 10% 10% 8.3% 10%;
     margin-left: 5%;
     font-size: 16px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     position: absolute;
@@ -800,13 +794,13 @@ form button {
 .fa-file-download:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 7% 10% 6.8% 10%;
+    padding: 7% 10% 6.1% 10%;
     margin-left: 9%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
+    position:absolute;
     top: 25%;
     text-align: center;
 }
@@ -833,13 +827,13 @@ form button {
 .fa-plus-circle:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 6% 10% 8% 10%;
+    padding: 6% 10% 7.6% 10%;
     margin-left: 5%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
+    position:absolute;
     top: 75%;
     text-align: center;
 }
@@ -847,13 +841,13 @@ form button {
 .new-task-btn:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 6% 10% 7.7% 10%;
+    padding: 6% 10% 7.5% 10%;
     margin-left: 5%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
+    position:absolute;
     top: 60%;
     text-align: center;
 }
@@ -864,10 +858,10 @@ form button {
     padding: 6% 10% 7.7% 10%;
     margin-left: 5%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
+    position:absolute;
     top: 75%;
     text-align: center;
 }
@@ -875,13 +869,13 @@ form button {
 .fa-users:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 6% 10% 7.7% 10%;
+    padding: 6% 10% 7.2% 10%;
     margin-left: 5%;
     font-size: 15px;
-    color: #c0f292;
+    color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
+    position:absolute;
     top: 80%;
     text-align: center;
 }
@@ -983,10 +977,10 @@ form button {
     box-shadow: -2px 4px 7px -4px #0000004f;
 }
 
-#plus-button:hover::after {
+.add-project-btn:hover::after {
     content: 'Create project';
     position: absolute;
-    right: 6%;
+    top: 110%;
     padding: 10%;
     border-radius: 15px;
     background: #ffffff;
@@ -1001,6 +995,25 @@ form button {
 
 .edit-task-btn--padding{
     padding-right: .25rem;
+ }
+.add-task-btn:hover::after {
+    content: 'Create task';
+    position: absolute;
+    top: 110%;
+    padding: 10%;
+    border-radius: 15px;
+    background: #ffffff;
+    display: block;
+    color: grey;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: Oswald;
+    -webkit-box-shadow: 1px 4px 9px -4px #0000004f;
+    box-shadow: -2px 4px 7px -4px #0000004f;
+}
+
+.sidebar-tasks {
+    margin-top: 29px;
 }
 
 @media only screen and (max-width: 1550px) {
