@@ -33,8 +33,12 @@
     display: flex;
     flex-direction: column;
     min-width: 220px;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     width: 30%;
+    background-color: #ffffff;
+    min-height: 225px;
+    border-radius: 15px;
+    /* padding-bottom: 1.5rem; */
 }
 
 .board-header {
@@ -42,33 +46,23 @@
     background-color: #a8d381;
     font-size: 20px;
     text-align: center;
+    margin-bottom: 1rem;
     width: 100%;
     border-radius: 15px 15px 0px 0px;
     text-transform: uppercase;
     font-weight: 400;
     padding: 1rem;
-    /* line-height: 60px; */
-}
-
-.board-background {
-    background-color: white;
-    color: #80807e;
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: space-between;
-    padding: 1%;
-    border-radius: 0px 0px 15px 15px;
+    color: #ffffff;
 }
 
 .board-data {
     background-color: rgb(242, 242, 242);
     border-radius: 30px;
+    color: #444444;
     text-align: left;
-    margin: 5px;
-    padding: 2%;
-    width: 100%;
+    margin: 0 auto 1rem;
+    padding: .25rem;
+    width: 92.5%;
     font-size: 17px;
     cursor: pointer;
 }
@@ -121,7 +115,7 @@
         gap: 1rem;
     }
     .task-board {
-        min-width: 300px;
+        width: 75%;
     }
 }
 
@@ -137,6 +131,7 @@
     }
     .task-board {
         min-width: 345px;
+        width: 80%;
     }
 }
 

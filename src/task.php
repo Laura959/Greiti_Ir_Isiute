@@ -34,12 +34,11 @@ include_once('db_config.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content='width=device-width; initial-scale=1.0;' name='viewport' />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=326" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=711" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Take a look and manage your tasks in project management system!"/>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <link href="css/style.css?rnd=124" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <link href="css/createForm.css?rnd=124" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
     <script>
@@ -55,10 +54,10 @@ include_once('db_config.php');
     <!-- Kairinis menu -->
     <div class="left-menu"> 
         <div class="left-menu__controls">
-            <button class="left-menu__show-btn left-menu__btn">
+            <button class="left-menu__show-btn left-menu__btn" aria-label="Show menu">
                 <i class="fas fa-bars" id="hamburger"></i>
             </button>
-            <button class="left-menu__hide-btn left-menu__btn">
+            <button class="left-menu__hide-btn left-menu__btn" aria-label="close">
                 <i class="fas fa-times" id="cancel"></i>
             </button>
         </div>
@@ -66,26 +65,26 @@ include_once('db_config.php');
             <ul class="left-menu__items">
            
                 <li class="left-menu__item">
-                    <a href="main.php" class="left-menu__icon">
+                    <a href="main.php" class="left-menu__icon" aria-label="Main page">
                         <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
                     </a>
                     <a href="main.php" class="left-menu__title">Projects</a>
                 </li>
                 <li class="left-menu__item">
-                    <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon">
+                    <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : '';?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : '';?>" class="left-menu__icon" aria-label="Dashboard page">
                         <i class="fas fa-th-large left-menu-icon" data-text="Task Board"></i>
                     </a>
                     <p class="left-menu__title">Task board</p>
                 </li>
 
                 <li class="left-menu__item">
-                    <a href="history.php" class="left-menu__icon">
+                    <a href="history.php" class="left-menu__icon" aria-label="History page">
                         <i class="fas fa-history left-menu-icon history-btn" data-text="History"></i>
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>
                 <li class="left-menu__item">
-                    <a href="#" class="create-project__JS left-menu__icon">
+                    <a class="create-project__JS left-menu__icon" aria-label="create">
                         <i class="fas fa-plus-circle left-menu-icon new-task-btn" data-text="New task"></i>
                     </a>
                     <p class="left-menu__title">New task</p>
@@ -114,7 +113,7 @@ include_once('db_config.php');
                 }
                 ?>
                 <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo;?>">
-                        <a href="#" class="left-menu__icon">
+                        <a href="#" class="left-menu__icon" aria-label="manage members">
                             <i class="fas fa-users left-menu-icon" data-text="Manage members"></i>
                         </a>
                         <p class="left-menu__title left-menu__title--margin">Manage members</p>
@@ -161,7 +160,7 @@ include_once('db_config.php');
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form method="POST">
-                <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
+                <button class="button" type="submit" name="logout" aria-label="logout"><i class="fas fa-sign-out-alt" aria-label="logout"></i></button>
             </form>
             </div>
         </div>
@@ -230,22 +229,20 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Sukurimo_data'] . "</td>
                         <td class='tasks__td'>" . $row['Naujinimo_data'] . "</td>
                         <td class='tasks__td'>
-                            <button class=\"update1-project__JS\">
-                                <i class='far fa-edit edit-task-btn'></i>
-                            </button>
-
-                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            <button class=\"update1-project__JS\" aria-label=\"edit\">
+                                <i class='far fa-edit edit-task-btn icon--mobile edit-task-btn--padding'></i>
+                            </button>";
 
                             if (isset($_COOKIE['Projekto_id']) && isset($_COOKIE['Projektas'])){
-                                echo "<button class=\"delete1-project__JS\" data-id= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                                echo "<button class=\"delete1-project__JS\" data-id-project= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" data-id=\"" . $row['Uzduoties_id'] . "\" aria-label=\"delete\">";
                                 } else {
-                                echo "<button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                                echo "<button class=\"delete1-project__JS\" data-id-project= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" data-id=\"" . $row['Uzduoties_id'] . "\" aria-label=\"delete\">";
                                 }
                                 echo "
 
-                                <i class='far fa-trash-alt delete-task-btn'></i>
+                                <i class='far fa-trash-alt delete-task-btn icon--mobile'></i>
                             </button>
-                            <button class=\"button\" id='create-button' style='padding: 0;'>
+                            <button class=\"button\" id='create-button' style='padding: 0;' aria-label=\"create a task\">
                                 <i class='fas fa-plus-circle create-task__JS ' id='plus-button'></i>
                             </button>
                         </td>
@@ -265,19 +262,17 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Sukurimo_data'] . "</td>
                         <td class='tasks__td'>" . $row['Naujinimo_data'] . "</td>
                         <td class='tasks__td'>
-                            <button class=\"update1-project__JS\">
-                                <i class='far fa-edit edit-task-btn'></i>
-                            </button>
-
-                            <button class=\"delete-project__JS\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            <button class=\"update1-project__JS\" aria-label=\"update\">
+                                <i class='far fa-edit edit-task-btn icon--mobile edit-task-btn--padding'></i>
+                            </button>";
 
                             if (isset($_COOKIE['Projekto_id']) && isset($_COOKIE['Projektas'])){
-                            echo "<button class=\"delete1-project__JS\" data-id= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            echo "<button class=\"delete1-project__JS\" data-id-project= \"" . $_COOKIE['Projekto_id'] . "\" data-title=\"" . $_COOKIE['Projektas'] . "\" data-id=\"" . $row['Uzduoties_id'] . "\" aria-label=\"delete\">";
                             } else {
-                            echo "<button class=\"delete1-project__JS\" data-id= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" id=\"" . $row['Uzduoties_id'] . "\">";
+                            echo "<button class=\"delete1-project__JS\" data-id-project= \"" . $_GET['Projekto_id'] . "\" data-title=\"" . $_GET['title'] . "\" data-id=\"" . $row['Uzduoties_id'] . "\" aria-label=\"delete\">";
                             }
                             echo "
-                                <i class='far fa-trash-alt delete-task-btn'></i>
+                                <i class='far fa-trash-alt delete-task-btn icon--mobile'></i>
                             </button>
                         </td>
                     </tr>";
@@ -292,7 +287,7 @@ include_once('db_config.php');
         <br>";
                 if (isset($_SESSION['empty']) && isset($_GET['title'])) {
                     echo "
-        <button id='create-button' class=\"tasks__add-btn\">
+        <button id='create-button' class=\"tasks__add-btn\" aria-label=\"create a task\">
             <i class='fas fa-plus-circle create-project__JS tasks__add-btn-i' id='plus-button'></i>
         </button>";
 
@@ -430,8 +425,7 @@ include_once('db_config.php');
                         <?php
                         if (isset($_POST['updateTitle'])) {
                             $update = new Project();
-                            $update->updateProject1($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], 
-                                    $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], $_SESSION['userId'], 'task.php');
+                            $update->updateTask($_POST['updateTitle'], $_POST['updateDescription'], $_POST['updatepriority'], $_POST['updatestatus'], $_POST['updateId'], $_GET["Projekto_id"], $_GET["title"], 'task.php');
                         }
                         if (isset($_SESSION['updateError'])) {
                               echo "<p class='pop-up__error'>".$_SESSION['updateError']."</p>";
@@ -446,7 +440,7 @@ include_once('db_config.php');
                         <p class="pop-up__alert-msg">Are you sure you want to delete this task?</p>
                         <div class="pop-up--flex">
                             <a href="#" class="pop-up__confirm-btn1">Delete</a>
-                            <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
+                            <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg" aria-label="Keep a task">Keep</div>
                         </div>                   
                     </form>
                 </div>
@@ -457,7 +451,7 @@ include_once('db_config.php');
                             <input type="hidden" class="pop-up__update-id" name="updateId"/>
                             <div class="pop-up--flex">
                                 <input type="submit" name="invite" value="Invite" class="pop-up__update-btn pop-up__input" id="project-btn">
-                                <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                                <div role="button" class="pop-up__cancel-btn" aria-label="Cancel">Cancel</div>
                             </div>
                             <?php
                             
@@ -476,12 +470,12 @@ include_once('db_config.php');
                     <h2 class="pop-up__h2 pop-up__h2--margin">Manage team members</h2>
                     <table class="pop-up__users"></table>
                     <div class="pop-up--flex">
-                        <a href="#" class="pop-up__invite-btn">Invite member</a>
-                        <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                        <a href="#" class="pop-up__invite-btn">Invite</a>
+                        <div role="button" class="pop-up__cancel-btn" aria-label="Cancel">Cancel</div>
                     </div>
                 </div>
             </main>
-            <script type="module" src="./js/createProject.js?rnd=217"></script>
+            <script type="module" src="./js/createProject.js?rnd=227"></script>
         </section>
     </body>
 

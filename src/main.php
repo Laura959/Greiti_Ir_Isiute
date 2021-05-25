@@ -29,12 +29,12 @@ include_once('db_config.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Take a look and manage your projects in project management system!"/>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="css/style.css?rnd=221" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="css/createForm.css?rnd=221" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
+    <link href="css/style.css?rnd=999" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <link href="css/createForm.css?rnd=147" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b94fb06eb.js"
     crossorigin="anonymous"></script>
 </head>
@@ -42,10 +42,10 @@ include_once('db_config.php');
      <!-- Kairinis menu -->
     <div class="left-menu"> 
         <div class="left-menu__controls">
-            <button class="left-menu__show-btn left-menu__btn">
+            <button class="left-menu__show-btn left-menu__btn" aria-label="Open">
                 <i class="fas fa-bars" id="hamburger"></i>
             </button>
-            <button class="left-menu__hide-btn left-menu__btn">
+            <button class="left-menu__hide-btn left-menu__btn" aria-label="Close">
                 <i class="fas fa-times" id="cancel"></i>
             </button>
         </div>
@@ -113,7 +113,7 @@ include_once('db_config.php');
             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
             ?>
             <form method="POST">
-                <button class="button" type="submit" name="logout">
+                <button class="button" type="submit" name="logout" aria-label="logout">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>
@@ -203,17 +203,17 @@ include_once('db_config.php');
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
           <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
           <td class='td-spacing projects-functions'>
-          <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
-          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-          <i class='far fa-trash-alt'></i>
+          <button class=\"update-project__JS\" data-role=\"".$row['role']."\" aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
+          <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\" aria-label=\"delete\">
+          <i class='far fa-trash-alt icon--mobile'></i>
           </button>
-          <button class=\"button\"><i class='fas fa-archive'></i></button>
+          <button class=\"button\" aria-label=\"archive\"><i class='fas fa-archive icon--mobile'></i></button>
           <form method='post' style='display:inline-block'>
-                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down'></i>
+                <button class=\"button export\" aria-label=\"export\" type='submit' name='id' value='".$row['Projekto_id']."'>
+                <i class='fas fa-arrow-down icon--mobile'></i>
                 </button>
           </form>
-          <button class=\"button\" id='create-button'>
+          <button class=\"button\" id='create-button' aria-label=\"create a project\">
           <i class='fas fa-plus-circle create-project__JS add-project-btn' id='plus-button' data-link=\"".$linkCSV."\"></i></button></td></tr>";
             break;
             }
@@ -227,22 +227,17 @@ include_once('db_config.php');
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
                 <div class='round'><div id='progressId".$i."'></div></div><div class='hover-info'>Total: ".$row['Total_tasks'].", To do: ".$row['Todo_tasks'].", In Progress: ".$row['InProgress_tasks'].", Finished: ".$row['Finished_tasks']."</div></td>
                 <td class='grey-border projects-functions'>
-                <button class=\"update-project__JS\" data-role=\"".$row['role']."\"><i class='far fa-edit'></i></button>
-                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\">
-                    <i class='far fa-trash-alt'></i>
+                <button class=\"update-project__JS\" data-role=\"".$row['role']."\" aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
+                <button class=\"delete-project__JS\" id=\"".$row['Projekto_id']."\" data-role=\"".$row['role']."\" aria-label=\"update\">
+                    <i class='far fa-trash-alt icon--mobile'></i>
                     </button> 
 
-                <button class=\"button\"><i class='fas fa-archive'></i></button>
+                <button class=\"button\" aria-label=\"archive\"><i class='fas fa-archive icon--mobile'></i></button>
                 <form method='post' style='display:inline-block'>
-                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."'>
-                <i class='fas fa-arrow-down'></i>
+                <button class=\"button export\" type='submit' name='id' value='".$row['Projekto_id']."' aria-label=\"export\">
+                <i class='fas fa-arrow-down icon--mobile'></i>
                 </button></td></tr>
                 </form>";
-
-            // $count++;
-            // if ($count>2) {
-            //     break;  cia galesime nustatyti salygas, kas bus kai pvz isspausdins 10 eiluciu
-            // }
             $i++;
         }
         echo "</table>";
@@ -293,7 +288,7 @@ include_once('db_config.php');
             <label for="description" class="pop-up__placeholder">Description</label><textarea class="pop-up__textarea" name="description"   maxlength="200" rows="6"></textarea>
             <div class="pop-up--flex">
                 <input type="submit" name="create" value="Create" class="pop-up__create-btn pop-up__input" id="project-btn">
-                <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                <div role="button" class="pop-up__cancel-btn" aria-label="Cancel creation">Cancel</div>
             </div>
             <?php
             if(isset($_POST['title']))  {
@@ -316,7 +311,7 @@ include_once('db_config.php');
             <input type="hidden" class="pop-up__update-id" name="updateId"/>
             <div class="pop-up--flex">
                 <input type="submit" name="update" value="Update" class="pop-up__update-btn pop-up__input" id="project-btn">
-                <div role="button" class="pop-up__cancel-btn">Cancel</div>
+                <div role="button" class="pop-up__cancel-btn" aria-label="Cancel update">Cancel</div>
             </div>
             <?php
             
@@ -341,7 +336,7 @@ include_once('db_config.php');
                      <p class="pop-up__alert-msg">Are you sure you want to delete this project?</p>
             <div class="pop-up--flex">
                 <a href="#" class="pop-up__confirm-btn">Delete</a>
-                <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg">Keep</div>
+                <div role="button" class="pop-up__cancel-btn pop-up__cancel-btn--bg" aria-label="Cancel deletion">Keep</div>
             </div>
         </form>
     </div>

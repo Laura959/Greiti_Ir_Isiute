@@ -19,6 +19,46 @@ const descriptionTasks = document.querySelectorAll('.project-description-tasks__
 const updateDashboard = document.querySelectorAll('.update-dashboard__JS');
 const manageMembersBtn = document.querySelector('.manage-members__JS');
 const inviteMembersBtn = document.querySelector('.pop-up__invite-btn');
+const dragItem = document.querySelectorAll('.drag-item');
+const dragArea = document.querySelectorAll('.task-board');
+let draggableTodo = null;
+
+function dragStart(){
+    draggableTodo = this;
+}
+
+const dragEnd = () =>{
+    draggableTodo = null;
+}
+
+function dragOver(e){
+    e.preventDefault();
+
+}
+
+function dragDrop(){
+    this.appendChild(draggableTodo);
+    const currentStatus = draggableTodo.getAttribute('data-status');
+    const task = {
+        id: draggableTodo.getAttribute('data-id'),
+        title: draggableTodo.textContent,
+        description: draggableTodo.getAttribute('data-description'),
+        status: draggableTodo.parentElement.children[0].textContent,
+        priority: draggableTodo.getAttribute('data-priority'),
+
+    }
+    sendSqlQuery(task);
+}
+
+dragItem.forEach(item =>{
+    item.addEventListener('dragstart', dragStart);
+    item.addEventListener('dragend', dragEnd);
+});
+
+dragArea.forEach(area =>{
+    area.addEventListener("dragover", dragOver);
+    area.addEventListener("drop", dragDrop);
+});
 
 const handleProjectCreateForm = () => {
     const form = document.querySelector('.pop-up');
@@ -112,6 +152,22 @@ const handleUpdateForm = (title, description, id, role) => {
     renderBlur();
 }
 
+const sendSqlQuery = task => {
+    let data = new FormData();
+    data.append('title', task.title);
+    data.append('description', task.description);
+    data.append('priority', task.priority);
+    data.append('status', task.status);
+    data.append('id', task.id);
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', "ajaxClass.php");
+    xhr.onload = function () {
+        console.log(this.response);
+    };
+    xhr.send(data);
+    return false;
+  }
 
 const removeChecked = () => {
     let test = document.querySelectorAll('.pop-up__update-priority');
@@ -127,6 +183,7 @@ const removeChecked = () => {
 
 const handleTaskUpdateForm = (title, priority, busena, description, id) => {
     removeChecked();
+    console.log(id, description);
     const form = document.querySelector('.pop-up__update1');
     const inputTitle = document.querySelector('.pop-up__update-title1');
     const inputDescription = document.querySelector('.pop-up__update-description1');
@@ -228,7 +285,7 @@ updateTaskBtns.forEach(
         const description = btn.parentElement.parentElement.children[2].textContent;
         const priority = btn.parentElement.parentElement.children[3].textContent;
         const busena = btn.parentElement.parentElement.children[4].textContent
-        const id = btn.parentElement.children[1].id;
+        const id = btn.parentElement.children[1].getAttribute('data-id');
         handleTaskUpdateForm(title, priority, busena, description, id);
     }));
 
@@ -263,9 +320,9 @@ updateDashboard.forEach(
 
 deleteTaskBtns.forEach(
     btn => btn.addEventListener('click', () => {
-        const id = btn.id;
+        const id = btn.getAttribute('data-id');
         const title = btn.getAttribute('data-title');
-        const project_id = btn.getAttribute('data-id');
+        const project_id = btn.getAttribute('data-id-project');
         handleClickDeleteForm1(id, title, project_id);
     }));
 
