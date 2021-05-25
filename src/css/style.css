@@ -523,8 +523,6 @@ form button {
     display: inline-block;
     background-color: #a0e383;
     padding: 5px 20px;
-    font-family: sans-serif, Arial;
-    font-weight: 500;
     font-size: 1rem;
     font-size: clamp(.9rem, 1.2vw, 1.1rem);
     min-width: 120px;
