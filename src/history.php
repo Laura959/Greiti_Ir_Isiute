@@ -179,7 +179,7 @@ include_once('db_config.php');
                     <tr>
                         <th class='project-name-spacing tasks__th'>ID</th>
                         <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Event type </th>
-                        <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Event name</th>
+                        <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Project / Task name</th>
                         <th class='tasks__th--width tasks__th'>Modification date </th>
                         <th class='tasks__th'>User</th>
                         </tr>";
