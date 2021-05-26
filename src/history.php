@@ -64,7 +64,7 @@ include_once('db_config.php');
                     </li>
                     <li class="left-menu__item left-menu__item-hover">
                         <a href="#" download="History.csv" class="left-menu__icon export">
-                            <i class="fas fa-file-download left-menu-icon" data-text="Export history"></i>
+                            <i class="fas fa-file-download left-menu-icon export-history-btn" data-text="Export history"></i>
                         </a>
                         <p class="left-menu__title">
                             <span class="export__span">Export History</span>
