@@ -191,7 +191,7 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Pakeitimo_data'] . "</td>
                         <td class='tasks__td'>" . $row['Vardas'] . "</td>
                         
-                     <button class=\"button\" id='create-button' aria-label=\"create a project\">
+                     <button class=\"button\" id='create-button' style='display:none' aria-label=\"create a project\">
           <i class='fas fa-plus-circle create-project__JS add-project-btn' id='plus-button' data-link=\"" . $linkCSV_history . "\"></i></button></td>
                      
                     </tr>";
