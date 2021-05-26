@@ -148,7 +148,7 @@ include_once('db_config.php');
         $queryWhere = !isset($SEARCH_ERROR) ? " AND projektai.Pavadinimas LIKE '%" . $SEARCH_QUERY . "%' " : " ";
         $queryOrder = "GROUP BY 1 ORDER BY Sukurimo_data DESC";
         $queryM = $querySelect . " " . $queryWhere . " " . $queryOrder;
-        $linkCSV = "data:text/csv;charset=utf-8,Title, Description, Status, Finished tasks, Total tasks\n";
+        $linkCSV = "data:text/csv;charset=utf-8, Title, Description, Status, Finished tasks, Total tasks\n";
         $linkCSV_tasks = "data:text/csv;charset=utf-8, ID, Title, Description, Priority, Status, Created, Modified\n";
         $result = $connectM->prepare($queryM);
         $result->execute();
@@ -190,6 +190,7 @@ include_once('db_config.php');
         echo "</thead>";
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $linkCSV .= "&quot;".$row['Pavadinimas']."&quot;,&quot;".$row['Aprasymas']."&quot;,".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
+            // $linkCSV .= $row['Pavadinimas'].",".$row['Aprasymas'].",".$row['Busena'].",".$row['Finished_tasks'].",".$row['Total_tasks']."\n";
             activeProgressBar($row['Total_tasks'], $row['Finished_tasks'], $i);
             if ($i == $number)
             {
@@ -340,13 +341,8 @@ include_once('db_config.php');
             </div>
         </form>
     </div>
-    <!-- <div class="pop-up__warning">
-        <h2 class="pop-up__warning-title">Warning!</h2>
-        <h3>Not Authorized</h3>
-        <p>You are not authorized to perform the request on this project.</p>
-    </div> -->
     </main>
-    <script type="module" src="./js/createProject.js?rnd=444" defer></script>
+    <script type="module" src="./js/createProject.js?rnd=414" defer></script>
     </section>
     </body>
 </html>
