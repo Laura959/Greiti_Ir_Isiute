@@ -58,26 +58,16 @@ include_once('db_config.php');
 
                     <li class="left-menu__item">
                         <a href="main.php" class="left-menu__icon">
-                            <i class="fas fa-folder left-menu-icon"></i>
+                            <i class="fas fa-folder left-menu-icon " data-text="Projects"></i>
                         </a>
                         <a href="main.php" class="left-menu__title">Projects</a>
                     </li>
                     <li class="left-menu__item">
                         <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : ''; ?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : ''; ?>" class="left-menu__icon">
-                            <i class="fas fa-th-large left-menu-icon"></i>
+                            <i class="fas fa-th-large left-menu-icon history-task-btn" data-text="Task Board"></i>
                         </a>
                         <p class="left-menu__title">Task board</p>
                     </li>
-
-                  
-                   <li class="left-menu__item left-menu__item-hover">
-                    <a href="#" download="History.csv" class="left-menu__icon export">
-                        <i class="fas fa-arrow-down left-menu-icon"></i>
-                    </a>
-                    <p class="left-menu__title">
-                        <span class="export__span">Export Projects</span>
-                    </p>
-                </li>
                     <?php
                     $usersinfo = "";
                     if (isset($_GET['Projekto_id'])) {
@@ -102,7 +92,7 @@ include_once('db_config.php');
                     ?>
                     <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo; ?>">
                         <a href="#" class="left-menu__icon">
-                            <i class="fas fa-users left-menu-icon"></i>
+                            <i class="fas fa-users left-menu-icon members-btn" data-text="Manage members"></i>
                         </a>
                         <p class="left-menu__title left-menu__title--margin">Manage members</p>
                     </li>
