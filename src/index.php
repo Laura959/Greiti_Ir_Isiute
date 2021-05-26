@@ -22,6 +22,16 @@ try {
                $_SESSION["username"] = $result[0]['Vardas'];
                $_SESSION["userId"] = $result[0]['Vartotojo_id'];
                header("location:main.php");
+               
+               
+               $ivykis = 'Prisijungimas';
+               $date1 = date("Y-m-d H:i:s");
+               $sql3 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
+               $statement3 = $connect->prepare($sql3);
+               $statement3->execute(['', $ivykis, '', $date1, $_SESSION["userId"], $_SESSION['username']]);
+               $connect->commit();
+               
+               
           } else {
                $message = 'Invalid email or password';
           }
