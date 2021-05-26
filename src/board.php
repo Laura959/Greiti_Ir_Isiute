@@ -10,6 +10,7 @@ if (isset($_SESSION["username"])) {
     if (isset($_POST['logout'])) {
         session_destroy();
         header("location:index.php");
+        include_once('atsijungimas.php');
     }
 } else {
     header("location:index.php");

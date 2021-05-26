@@ -14,6 +14,7 @@ if (isset($_SESSION["username"])) {
         session_destroy();
         setcookie("Projektas", "", time() - 3600);
         header("location:index.php");
+        include_once('atsijungimas.php');
     }
 } else {
     header("location:index.php");
