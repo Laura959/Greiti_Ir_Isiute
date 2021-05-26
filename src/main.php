@@ -73,7 +73,7 @@ include_once('db_config.php');
                 </li>
                 <li class="left-menu__item">
                     <a href="#" class="create-project__JS left-menu__icon">
-                        <i class="fas fa-plus-circle left-menu-icon" data-text="New project"></i>
+                        <i class="fas fa-plus-circle left-menu-icon new-project-btn" data-text="New project"></i>
                     </a>
                     <p class="left-menu__title">New project</p>
                 </li>

@@ -825,7 +825,7 @@ form button {
     z-index: 20;
 }
 
-.fa-plus-circle:hover::after {
+.new-project-btn:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 8% 10%;
