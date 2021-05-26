@@ -33,19 +33,91 @@ include_once('db_config.php');
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Take a look and manage your projects in project management system!"/>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="css/style.css?rnd=999" rel="stylesheet">
-        <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-        <link href="css/createForm.css?rnd=141" type="text/css" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/1b94fb06eb.js"
-        crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <!-- Kairinis menu -->
-        <div class="left-menu"> 
-            <div class="left-menu__controls">
-                <button class="left-menu__show-btn left-menu__btn" aria-label="Open">
-                    <i class="fas fa-bars" id="hamburger"></i>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="css/style.css?rnd=999" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <link href="css/createForm.css?rnd=141" type="text/css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b94fb06eb.js"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+     <!-- Kairinis menu -->
+    <div class="left-menu"> 
+        <div class="left-menu__controls">
+            <button class="left-menu__show-btn left-menu__btn" aria-label="Open">
+                <i class="fas fa-bars" id="hamburger"></i>
+            </button>
+            <button class="left-menu__hide-btn left-menu__btn" aria-label="Close">
+                <i class="fas fa-times" id="cancel"></i>
+            </button>
+        </div>
+        <div class="left-menu__list">
+            <ul class="left-menu__items">
+                <li class="left-menu__item">
+                    <a href="#" class="left-menu__icon">
+                        <i class="fas fa-folder left-menu-icon" data-text="Projects"></i>
+                    </a>
+                    <p class="left-menu__title">Projects</p>
+                </li>
+                <li class="left-menu__item left-menu__item-hover">
+                    <a href="#" download="Projects.csv" class="left-menu__icon export">
+                        <i class="fas fa-file-download left-menu-icon" data-text="Export projects"></i>
+                    </a>
+                    <p class="left-menu__title">
+                        <span class="export__span">Export Projects</span>
+                    </p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="history.php" class="left-menu__icon">
+                        <i class="fas fa-history left-menu-icon" data-text="History"></i>
+                    </a>
+                    <p class="left-menu__title">History</p>
+                </li>
+                <li class="left-menu__item">
+                    <a href="#" class="create-project__JS left-menu__icon">
+                        <i class="fas fa-plus-circle left-menu-icon new-project-btn" data-text="New project"></i>
+                    </a>
+                    <p class="left-menu__title">New project</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Kairinio menu pabaiga -->
+    <section>
+<header>
+    <!-- Viršutinė menu juosta su search ir exit laukeliais -->
+    <nav class="navbar">
+        <a class="project-page-title mr-auto" download="Projects.csv">Projects</a>
+        <div class="whole-search">
+        <!-- board-page-title propects -->
+    <!-- SEARCH FUNKCIALUMAS -->        
+        <form id="search-form">
+        <?php              
+            if(isset($_GET["search"])) {
+                $SEARCH_QUERY = trim($_GET["search"]);
+                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
+                if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3) {
+                    // $SEARCH_ERROR = "error";
+                }
+            } else {
+                $SEARCH_QUERY = "";
+            }
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search projects\" class=\"search-form__input\" pattern=\"\w{3,}\" title=\"Enter atleast 3 symbols\">
+            <i class=\"fas fa-search\" id=\"search-icon\"></i>";
+             
+            // if(isset($SEARCH_ERROR)) {
+            //     echo "<br /><span style=\"color: red\"> " . $SEARCH_ERROR . "</span";               
+            // }
+        ?>
+        </form>        
+        <div class="form-inline">
+            <?php
+            echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
+            ?>
+            <form method="POST">
+                <button class="button" type="submit" name="logout" aria-label="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+
                 </button>
                 <button class="left-menu__hide-btn left-menu__btn" aria-label="Close">
                     <i class="fas fa-times" id="cancel"></i>

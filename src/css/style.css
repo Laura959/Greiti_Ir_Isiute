@@ -805,18 +805,6 @@ form button {
     text-align: center;
 }
 
-.history-task-btn:hover::after {
-    content: attr(data-text);
-    background-color: #ecf9e6;
-    padding: 6.9% 10% 6.9% 12%;
-    margin-left: 4%;
-    font-size: 15px;
-    color: #80807e;
-    font-weight: bold;
-    border-radius: 0px 15px 15px 0px;
-    position: absolute;
-    top: 33.4%;
-}
 
 #plus-button:hover::after,
 .delete-task-btn:hover::after,
@@ -837,7 +825,7 @@ form button {
     z-index: 20;
 }
 
-.fa-plus-circle:hover::after {
+.new-project-btn:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
     padding: 6% 10% 8% 10%;
@@ -1029,17 +1017,18 @@ form button {
     margin-top: 29px;
 }
 
-.members-btn:hover::after {
+.export-history-btn:hover::after {
     content: attr(data-text);
     background-color: #ecf9e6;
-    padding: 6.9% 10% 6.9% 12%;
-    margin-left: 4%;
+    padding: 7% 10% 6.8% 10%;
+    margin-left: 9%;
     font-size: 15px;
     color: #80807e;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
-    position: absolute;
-    top: 66.9%;
+    position:absolute;
+    top: 50%;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1550px) {
