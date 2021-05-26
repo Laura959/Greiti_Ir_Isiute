@@ -40,7 +40,7 @@ include_once('db_config.php');
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/1b94fb06eb.js"
         crossorigin="anonymous"></script>
-        
+
     </head>
     <body>
         <!-- Kairinis menu -->
@@ -62,11 +62,13 @@ include_once('db_config.php');
                         </a>
                         <a href="main.php" class="left-menu__title">Projects</a>
                     </li>
-                    <li class="left-menu__item">
-                        <a href="board.php?Projekto_id=<?php echo isset($_GET['Projekto_id']) ? $_GET['Projekto_id'] : ''; ?>&title=<?php echo isset($_GET['title']) ? $_GET['title'] : ''; ?>" class="left-menu__icon">
-                            <i class="fas fa-th-large left-menu-icon history-task-btn" data-text="Task Board"></i>
+                    <li class="left-menu__item left-menu__item-hover">
+                        <a href="#" download="History.csv" class="left-menu__icon export">
+                            <i class="fas fa-file-download left-menu-icon" data-text="Export history"></i>
                         </a>
-                        <p class="left-menu__title">Task board</p>
+                        <p class="left-menu__title">
+                            <span class="export__span">Export History</span>
+                        </p>
                     </li>
                     <?php
                     $usersinfo = "";
@@ -150,7 +152,7 @@ include_once('db_config.php');
                     $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
                     $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $queryM = "SELECT History_id, Ivykio_tipas,Ivykio_vardas, Pakeitimo_data, Vartotojo_id, Vardas FROM history ORDER BY Pakeitimo_data DESC";
-
+                    $linkCSV_history = "data:text/csv;charset=utf-8, ID, Event Type, Project / Task name, Modification date, User\n";
 
 
                     $result = $connectM->prepare($queryM);
@@ -177,6 +179,7 @@ include_once('db_config.php');
 
                     echo "</thead>";
                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $linkCSV_history .= "&quot;" . $row['History_id'] . "&quot;,&quot;" . $row['Ivykio_tipas'] . "&quot;," . $row['Ivykio_vardas'] . "," . $row['Pakeitimo_data'] . "," . $row['Vardas'] . "\n";
                         if ($i == $number) {
                             // spausdinama eilutė su "Sukurti projektą mygtuku
                             echo "
@@ -188,7 +191,8 @@ include_once('db_config.php');
                         <td class='tasks__td'>" . $row['Pakeitimo_data'] . "</td>
                         <td class='tasks__td'>" . $row['Vardas'] . "</td>
                         
-                     
+                     <button class=\"button\" id='create-button' aria-label=\"create a project\">
+          <i class='fas fa-plus-circle create-project__JS add-project-btn' id='plus-button' data-link=\"" . $linkCSV_history . "\"></i></button></td>
                      
                     </tr>";
                             break;
