@@ -198,7 +198,7 @@ include_once('db_config.php');
           echo "<tr>
           <td class='d-none'>".$row['Projekto_id']."</td>
           <td><a href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\" class=\"projects__title-hover\">".$row['Pavadinimas']."</td>
-          <td><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
+          <td><div class=\"project-description__JS\" id='shortened-description' data-role=\"".$row['role']."\" aria-label=\"update\"><a href='#'>".$row['Aprasymas']."</a></div></td>
           <td>".$row['Busena']."</td>
           <td class='progresss'>
           <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>
@@ -222,7 +222,7 @@ include_once('db_config.php');
                 echo "<tr>
                 <td class='d-none'>".$row['Projekto_id']."</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=".$row['Projekto_id']."&title=".$row['Pavadinimas']."\">".$row['Pavadinimas']."</td>
-                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description'><a href='#'>".$row['Aprasymas']."</a></div></td>
+                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description' data-role=\"".$row['role']."\" aria-label=\"update\"><a href='#' data-role=\"".$row['role']."\" aria-label=\"update\">".$row['Aprasymas']."</a></div></td>
                 <td class='grey-border'>".$row['Busena']."</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>".$row['Finished_tasks']."/".$row['Total_tasks']."</p>

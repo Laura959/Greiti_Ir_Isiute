@@ -23,20 +23,20 @@ const dragItem = document.querySelectorAll('.drag-item');
 const dragArea = document.querySelectorAll('.task-board');
 let draggableTodo = null;
 
-function dragStart(){
+function dragStart() {
     draggableTodo = this;
 }
 
-const dragEnd = () =>{
+const dragEnd = () => {
     draggableTodo = null;
 }
 
-function dragOver(e){
+function dragOver(e) {
     e.preventDefault();
 
 }
 
-function dragDrop(){
+function dragDrop() {
     this.appendChild(draggableTodo);
     const currentStatus = draggableTodo.getAttribute('data-status');
     const task = {
@@ -50,12 +50,12 @@ function dragDrop(){
     sendSqlQuery(task);
 }
 
-dragItem.forEach(item =>{
+dragItem.forEach(item => {
     item.addEventListener('dragstart', dragStart);
     item.addEventListener('dragend', dragEnd);
 });
 
-dragArea.forEach(area =>{
+dragArea.forEach(area => {
     area.addEventListener("dragover", dragOver);
     area.addEventListener("drop", dragDrop);
 });
@@ -73,7 +73,7 @@ const handleTaskCreateForm = () => {
     renderBlur();
 }
 
-const renderWarning = async () => {
+const renderWarning = async() => {
     const body = document.body;
 
     const container = document.createElement('div');
@@ -159,15 +159,15 @@ const sendSqlQuery = task => {
     data.append('priority', task.priority);
     data.append('status', task.status);
     data.append('id', task.id);
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "ajaxClass.php");
-    xhr.onload = function () {
+    xhr.onload = function() {
         console.log(this.response);
     };
     xhr.send(data);
     return false;
-  }
+}
 
 const removeChecked = () => {
     let test = document.querySelectorAll('.pop-up__update-priority');
@@ -297,7 +297,8 @@ description.forEach(
         const title = fullDescription.parentElement.parentElement.children[1].textContent;
         const description = fullDescription.parentElement.parentElement.children[2].textContent;
         const id = fullDescription.parentElement.parentElement.children[0].textContent;
-        handleClickUpdateForm(title, description, id);
+        const role = fullDescription.getAttribute('data-role');
+        handleUpdateForm(title, description, id, role);
     }));
 
 descriptionTasks.forEach(
@@ -344,16 +345,16 @@ if (textarea) {
     textarea.addEventListener('focusout', handleClickAddPlaceholder);
 }
 console.log(inviteMembersBtn)
-if(inviteMembersBtn){
-manageMembersBtn.addEventListener('click', () => {
-    const members = manageMembersBtn.getAttribute('data-users');
-    handleMembersForm(members);
-});
+if (inviteMembersBtn) {
+    manageMembersBtn.addEventListener('click', () => {
+        const members = manageMembersBtn.getAttribute('data-users');
+        handleMembersForm(members);
+    });
 
-inviteMembersBtn.addEventListener('click', handleInviteMembers);
+    inviteMembersBtn.addEventListener('click', handleInviteMembers);
 }
 
-const handlePrepareCsvProjectsDownload = () =>{
+const handlePrepareCsvProjectsDownload = () => {
     if (document.querySelector('[data-link]')) {
         const exportBtn = document.querySelector('.export');
         const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
@@ -362,4 +363,3 @@ const handlePrepareCsvProjectsDownload = () =>{
 }
 
 window.addEventListener('load', handlePrepareCsvProjectsDownload);
-
