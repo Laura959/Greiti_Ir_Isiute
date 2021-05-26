@@ -210,11 +210,13 @@ const handleCloseForm = () => {
 }
 
 const handleClickRemovePlaceholder = () => {
-    document.querySelector('.pop-up__placeholder').textContent = '';
+    const placeholder = document.querySelector('.pop-up__placeholder');
+    placeholder ? placeholder.textContent = '' : '';
 }
 
 const handleClickAddPlaceholder = () => {
-    document.querySelector('.pop-up__placeholder').textContent = 'Description';
+    const placeholder = document.querySelector('.pop-up__placeholder');
+    placeholder ? placeholder.textContent = 'Description' : '';
 }
 
 const handleToggleMenu = () => {
@@ -351,10 +353,13 @@ manageMembersBtn.addEventListener('click', () => {
 inviteMembersBtn.addEventListener('click', handleInviteMembers);
 }
 
-window.addEventListener('load', (event) => {
+const handlePrepareCsvProjectsDownload = () =>{
     if (document.querySelector('[data-link]')) {
         const exportBtn = document.querySelector('.export');
         const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
-        exportBtn.setAttribute('href', link);
+        exportBtn.setAttribute('href', encodeURI(link));
     }
-});
+}
+
+window.addEventListener('load', handlePrepareCsvProjectsDownload);
+
