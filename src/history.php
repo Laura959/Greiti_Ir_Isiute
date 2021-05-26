@@ -92,12 +92,7 @@ include_once('db_config.php');
                         }
                     }
                     ?>
-                    <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo; ?>">
-                        <a href="#" class="left-menu__icon">
-                            <i class="fas fa-users left-menu-icon members-btn" data-text="Manage members"></i>
-                        </a>
-                        <p class="left-menu__title left-menu__title--margin">Manage members</p>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
