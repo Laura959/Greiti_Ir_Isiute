@@ -223,23 +223,24 @@
                 INNER JOIN vartotojai ON komandos.Vartotojas = vartotojai.Vartotojo_id 
                 WHERE projektai.Pavadinimas = ? && vartotojai.Vartotojo_id = ?
             ";
-            try{
+            try {
                 $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
                 $pdo = new PDO($dsn, $this->user, $this->pass);
                 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
                 $statement = $pdo->prepare($sql);
                 $statement->execute([$name ,$user]);
                 $count = $statement->rowCount();
-                if($count > 0){
+                if ($count > 0) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
-            }catch(PDOException $error){
+            } catch (PDOException $error) {
                 return 'error';
             }
         }
-             public function checkIfNameExistsTask($name, $user){
+        
+        public function checkIfNameExistsTask($name, $user){
             $sql = "
             SELECT Pavadinimas FROM uzduotys 
                 INNER JOIN komandos ON uzduotys.Uzduoties_id = komandos.Projekto_id 
@@ -259,84 +260,6 @@
                     return false;
                 }
             }catch(PDOException $error){
-                return 'error';
-            }
-        }
-        public function getUserId($email){
-            $sql = "SELECT Vartotojo_id From vartotojai WHERE El_pastas = ?;";
-            try{
-                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
-                $pdo = new PDO($dsn, $this->user, $this->pass);
-                $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                $statement = $pdo->prepare($sql);
-                $statement->execute([$email]);
-               
-                if($row = $statement->fetch()){
-                    return $row['Vartotojo_id'];
-                }else{
-                    return false;
-                }
-            }catch(PDOException $error){
-                return 'error';
-            }
-        }
-
-        public function existsUserOnProject($projectId, $id){
-            $sql = "
-            SELECT vartotojai.* FROM vartotojai
-                LEFT JOIN komandos ON komandos.Vartotojas = vartotojai.Vartotojo_id
-                LEFT JOIN projektai ON projektai.Projekto_id = komandos.Projekto_id
-                WHERE projektai.Projekto_id = ?
-                AND vartotojai.Vartotojo_id = ?
-            ";
-            try{
-                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
-                $pdo = new PDO($dsn, $this->user, $this->pass);
-                $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                $statement = $pdo->prepare($sql);
-                $statement->execute([$projectId, $id]);
-               
-                if($statement->fetch()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }catch(PDOException $error){
-                return true;
-            }
-        }
-
-        public function inviteMember($email){
-            $id = $this->getUserId($email);
-            $project = $_GET['Projekto_id'];
-            if(!$id){
-                $_SESSION['inviteError'] = 'User with this email is not registered';
-                return;
-            }else if($this->existsUserOnProject($project, $id)){
-                $_SESSION['inviteError'] = 'User with this email is already on the project';
-                return;
-            }
-            $role = 2;
-            $sql = "
-            INSERT INTO komandos VALUES(?, ?, ?);
-            ";
-            try{
-                $dsn = "mysql:host=".$this->host.";dbname=".$this->dbName;
-                $pdo = new PDO($dsn, $this->user, $this->pass);
-                $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                $statement = $pdo->prepare($sql);
-                $statement->execute([$project, $role, $id]);
-                $count = $statement->rowCount();
-                if($count > 0){
-                    $name = $_GET['title'];
-                    echo "<script> location.replace(\"task.php?Projekto_id=".$project."&title=".$name."\"); </script>";
-                    return true;
-                }else{
-                    $_SESSION['inviteError'] = 'Database connection lost.';
-                    return false;
-                }
-            }catch(PDOException $error){
-                $_SESSION['inviteError'] = 'Database connection lost.';
                 return 'error';
             }
         }

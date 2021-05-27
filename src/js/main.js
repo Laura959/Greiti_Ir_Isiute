@@ -1,10 +1,3 @@
-import {
-    sleep,
-    isNotAuthorized,
-    getInitials,
-    areUsersLoaded
-} from './helper.js';
-
 const createProjectBtns = document.querySelectorAll('.create-project__JS');
 const createTaskBtns = document.querySelectorAll('.create-task__JS');
 const deleteProjectBtns = document.querySelectorAll('.delete-project__JS');
@@ -17,8 +10,6 @@ const togglerMenu = document.querySelectorAll('.left-menu__btn');
 const description = document.querySelectorAll('.project-description__JS');
 const descriptionTasks = document.querySelectorAll('.project-description-tasks__JS');
 const updateDashboard = document.querySelectorAll('.update-dashboard__JS');
-const manageMembersBtn = document.querySelector('.manage-members__JS');
-const inviteMembersBtn = document.querySelector('.pop-up__invite-btn');
 const dragItem = document.querySelectorAll('.drag-item');
 const dragArea = document.querySelectorAll('.task-board');
 let draggableTodo = null;
@@ -73,37 +64,6 @@ const handleTaskCreateForm = () => {
     renderBlur();
 }
 
-const renderWarning = async() => {
-    const body = document.body;
-
-    const container = document.createElement('div');
-    container.classList.add('pop-up__warning');
-
-    const title = document.createElement('h2');
-    title.classList.add('pop-up__warning-title');
-    title.textContent = "Warning!";
-    container.appendChild(title);
-
-    const text = document.createElement('h3');
-    text.textContent = "Not Authorized."
-    container.appendChild(text);
-
-    const description = document.createElement('p');
-    description.textContent = "You are not authorized to perform the request on this project.";
-    container.appendChild(description);
-
-    body.appendChild(container);
-    renderBlur();
-    await sleep(1500);
-    removeWarning();
-    removeBlur();
-}
-
-const removeWarning = () => {
-    const container = document.querySelector('.pop-up__warning');
-    container.parentNode.removeChild(container);
-}
-
 const renderBlur = () => {
     const blur = document.createElement('div');
     blur.classList.add('blur__JS');
@@ -115,14 +75,10 @@ const removeBlur = () => {
     blur.parentNode.removeChild(blur);
 }
 
-const handleProjectDeleteForm = (id, role) => {
-    if (isNotAuthorized(role)) {
-        renderWarning();
-        return;
-    }
+const handleProjectDeleteForm = (id, title) => {
     const form = document.querySelector('.pop-up__delete');
     const deleteBtn = document.querySelector('.pop-up__confirm-btn');
-    const link = `delete.php?Projekto_id=${id}`;
+    const link = `delete.php?Projekto_id=${id}&title=${title}`;
     deleteBtn.setAttribute('href', `${link}`);
     form.classList.add('pop-up__JS');
     renderBlur();
@@ -136,11 +92,7 @@ const handleClickDeleteForm1 = (id, title, Projekto_id) => {
     renderBlur();
 }
 
-const handleUpdateForm = (title, description, id, role) => {
-    if (isNotAuthorized(role)) {
-        renderWarning();
-        return;
-    }
+const handleUpdateForm = (title, description, id) => {
     const form = document.querySelector('.pop-up__update');
     const inputTitle = document.querySelector('.pop-up__update-title');
     const inputDescription = document.querySelector('.pop-up__update-description');
@@ -163,7 +115,7 @@ const sendSqlQuery = task => {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "ajaxClass.php");
     xhr.onload = function() {
-        console.log(this.response);
+        // console.log(this.response);
     };
     xhr.send(data);
     return false;
@@ -224,39 +176,20 @@ const handleToggleMenu = () => {
     body.classList.toggle('left-menu__JS');
 }
 
-const renderUserInfo = (initials, fullname) => {
-    const usersTable = document.querySelector('.pop-up__users');
-    const tr = document.createElement('tr');
-    const initialsData = document.createElement('td');
-    initialsData.textContent = initials.toUpperCase();
-    initialsData.classList.add('pop-up__members-initials');
-    tr.appendChild(initialsData);
-
-    const fullnameData = document.createElement('td');
-    fullnameData.innerHTML = fullname;
-    fullnameData.classList.add('pop-up__members-info');
-    tr.appendChild(fullnameData);
-    usersTable.appendChild(tr);
+const handlePrepareCsvProjectsDownload = () => {
+    if (document.querySelector('[data-link]')) {
+        const exportBtn = document.querySelector('.export');
+        const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
+        exportBtn.setAttribute('href', encodeURI(link));
+    }
 }
 
-const handleMembersForm = (members) => {
-    const form = document.querySelector('.pop-up__members');
-    const fullNames = members.split(',');
-    const initials = getInitials(fullNames);
-
-    form.classList.add('pop-up__JS');
-    renderBlur();
-    if (areUsersLoaded()) return;
-    initials.forEach((initial, index) => {
-        renderUserInfo(initial, fullNames[index]);
+const sleep = ms => {
+    return new Promise((accept) => {
+        setTimeout(() => {
+            accept();
+        }, ms);
     });
-}
-
-const handleInviteMembers = () => {
-    handleCloseForm();
-    const form = document.querySelector('.pop-up__invite');
-    form.classList.add('pop-up__JS');
-    renderBlur();
 }
 
 togglerMenu.forEach(btn => {
@@ -277,8 +210,7 @@ updateProjectBtns.forEach(
         const title = btn.parentElement.parentElement.children[1].textContent;
         const description = btn.parentElement.parentElement.children[2].textContent;
         const id = btn.parentElement.children[1].id;
-        const role = btn.getAttribute('data-role');
-        handleUpdateForm(title, description, id, role);
+        handleUpdateForm(title, description, id);
     }));
 
 updateTaskBtns.forEach(
@@ -297,8 +229,7 @@ description.forEach(
         const title = fullDescription.parentElement.parentElement.children[1].textContent;
         const description = fullDescription.parentElement.parentElement.children[2].textContent;
         const id = fullDescription.parentElement.parentElement.children[0].textContent;
-        const role = fullDescription.getAttribute('data-role');
-        handleUpdateForm(title, description, id, role);
+        handleUpdateForm(title, description, id);
     }));
 
 descriptionTasks.forEach(
@@ -332,8 +263,8 @@ deleteTaskBtns.forEach(
 deleteProjectBtns.forEach(
     btn => btn.addEventListener('click', () => {
         const id = btn.id;
-        const role = btn.getAttribute('data-role');
-        handleProjectDeleteForm(id, role)
+        const title = btn.parentElement.parentElement.children[1].textContent;
+        handleProjectDeleteForm(id, title)
     }));
 
 cancelBtns.forEach(
@@ -343,23 +274,6 @@ cancelBtns.forEach(
 if (textarea) {
     textarea.addEventListener('focus', handleClickRemovePlaceholder);
     textarea.addEventListener('focusout', handleClickAddPlaceholder);
-}
-console.log(inviteMembersBtn)
-if (inviteMembersBtn) {
-    manageMembersBtn.addEventListener('click', () => {
-        const members = manageMembersBtn.getAttribute('data-users');
-        handleMembersForm(members);
-    });
-
-    inviteMembersBtn.addEventListener('click', handleInviteMembers);
-}
-
-const handlePrepareCsvProjectsDownload = () => {
-    if (document.querySelector('[data-link]')) {
-        const exportBtn = document.querySelector('.export');
-        const link = document.querySelector('[data-link]').getAttribute('data-link').replace(/\n$/, '');
-        exportBtn.setAttribute('href', encodeURI(link));
-    }
 }
 
 window.addEventListener('load', handlePrepareCsvProjectsDownload);

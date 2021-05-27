@@ -71,12 +71,6 @@ include_once('db_config.php');
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>
-                <li class="left-menu__item">
-                    <a href="#" class="create-project__JS left-menu__icon">
-                        <i class="fas fa-plus-circle left-menu-icon board-task-btn" data-text="New task"></i>
-                    </a>
-                    <p class="left-menu__title">New task</p>
-                </li>
             </ul>
         </div>
     </div>
@@ -98,6 +92,7 @@ include_once('db_config.php');
                     </form>
                 </div>
             </nav>
+            
             <!-- Viršutinės menu juostos pabaiga -->
         </header>
         <!-- TASK BOARDS -->
@@ -237,6 +232,7 @@ include_once('db_config.php');
                 </div>
             </div>
         </div>
+        
         <div class="pop-up__update1">
                     <h2 class="pop-up__h2">Update Task</h2>
                     <form method="POST" class="pop-up__form">
@@ -307,7 +303,7 @@ include_once('db_config.php');
                     </form>
                 </div>
         </main>
-        <script type="module" src="./js/createProject.js?rnd=121" defer></script>
+        <script src="./js/main.js?rnd=121" defer></script>
     </section>
     </body>
 </html>

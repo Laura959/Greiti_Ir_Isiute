@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2021 m. Bal 25 d. 22:56
+-- Generation Time: 2021 m. Geg 27 d. 22:27
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Sukurta duomenų struktūra lentelei `history`
+--
+
+CREATE TABLE `history` (
+  `History_id` int(11) NOT NULL,
+  `Ivykio_tipas` text COLLATE utf32_lithuanian_ci NOT NULL,
+  `Ivykio_vardas` varchar(255) COLLATE utf32_lithuanian_ci NOT NULL,
+  `Pakeitimo_data` datetime NOT NULL,
+  `Vartotojo_id` int(11) NOT NULL,
+  `Vardas` varchar(255) COLLATE utf32_lithuanian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_lithuanian_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Sukurta duomenų struktūra lentelei `komandos`
 --
 
@@ -32,14 +47,6 @@ CREATE TABLE `komandos` (
   `Role` int(11) NOT NULL,
   `Vartotojas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_lithuanian_ci;
-
---
--- Sukurta duomenų kopija lentelei `komandos`
---
-
-INSERT INTO `komandos` (`Projekto_id`, `Role`, `Vartotojas`) VALUES
-(123, 1, 22),
-(1234, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -55,14 +62,6 @@ CREATE TABLE `projektai` (
   `Sukurimo_data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_lithuanian_ci;
 
---
--- Sukurta duomenų kopija lentelei `projektai`
---
-
-INSERT INTO `projektai` (`Projekto_id`, `Pavadinimas`, `Aprasymas`, `Busena`, `Sukurimo_data`) VALUES
-(123, 'Project system', 'Manage projects', 'In progress', '2021-04-25'),
-(1234, 'Task system', 'Manage tasks', 'In progress', '2021-04-25');
-
 -- --------------------------------------------------------
 
 --
@@ -73,15 +72,6 @@ CREATE TABLE `projektu_uzduotys` (
   `Projekto_id` int(11) NOT NULL,
   `Uzduoties_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_lithuanian_ci;
-
---
--- Sukurta duomenų kopija lentelei `projektu_uzduotys`
---
-
-INSERT INTO `projektu_uzduotys` (`Projekto_id`, `Uzduoties_id`) VALUES
-(123, 11),
-(123, 22),
-(1234, 33);
 
 -- --------------------------------------------------------
 
@@ -100,7 +90,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`Roles_id`, `Pavadinimas`, `Aprasymas`) VALUES
-(1, 'Administratorius', 'Turi daug teisiu');
+(1, 'Administratorius', 'Gali keisti projektus ir uzduotis'),
+(2, 'Komandos narys', 'Negali keisti projektu');
 
 -- --------------------------------------------------------
 
@@ -116,17 +107,9 @@ CREATE TABLE `uzduotys` (
   `Busena` varchar(255) COLLATE utf32_lithuanian_ci NOT NULL,
   `Sukurimo_data` date NOT NULL,
   `Naujinimo_data` date NOT NULL,
-  `projekto_id` int(11) NOT NULL
+  `Eiles_nr` bigint(8) NOT NULL,
+  `Projekto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_lithuanian_ci;
-
---
--- Sukurta duomenų kopija lentelei `uzduotys`
---
-
-INSERT INTO `uzduotys` (`Uzduoties_id`, `Pavadinimas`, `Aprasymas`, `Prioritetas`, `Busena`, `Sukurimo_data`, `Naujinimo_data`, `projekto_id`) VALUES
-(11, 'Atimti', 'Atimtis', 'Medium', 'Finished', '2021-02-02', '2021-03-03', 123),
-(22, 'Prideti', 'Sudetis', 'Medius', 'Todo', '2021-02-02', '2021-03-03', 123),
-(33, 'Pakeisti', 'Pakeitimas', 'Low', 'Finished', '2021-02-02', '2021-03-03', 1234);
 
 -- --------------------------------------------------------
 
@@ -153,6 +136,12 @@ INSERT INTO `vartotojai` (`El_pastas`, `Slaptazodis`, `Vardas`, `Pavarde`, `Vart
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`History_id`);
 
 --
 -- Indexes for table `komandos`
@@ -185,13 +174,30 @@ ALTER TABLE `roles`
 -- Indexes for table `uzduotys`
 --
 ALTER TABLE `uzduotys`
-  ADD PRIMARY KEY (`Uzduoties_id`);
+  ADD PRIMARY KEY (`Uzduoties_id`),
+  ADD UNIQUE KEY `Eiles_nr` (`Eiles_nr`);
 
 --
 -- Indexes for table `vartotojai`
 --
 ALTER TABLE `vartotojai`
   ADD PRIMARY KEY (`Vartotojo_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
+  MODIFY `History_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=360;
+
+--
+-- AUTO_INCREMENT for table `uzduotys`
+--
+ALTER TABLE `uzduotys`
+  MODIFY `Eiles_nr` bigint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- Apribojimai eksportuotom lentelėm
