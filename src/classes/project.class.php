@@ -4,7 +4,7 @@
         // private $pass = "nera";
         private $host = "localhost";  
         private $user = "root";  
-        private $pass = "";  
+        private $pass = "[ems]";  
         private $dbName = "projektas"; 
 
         public function createProject($name, $description, $user){

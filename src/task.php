@@ -117,7 +117,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
+            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]+\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
         ?>
         </form>
@@ -144,7 +144,7 @@ include_once('db_config.php');
                     INNER JOIN projektu_uzduotys ON uzduotys.Uzduoties_id = projektu_uzduotys.Uzduoties_id 
                     INNER JOIN projektai ON projektu_uzduotys.Projekto_id = projektai.Projekto_id 
                     WHERE projektai.Projekto_id = ".$_COOKIE['Projekto_id']."
-                    AND (uzduotys.Pavadinimas LIKE '%".$SEARCH_QUERY."%' OR uzduotys.Pavadinimas LIKE '%".$SEARCH_QUERY."%')
+                    AND (uzduotys.Pavadinimas LIKE '%".$SEARCH_QUERY."%' OR uzduotys.Uzduoties_id LIKE '%".$SEARCH_QUERY."%')
                     ORDER BY uzduotys.Eiles_nr DESC";
             } 
             else {
