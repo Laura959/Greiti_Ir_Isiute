@@ -4,7 +4,7 @@ class Dbh {
     // private $pass = "nera";
     private $host = "localhost";  
     private $user = "root";
-    private $pass = "[ems]";
+    private $pass = "";
     private $dbName = "projektas";
 
     public function connect(){
