@@ -117,7 +117,7 @@ include_once('db_config.php');
             } else {
                 $SEARCH_QUERY = "";
             }
-            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]+\" title=\"Enter at least 3 symbols\">
+            echo "<input = type=\"hidden\" name=\"title\" value=\"".$_GET['title']."\"><input = type=\"hidden\" name=\"Projekto_id\" value=\"".$_GET['Projekto_id']."\"><input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]+\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
         ?>
         </form>
