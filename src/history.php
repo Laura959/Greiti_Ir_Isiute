@@ -64,11 +64,11 @@ include_once('db_config.php');
                         <a href="main.php" class="left-menu__title">Projects</a>
                     </li>
                     <li class="left-menu__item left-menu__item-hover">
-                        <a href="#" download="History.csv" class="left-menu__icon export">
-                            <i class="fas fa-file-download left-menu-icon export-history-btn" data-text="Export history"></i>
+                        <a href="#" download="Logs.csv" class="left-menu__icon export">
+                            <i class="fas fa-file-download left-menu-icon export-history-btn" data-text="Export logs"></i>
                         </a>
                         <p class="left-menu__title">
-                            <span class="export__span">Export History</span>
+                            <span class="export__span">Export Logs</span>
                         </p>
                     </li>
                     <?php
@@ -109,28 +109,11 @@ include_once('db_config.php');
                     } else if (isset($_GET['title'])) {
                         echo "<h2 class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">" . $_GET['title'] . "</span> / Tasks</h2>";
                     } else {
-                        echo "<h2 class=\"project-page-title tasks__title  mr-auto\"> History</h2>";
+                        echo "<h2 class=\"project-page-title tasks__title  mr-auto\"> Logs</h2>";
                     }
                     ?>
                     <div class="whole-search tasks__search"> <!-- SEARCH FUNKCIALUMAS -->        
-                        <form id="search-form">
-                            <?php
-                            if (isset($_GET["search"])) {
-                                $SEARCH_QUERY = trim($_GET["search"]);
-                                $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);
-                                // if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
-                                //     $SEARCH_ERROR = "Enter at least 3 symbols";
-                                // }
-                            } else {
-                                $SEARCH_QUERY = "";
-                            }
-                            echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
-            <i class=\"fas fa-search\" id=\"search-icon\"></i>";
-                            // if(isset($SEARCH_ERROR)) {
-                            //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
-                            // }
-                            ?>
-                        </form>
+                        
                         <div class="form-inline">
                             <?php
                             echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
@@ -162,7 +145,7 @@ include_once('db_config.php');
                         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Task with this name does not exist</span></div>";
                     } else {
                         echo "
-            <table class=\"table--fixed tasks-table\">
+            <table style='width: auto;' class=\"table--fixed tasks-table\">
                 <thead class=\"tasks__thead\" style=\"position: relative;\">
                     <tr>
                         <th class='project-name-spacing tasks__th'>ID</th>

@@ -19,7 +19,7 @@ try {
        
         $sql5 = "INSERT INTO history VALUES (?,?,?,?,?,?)";
         
-        $pav = "???";
+        $pav = "";
         
 
         $conn->exec($sql);
