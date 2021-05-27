@@ -79,8 +79,8 @@ include_once('db_config.php');
                 </li>
 
                 <li class="left-menu__item">
-                    <a href="history.php" class="left-menu__icon" aria-label="History page">
-                        <i class="fas fa-history left-menu-icon history-btn" data-text="History"></i>
+                    <a href="history.php" class="left-menu__icon" aria-label="Logs page">
+                        <i class="fas fa-history left-menu-icon history-btn" data-text="Logs"></i>
                     </a>
                     <p class="left-menu__title">History</p>
                 </li>

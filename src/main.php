@@ -70,9 +70,9 @@ include_once('db_config.php');
                                 </li>
                                 <li class="left-menu__item">
                                     <a href="history.php" class="left-menu__icon">
-                                        <i class="fas fa-history left-menu-icon" data-text="History"></i>
+                                        <i class="fas fa-history left-menu-icon" data-text="Logs"></i>
                                     </a>
-                                    <p class="left-menu__title">History</p>
+                                    <p class="left-menu__title">Logs</p>
                                 </li>
                                 <li class="left-menu__item">
                                     <a href="#" class="create-project__JS left-menu__icon">
