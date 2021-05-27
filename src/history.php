@@ -35,7 +35,7 @@ include_once('db_config.php');
         <meta content='width=device-width; initial-scale=1.0;' name='viewport' />
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="css/style.css?rnd=326" rel="stylesheet">
+        <link href="css/style.css?rnd=321" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="css/createForm.css?rnd=711" type="text/css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500&display=swap" rel="stylesheet">
@@ -100,30 +100,18 @@ include_once('db_config.php');
         <!-- Kairinio menu pabaiga -->
         <section>
             <header>
-                <!-- Viršutinė menu juosta su search ir exit laukeliais -->
-                <nav class="navbar tasks__navbar">
-
-                    <?php
-                    if (isset($_COOKIE["Projektas"])) {
-                        echo "<h2 class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">" . $_COOKIE["Projektas"] . "</span> / Tasks</h2>";
-                    } else if (isset($_GET['title'])) {
-                        echo "<h2 class=\"project-page-title  tasks__title mr-auto\"> <span class=\"tasks__title--uppercase\">" . $_GET['title'] . "</span> / Tasks</h2>";
-                    } else {
-                        echo "<h2 class=\"project-page-title tasks__title  mr-auto\"> Logs</h2>";
-                    }
-                    ?>
-                    <div class="whole-search tasks__search" style="justify-content: end"> <!-- SEARCH FUNKCIALUMAS -->        
-                        
-                        <div class="form-inline">
-                            <?php
-                            echo '<p class="login-name">' . $_SESSION["username"] . '</p>';
-                            ?>
-                            <form method="POST">
-                                <button class="button" type="submit" name="logout"><i class="fas fa-sign-out-alt "></i></button>
-                            </form>
-                        </div>
+                <nav class="navbar navbar__history--margin">
+                        <h2 class="project-page-title tasks__title history__title mr-auto">Logs</h2>
+                    
+                    <div class="form-inline form__logout">
+                        <?php
+                        echo '<p class="login-name login-name__board">' . $_SESSION["username"] . '</p>';
+                        ?>
+                        <form method="POST">
+                            <button class="button" type="submit" name="logout" aria-label="logout"><i class="fas fa-sign-out-alt" ></i></button>
+                        </form>
                     </div>
-
+                </nav>
             </header>
             <main>
                 <?php
@@ -145,14 +133,14 @@ include_once('db_config.php');
                         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Task with this name does not exist</span></div>";
                     } else {
                         echo "
-            <table style='width: 80%;' class=\"table--fixed tasks-table\">
-                <thead class=\"tasks__thead\" style=\"position: relative;\">
+            <table class=\"table--fixed tasks-table history-table\">
+                <thead class=\"tasks__thead history__thead\" style=\"position: relative;\">
                     <tr>
-                        <th class='project-name-spacing tasks__th'>ID</th>
-                        <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Event type </th>
-                        <th class='tasks__th--width tasks__th tasks__th--radius tasks__th--text-align'>Project / Task name</th>
-                        <th class='tasks__th--width tasks__th'>Modification date </th>
-                        <th class='tasks__th'>User</th>
+                        <th class='project-name-spacing tasks__th history__th--width'>Log ID</th>
+                        <th class='tasks__th tasks__th--radius tasks__th--text-align history__th--color'>Event type </th>
+                        <th class='tasks__th history__th-name history__th--color'>Project / Task name</th>
+                        <th class='tasks__th'>Modification date </th>
+                        <th class='tasks__th round-border'>User</th>
                         </tr>";
                     }
 
@@ -202,7 +190,7 @@ include_once('db_config.php');
 
 
             </main>
-            <script type="module" src="./js/createProject.js?rnd=217"></script>
+            <script src="./js/main.js?rnd=217"></script>
         </section>
     </body>
 

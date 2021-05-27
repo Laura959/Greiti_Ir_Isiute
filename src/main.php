@@ -61,7 +61,7 @@ include_once('db_config.php');
                                     <p class="left-menu__title">Projects</p>
                                 </li>
                                 <li class="left-menu__item left-menu__item-hover">
-                                    <a href="#" download="Projects.csv" class="left-menu__icon export">
+                                    <a href="data:text/csv;charset=utf-8, Title, Description, Status, Finished tasks, Total tasks" download="Projects.csv" class="left-menu__icon export">
                                         <i class="fas fa-file-download left-menu-icon" data-text="Export projects"></i>
                                     </a>
                                     <p class="left-menu__title">
@@ -137,7 +137,6 @@ include_once('db_config.php');
                 projektai.Aprasymas,
                 projektai.Busena,
                 projektai.Sukurimo_data,
-                komandos.role,
                 SUM(case when uzduotys.Busena ='Done' then 1 else 0 end) as Finished_tasks,
                 SUM(case when uzduotys.Busena ='To Do' then 1 else 0 end) as Todo_tasks,
                 SUM(case when uzduotys.Busena ='In Progress' then 1 else 0 end) as InProgress_tasks,
@@ -202,14 +201,14 @@ include_once('db_config.php');
                                             echo "<tr>
           <td class='d-none'>" . $row['Projekto_id'] . "</td>
           <td><a href=\"task.php?Projekto_id=" . $row['Projekto_id'] . "&title=" . $row['Pavadinimas'] . "\" class=\"projects__title-hover\">" . $row['Pavadinimas'] . "</td>
-          <td><div class=\"project-description__JS\" id='shortened-description' data-role=\"" . $row['role'] . "\" aria-label=\"update\"><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
+          <td><div class=\"project-description__JS\" id='shortened-description' aria-label=\"update\"><a href='#'>" . $row['Aprasymas'] . "</a></div></td>
           <td>" . $row['Busena'] . "</td>
           <td class='progresss'>
           <p class='progress-numbers'>" . $row['Finished_tasks'] . "/" . $row['Total_tasks'] . "</p>
           <div class='round'><div id='progressId" . $i . "'></div></div><div class='hover-info'>Total: " . $row['Total_tasks'] . ", To do: " . $row['Todo_tasks'] . ", In Progress: " . $row['InProgress_tasks'] . ", Finished: " . $row['Finished_tasks'] . "</div></td>
           <td class='td-spacing projects-functions'>
-          <button class=\"update-project__JS\" data-role=\"" . $row['role'] . "\" aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
-          <button class=\"delete-project__JS\" id=\"" . $row['Projekto_id'] . "\" data-role=\"" . $row['role'] . "\" aria-label=\"delete\">
+          <button class=\"update-project__JS\"  aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
+          <button class=\"delete-project__JS\" id=\"" . $row['Projekto_id'] . "\" aria-label=\"delete\">
           <i class='far fa-trash-alt icon--mobile'></i>
           </button>
           <button class=\"button\" aria-label=\"archive\"><i class='fas fa-archive icon--mobile'></i></button>
@@ -226,14 +225,14 @@ include_once('db_config.php');
                                         echo "<tr>
                 <td class='d-none'>" . $row['Projekto_id'] . "</td>
                 <td class='grey-border'><a class=\"projects__title-hover\"href=\"task.php?Projekto_id=" . $row['Projekto_id'] . "&title=" . $row['Pavadinimas'] . "\">" . $row['Pavadinimas'] . "</td>
-                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description' data-role=\"" . $row['role'] . "\" aria-label=\"update\"><a href='#' data-role=\"" . $row['role'] . "\" aria-label=\"update\">" . $row['Aprasymas'] . "</a></div></td>
+                <td class='grey-border'><div class=\"project-description__JS\" id='shortened-description' aria-label=\"update\"><a href='#' aria-label=\"update\">" . $row['Aprasymas'] . "</a></div></td>
                 <td class='grey-border'>" . $row['Busena'] . "</td>
                 <td class='grey-border progresss'>
                 <p class='progress-numbers'>" . $row['Finished_tasks'] . "/" . $row['Total_tasks'] . "</p>
                 <div class='round'><div id='progressId" . $i . "'></div></div><div class='hover-info'>Total: " . $row['Total_tasks'] . ", To do: " . $row['Todo_tasks'] . ", In Progress: " . $row['InProgress_tasks'] . ", Finished: " . $row['Finished_tasks'] . "</div></td>
                 <td class='grey-border projects-functions'>
-                <button class=\"update-project__JS\" data-role=\"" . $row['role'] . "\" aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
-                <button class=\"delete-project__JS\" id=\"" . $row['Projekto_id'] . "\" data-role=\"" . $row['role'] . "\" aria-label=\"update\">
+                <button class=\"update-project__JS\" aria-label=\"update\"><i class='far fa-edit icon--mobile'></i></button>
+                <button class=\"delete-project__JS\" id=\"" . $row['Projekto_id'] . "\" aria-label=\"update\">
                     <i class='far fa-trash-alt icon--mobile'></i>
                     </button> 
 
@@ -343,7 +342,7 @@ include_once('db_config.php');
                                 </form>
                             </div>
                         </main>
-                        <script type="module" src="./js/createProject.js?rnd=414" defer></script>
+                        <script src="./js/main.js?rnd=214" defer></script>
                     </section>
                     </body>
                     </html>

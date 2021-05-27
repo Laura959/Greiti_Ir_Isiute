@@ -90,35 +90,6 @@ include_once('db_config.php');
                     </a>
                     <p class="left-menu__title">New task</p>
                 </li>
-                <?php 
-                $usersinfo = "";
-                if(isset($_GET['Projekto_id'])){
-                    try {
-                        $connectM = new PDO("mysql:host=$host; dbname=$dbName", $user, $pass);
-                        $connectM->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $sql = "
-                            SELECT vartotojai.Vardas, vartotojai.Pavarde FROM vartotojai
-                            LEFT JOIN komandos ON komandos.Vartotojas = vartotojai.Vartotojo_id
-                            LEFT JOIN projektai ON projektai.Projekto_id = komandos.Projekto_id
-                            WHERE projektai.Projekto_id =".$_GET['Projekto_id']."
-                        ";
-
-                    }catch (PDOException $error) {  //Jei nepavyksta prisijungti ismeta klaidos pranesima
-                        echo $error->getMessage();
-                    }
-                    $result = $connectM->prepare($sql);
-                    $result->execute();
-                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                        $usersinfo .= $row['Vardas']." ".$row['Pavarde'].",";
-                    }
-                }
-                ?>
-                <li class="left-menu__item manage-members__JS" data-users="<?php echo $usersinfo;?>">
-                        <a href="#" class="left-menu__icon" aria-label="manage members">
-                            <i class="fas fa-users left-menu-icon" data-text="Manage members"></i>
-                        </a>
-                        <p class="left-menu__title left-menu__title--margin">Manage members</p>
-                </li>
             </ul>
         </div>
     </div>
@@ -143,17 +114,11 @@ include_once('db_config.php');
             if(isset($_GET["search"])) {
                 $SEARCH_QUERY = trim($_GET["search"]);
                 $SEARCH_QUERY_LENGTH = strlen($SEARCH_QUERY);                
-                // if($SEARCH_QUERY_LENGTH > 0 && $SEARCH_QUERY_LENGTH < 3 && !is_numeric($SEARCH_QUERY)) {
-                //     $SEARCH_ERROR = "Enter at least 3 symbols";
-                // }
             } else {
                 $SEARCH_QUERY = "";
             }
             echo "<input type=\"text\" id=\"search\" name=\"search\" value=\"" . $SEARCH_QUERY . "\" placeholder=\"Search tasks\" class=\"search-form__input\" pattern=\"\w{3,}||[0-9]\" title=\"Enter at least 3 symbols\">
             <i class=\"fas fa-search\" id=\"search-icon\"></i>";
-            // if(isset($SEARCH_ERROR)) {
-            //     echo "<br /><span style=\"color: red; font-style:italic;\"> " . $SEARCH_ERROR . "</span";
-            // }
         ?>
         </form>
         <div class="form-inline">
@@ -165,8 +130,8 @@ include_once('db_config.php');
             </form>
             </div>
         </div>
-
-            </header>
+    </nav>
+</header>
             <main>
                 <?php
 
@@ -445,38 +410,8 @@ include_once('db_config.php');
                         </div>                   
                     </form>
                 </div>
-                <div class="pop-up__invite">
-                    <h2 class="pop-up__h2 pop-up__h2--margin">Manage members</h2>
-                    <form method="POST" class="pop-up__form">
-                            <input style="text-align:left;" class="pop-up__input pop-up__update-title" type="text" name="inviteEmail" maxlength="30" placeholder="Invite by email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Invite by email'" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" title="Enter a valid email address" required>
-                            <input type="hidden" class="pop-up__update-id" name="updateId"/>
-                            <div class="pop-up--flex">
-                                <input type="submit" name="invite" value="Invite" class="pop-up__update-btn pop-up__input" id="project-btn">
-                                <div role="button" class="pop-up__cancel-btn" aria-label="Cancel">Cancel</div>
-                            </div>
-                            <?php
-                            
-                            if(isset($_POST['inviteEmail']))  {
-                                $update = new Project(); 
-                                $update->inviteMember($_POST['inviteEmail']);
-                            }
-                            if(isset($_SESSION['inviteError'])){
-                                echo "<p class='pop-up__error'>".$_SESSION['inviteError']."</p>";
-                                unset($_SESSION['inviteError']);
-                            }
-                            ?>  
-                    </form>
-                </div>
-                <div class="pop-up__members">
-                    <h2 class="pop-up__h2 pop-up__h2--margin">Manage team members</h2>
-                    <table class="pop-up__users"></table>
-                    <div class="pop-up--flex">
-                        <a href="#" class="pop-up__invite-btn">Invite</a>
-                        <div role="button" class="pop-up__cancel-btn" aria-label="Cancel">Cancel</div>
-                    </div>
-                </div>
             </main>
-            <script type="module" src="./js/createProject.js?rnd=227"></script>
+            <script src="./js/main.js?rnd=227"></script>
         </section>
     </body>
 
