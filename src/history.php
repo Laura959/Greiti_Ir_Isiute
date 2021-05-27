@@ -112,7 +112,7 @@ include_once('db_config.php');
                         echo "<h2 class=\"project-page-title tasks__title  mr-auto\"> Logs</h2>";
                     }
                     ?>
-                    <div class="whole-search tasks__search"> <!-- SEARCH FUNKCIALUMAS -->        
+                    <div class="whole-search tasks__search" style="justify-content: end"> <!-- SEARCH FUNKCIALUMAS -->        
                         
                         <div class="form-inline">
                             <?php
