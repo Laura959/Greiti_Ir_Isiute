@@ -55,7 +55,7 @@ include_once('db_config.php');
                 </button>
             </div>
             <div class="left-menu__list">
-                <ul class="left-menu__items">
+                <ul class="left-menu__items log-sidebar">
 
                     <li class="left-menu__item">
                         <a href="main.php" class="left-menu__icon">
@@ -145,7 +145,7 @@ include_once('db_config.php');
                         echo "<div class=\"error-search-group\"> <img src=\"projects.png\" class=\"error-search-img\"> <span class=\"error-search-message\"> Task with this name does not exist</span></div>";
                     } else {
                         echo "
-            <table style='width: auto;' class=\"table--fixed tasks-table\">
+            <table style='width: 80%;' class=\"table--fixed tasks-table\">
                 <thead class=\"tasks__thead\" style=\"position: relative;\">
                     <tr>
                         <th class='project-name-spacing tasks__th'>ID</th>
