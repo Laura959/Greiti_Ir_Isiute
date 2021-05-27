@@ -5,7 +5,7 @@ Welcome to our project "Greiti ir Isiute".
 
 ## About Project
 
-The main purpose of this project is to create new projects and tasks as well managing them.  After we create a new project, we can delete it, edit the existing information and download it in CSV format which will display the name of the project, description, project status, finished tasks, and total tasks. If we click on the existing project name we automatically go to the task window where we can create tasks. Once we have created the task, we can delete them, edit the title, description, priority, and status of the task, and we can also download them in CSV format. Our project has a search bar that will help you to find the necessary projects and tasks faster.
+The main purpose of this project is to create new projects and tasks as well managing them.  After we create a new project, we can delete them, edit the existing information and download it in CSV format which will display the name of the project, description, project status, finished tasks, and total tasks. If we click on the existing project name we automatically go to the task window where we can create tasks. Once we have created the task, we can delete them, edit the title, description, priority, and status of the task, and we can also download them in CSV format. Our project has a search bar that will help you to find the necessary projects and tasks faster.
 
 ## Start-up instructions
 
