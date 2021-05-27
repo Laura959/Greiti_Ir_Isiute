@@ -251,12 +251,20 @@ include_once('db_config.php');
                 echo "
         </table>
         <br>";
-                if (isset($_SESSION['empty']) && isset($_GET['title'])) {
+                if (isset($_SESSION['empty']) && isset($_GET['title']) && !isset($_COOKIE['Projektas'])) {
                     echo "
         <button id='create-button' class=\"tasks__add-btn\" aria-label=\"create a task\">
             <i class='fas fa-plus-circle create-project__JS tasks__add-btn-i' id='plus-button'></i>
         </button>";
 
+                    unset($_SESSION['empty']);
+
+                } else if (isset($_SESSION['empty']) && isset($_COOKIE['Projektas'])) {
+                    echo "
+        <button id='create-button' class=\"tasks__add-btn\" aria-label=\"create a task\">
+            <i class='fas fa-plus-circle create-project__JS tasks__add-btn-i' id='plus-button'></i>
+        </button>";
+            
                     unset($_SESSION['empty']);
                 }
 
